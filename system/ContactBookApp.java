@@ -1,104 +1,92 @@
 public class ContactBookApp {
     public static void main(String[] arg) {
         ContactBook contactBook = new ContactBook();
-        contactBook.printContactBook();
-        // System.out.println(Contact.numberOfContacts);
+        Contact contact = new Contact.Builder().firstName("Daniel").build();
+        System.out.println(contact);
+        contactBook.addContact(contact);
+        contactBook.printContact(0);
     }
 }
 
-class ContactBook{
-    private int contactListCapacity = 100;
-    private Contact[] contactList = new Contact[contactListCapacity];
-    public Contact[] getContactList(){
-        return this.contactList;
+class ContactBook {
+    private Contact[] contacts;
+    public Contact[] getContacts() {
+        return contacts;
     }
 
     public ContactBook() {
-        initializeContactList(9);
-    }s
+        initializeContactsArray(100);
+    }
 
-    // METHODS FOR MANIPULATING CONTACTS IN THE ARRAY
+    private void initializeContactsArray(int capacityOfArray) {
+        contacts = new Contact[capacityOfArray];
+    }
 
+    //
     public void addContact(Contact contact) {
-        this.contactList[contact.getContactID()] = contact;        
+        this.contacts[contact.getContactID()] = contact;        
     }    
-
-    public void removeContact(Contact contact) {
-        this.contactList[contact.getContactID()] = null;
-    }
-
-    public void removeContact(int contactID) {
-        this.contactList[contactID] = null;
-    }
-
-    // METHODS FOR SORTING CONTACTS
-
     
-
-
+    public void removeContact(Contact contact) {
+        this.contacts[contact.getContactID()] = null;
+    }
+    
+    public void removeContact(int contactID) {
+        this.contacts[contactID] = null;
+    }
+    
+    // METHODS FOR SORTING CONTACTS
+    
+    
+    
+    
     // METHODS FOR PRINTING
-
+    
     public void printContactBook() {
-        for(int i = 0; i < Contact.numberOfContacts; i++) {
-            if (this.contactList[i] == null) {
+        for(int i = 0; i < Contact.getNumberOfContacts(); i++) {
+            if (this.contacts[i] == null) {
                 continue;
             }
-            System.out.println(this.contactList[i]);
+            System.out.println(this.contacts[i]);
         } 
     }   
-
+    
     public void printContact(int contactID) {
-        System.out.println(this.getContactList()[contactID]);
-
+        System.out.println(this.getContacts()[contactID]);
+    
     }
-
+    
     // METHODS INTENDED FOR TESTING PURPOSES
-
+    
     private void initializeContactList(int limitOfContacts) {
         int i = 0;
         Contact[] genericContactsArray = this.genericContacts();
         while (i <= limitOfContacts) {
             Contact contact = genericContactsArray[i];
-            this.contactList[contact.getContactID()] = contact;
+            this.contacts[contact.getContactID()] = contact;
             i++;
             System.out.println(contact.getContactID());   
             System.out.println(i);
         }
-
+    
         // this.contactList[i] = new Contact(genericBusiness(), genericAddress(), genericPhoneNumber);
     }
-
+    
     private Contact[] genericContacts() {
         int i = 0;
-        Contact[] contactArray = new Contact[10];
+        Contact[] contactArray = new Contact[9];
         while (i <= 9) {
-            contactArray[i] = new Contact(genericPeople()[i], genericAddress(), genericPhoneNumber);
+            //
             i++;
-            System.out.println("genericContacts: "+Contact.numberOfContacts);
-
+            System.out.println("genericContacts: "+Contact.getNumberOfContacts());
+    
         }
         return contactArray;
     }
-
-    private Person[] genericPeople() {
-        Person[] personArray = new Person[10];
-        for (int i=0 ; i<=9; i++) {
-            personArray[i] = new Person("Generyk", genericSurnames()[i], true);
-            System.out.println("genericPeople: "+Contact.numberOfContacts);
-        }
-        return personArray;
-    }
-
-    private Business genericBusiness() {
-        return new Business("Genericon LTD");
-    }
-
-    private Address genericAddress() {
-        return new Address("Generic Str", 1, 2, "30-332", "GenCity", "GenCountry");
-    }
-
+    
+    // METHODS INTENDED FOR TESTING
     private long genericPhoneNumber = 444222113;
-
+    
     private String[] genericSurnames() {
         String[] stringArray = new String[10];
         stringArray[0] = "Abrowski";
@@ -114,163 +102,144 @@ class ContactBook{
         return stringArray;
     }
 
-
 }
 
 
-// HUGE TODO: Create a Builder class for Contact objects
-// TODO: Create a better data structure for storing contacts
+
+
+
+
+
+
 
 class Contact {
+    private static int numberOfContacts = 0;
+    public static int getNumberOfContacts () {
+        return numberOfContacts;
+    }
 
-    
-
-    private int contactID;
+    private final int contactID;
     public int getContactID() {
-        return this.contactID;
+        return contactID;
     }
-    public static int numberOfContacts = 0;
-    
-    private long phoneNumber;
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
+    private final String firstName;
+    private final String lastName;
+    private final String dateOfBirth;
+    private final String addressStreet;
+    private final String addressHouse;
+    private final String addressFlat;
+    private final String addressPostcode; 
+    private final String addressCity;
+    private final String addressCountry;
+    private final String phoneNumber;
+    private final String email;
 
-    private Person person;
-    private Business business;
-    private Address address;
-    private String photoDir;
+    public static class Builder {
+        //Required parameters
+        private final int contactID;
 
-    public Contact (
-        Person person,
-        Address address,
-        long phoneNumber
-    ) {
-        this.person = person;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.makeContactID();
-    }
+        //Optional parameters and their defaults
+        private String firstName = "";
+        private String lastName = "";
+        private String dateOfBirth = "";
+        private String addressStreet = "";
+        private String addressHouse = "";
+        private String addressFlat = "";
+        private String addressPostcode = "";
+        private String addressCity = "";
+        private String addressCountry = "";
+        private String phoneNumber = "";
+        private String email = "";
 
-    public Contact (
-        Person person,
-        Address address,
-        long phoneNumber,
-        boolean skipCreatingID
-    ) {
-        this.person = person;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.makeContactID();
-    }
+        public Builder () {
+            contactID = Contact.numberOfContacts;
+            Contact.numberOfContacts++;
+        }
 
-    public Contact (
-        Business business,
-        Address address,
-        long phoneNumber
-    ) {
-        this.business = business;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.makeContactID();
-    }
-    public Contact (
-        Business business,
-        Address address,
-        long phoneNumber,
-        boolean skipCreatingID
-    ) {
-        this.business = business;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.makeContactID();
-    }    
+        public Builder firstName (String value) {
+            firstName = value;
+            return this;
+        }
 
-    private void makeContactID() {
-        this.contactID = numberOfContacts;    
-        numberOfContacts++;
-    }
+        public Builder lastName (String value) {
+            lastName = value;
+            return this;
+        }
 
-    public String toString() {
-        if (this.person != null) {
-            return "Contact id: " + this.contactID + ",\n" + 
-            "Name: " + this.person.getFirstName() + ",\n" +
-            "Surname: " + this.person.getLastName() + ",\n" +
-            "Address: " + this.address + ",\n" +
-            "Phone number: "+ this.phoneNumber + "\n";    
-        } else if (this.business != null) {
-            return "Contact id: " + this.contactID + ",\n" + 
-            "Name: " + this.business.getBusinessName() + ",\n" +
-            "Address: " + this.address + ",\n" +
-            "Phone number: "+ this.phoneNumber + "\n";              
-        } else {
-            return "ERROR: This contact is neither a person nor a business.";
+        public Builder dateOfBirth (String value) {
+            dateOfBirth = value;
+            return this;
+        }
+
+        public Builder addressStreet (String value) {
+            addressStreet = value;
+            return this;
+        }
+
+        public Builder addressHouse (String value) {
+            addressHouse = value;
+            return this;
+        }
+
+        public Builder addressFlat (String value) {
+            addressFlat = value;
+            return this;
+        }
+
+        public Builder addressPostcode (String value) {
+            addressPostcode = value;
+            return this;
+        }
+
+        public Builder addressCity (String value) {
+            addressCity = value;
+            return this;
+        }
+
+        public Builder addressCountry (String value) {
+            addressCountry = value;
+            return this;
+        }
+
+        public Builder phoneNumber (String value) {
+            phoneNumber = value;
+            return this;
+        }
+
+        public Builder email (String value) {
+            email = value;
+            return this;
+        }
+
+        public Contact build() {
+            return new Contact(this);
         }
     }
-}
 
-class Business {
-    private String businessName;
-    public String getBusinessName() {
-        return businessName;
-    }
-    public Business (String businessName) {
-        this.businessName = businessName;
-    }
-}
-
-class Person {
-    private String firstName;
-    public String getFirstName(){
-        return firstName;
-    }
-
-    private String lastName;
-    public String getLastName() {
-        return lastName;
-    }
-    // private enum Sex {
-    //     MALE, FEMALE;
-    // }
-    private boolean isSingle;
-
-    public Person(
-        String firstName,
-        String lastName,
-        boolean isSingle
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.isSingle = isSingle;
-    }
-}
-
-class Address {
-    private String streetName;
-    private int houseNumber;
-    private int flatNumber;
-    private String postcode;
-    private String city;
-    private String country;
-
-    public Address (
-        String streetName,
-        int houseNumber,
-        int flatNumber,
-        String postcode,
-        String city,
-        String country
-    ) {
-        this.streetName = streetName;
-        this.houseNumber = houseNumber;
-        this.flatNumber = flatNumber;
-        this.postcode = postcode;
-        this.city = city;
-        this.country = country;
+    private Contact (Builder builder) {
+        contactID = builder.contactID;
+        firstName = builder.firstName;
+        lastName = builder.lastName;
+        dateOfBirth = builder.dateOfBirth;
+        addressStreet = builder.addressStreet;
+        addressHouse = builder.addressHouse;
+        addressFlat = builder.addressFlat;
+        addressPostcode = builder.addressPostcode; 
+        addressCity = builder.addressCity;
+        addressCountry = builder.addressCountry;
+        phoneNumber = builder.phoneNumber;
+        email = builder.email;
     }
 
     public String toString() {
-        return this.streetName + " " + this.houseNumber + "/" + this.flatNumber + ", \n"+
-        this.postcode+", "+this.city+", "+this.country;
+        return 
+            "Contact ID: " + contactID + ",\n" +
+            "First Name: " + firstName + ",\n" +
+            "Last Name: " + lastName + ",\n" +
+            "Date of Birth: " + dateOfBirth + ",\n" +
+            "Address:" + addressStreet + " " + addressHouse + "/" + addressFlat + ",\n" +
+            "         " + addressPostcode + " " + addressCity + ", " + addressCountry + ",\n" +
+            "Phone number: " + phoneNumber + ",\n" +
+            "E-mail: " + email;
     }
 }
