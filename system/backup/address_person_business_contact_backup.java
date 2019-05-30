@@ -15,7 +15,7 @@ class ContactBook{
 
     public ContactBook() {
         initializeContactList(9);
-    }s
+    }
 
     // METHODS FOR MANIPULATING CONTACTS IN THE ARRAY
 

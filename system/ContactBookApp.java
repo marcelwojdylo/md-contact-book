@@ -1,10 +1,9 @@
 public class ContactBookApp {
     public static void main(String[] arg) {
+        System.out.println("\n");
         ContactBook contactBook = new ContactBook();
-        Contact contact = new Contact.Builder().firstName("Daniel").build();
-        System.out.println(contact);
-        contactBook.addContact(contact);
-        contactBook.printContact(0);
+        contactBook.printContactsWithLastNameInitial('C');
+        contactBook.printContactsWithLastNameInitial('U');
     }
 }
 
@@ -16,13 +15,15 @@ class ContactBook {
 
     public ContactBook() {
         initializeContactsArray(100);
+        fillArrayWithGenericContacts(10);
     }
 
     private void initializeContactsArray(int capacityOfArray) {
         contacts = new Contact[capacityOfArray];
     }
 
-    //
+    // METHODS FOR MANIPULATING CONTACT OBJECTS IN ARRAY
+
     public void addContact(Contact contact) {
         this.contacts[contact.getContactID()] = contact;        
     }    
@@ -35,10 +36,19 @@ class ContactBook {
         this.contacts[contactID] = null;
     }
     
-    // METHODS FOR SORTING CONTACTS
+    // METHODS FOR SORTING CONTACTS 
     
-    
-    
+    public void printContactsWithLastNameInitial(char initial) {
+        for (int i = 0; i <= Contact.getNumberOfContacts(); i ++) {
+            if (contacts[i] == null) {
+                continue;
+            }
+            if (contacts[i].lastName.charAt(0) == initial) {
+                System.out.println(contacts[i]);
+            }
+
+        }
+    }
     
     // METHODS FOR PRINTING
     
@@ -58,28 +68,34 @@ class ContactBook {
     
     // METHODS INTENDED FOR TESTING PURPOSES
     
-    private void initializeContactList(int limitOfContacts) {
+    private void fillArrayWithGenericContacts(int limitOfContacts) {
         int i = 0;
         Contact[] genericContactsArray = this.genericContacts();
-        while (i <= limitOfContacts) {
+        while (i <= limitOfContacts-1) {
             Contact contact = genericContactsArray[i];
             this.contacts[contact.getContactID()] = contact;
             i++;
-            System.out.println(contact.getContactID());   
-            System.out.println(i);
         }
-    
-        // this.contactList[i] = new Contact(genericBusiness(), genericAddress(), genericPhoneNumber);
     }
     
     private Contact[] genericContacts() {
         int i = 0;
-        Contact[] contactArray = new Contact[9];
+        Contact[] contactArray = new Contact[10];
         while (i <= 9) {
-            //
-            i++;
-            System.out.println("genericContacts: "+Contact.getNumberOfContacts());
-    
+            contactArray[i] = new Contact.Builder()
+                .lastName(this.genericSurnames()[i])
+                .firstName("Generyk")
+                .phoneNumber("666-666-666")
+                .dateOfBirth("13/12/1990")
+                .addressStreet("Rajska")
+                .addressHouse("2")
+                .addressFlat("96")
+                .addressPostcode("02-972")
+                .addressCity("Warszawa")
+                .addressCountry("Polska")
+                .email("generyk@generyk.gn")
+                .build();
+            i++;    
         }
         return contactArray;
     }
@@ -122,17 +138,17 @@ class Contact {
     public int getContactID() {
         return contactID;
     }
-    private final String firstName;
-    private final String lastName;
-    private final String dateOfBirth;
-    private final String addressStreet;
-    private final String addressHouse;
-    private final String addressFlat;
-    private final String addressPostcode; 
-    private final String addressCity;
-    private final String addressCountry;
-    private final String phoneNumber;
-    private final String email;
+    public final String firstName;
+    public final String lastName;
+    public final String dateOfBirth;
+    public final String addressStreet;
+    public final String addressHouse;
+    public final String addressFlat;
+    public final String addressPostcode; 
+    public final String addressCity;
+    public final String addressCountry;
+    public final String phoneNumber;
+    public final String email;
 
     public static class Builder {
         //Required parameters
@@ -240,6 +256,6 @@ class Contact {
             "Address:" + addressStreet + " " + addressHouse + "/" + addressFlat + ",\n" +
             "         " + addressPostcode + " " + addressCity + ", " + addressCountry + ",\n" +
             "Phone number: " + phoneNumber + ",\n" +
-            "E-mail: " + email;
+            "E-mail: " + email + "\n";
     }
 }
