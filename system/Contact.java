@@ -84,6 +84,54 @@ class Contact {
 
 
 
+    public void setFirstName(String string) {
+        contactData.firstName = string;
+    }
+
+    public void setLastName(String string) {
+        contactData.lastName = string;
+    }
+
+    public void setAddressStreet(String string) {
+        contactData.addressStreet = string;
+    }
+
+    public void setAddressHouse(String string) {
+        contactData.addressStreet = string;
+    }
+
+    public void setAddressFlat(String string) {
+        contactData.addressStreet = string;
+    }
+
+    public void setAddressPostcode(String string) {
+        contactData.addressPostcode = string;
+    }
+
+    public void setAddressCity(String string) {
+        contactData.addressCity = string;
+    }
+
+    public void setAddressCountry(String string) {
+        contactData.addressCountry = string;
+    }
+
+    public void setPhoneNumber(String string) {
+        contactData.phoneNumber = string;
+    }
+
+    public void setEmail(String string) {
+        contactData.email = string;
+    }
+
+    public void setDateOfBirth(int[] array) {
+        contactData.dateOfBirth = array;
+    }
+
+
+
+
+
     public static class Builder {
 
         private final int contactID;
