@@ -3,13 +3,6 @@ package system;
 
 class ContactDataFormatter {
 
-
-
-
-
-
-
-
     public static String formatPhoneNumber(String phoneNumber) {
         String formattedNumber = removeNonDigits(phoneNumber);
         return formattedNumber;
@@ -18,6 +11,12 @@ class ContactDataFormatter {
     public static String formatPhoneNumber(int phoneNumber) {
         String formattedNumber = Integer.toString(phoneNumber);
         return formattedNumber;
+    }
+
+    public static String formatProperName(String string) {
+        String formattedProperName = removeNonLetters(string);
+        formattedProperName = capitaliseString(formattedProperName);
+        return formattedProperName;
     }
 
 
@@ -32,29 +31,6 @@ class ContactDataFormatter {
         return result;
     }
 
-    private static String charRemoveAt(String string, int index) {
-        return string.substring(0, index) + string.substring(index);
-    }
-
-    private static boolean isDigit(char character) {
-        for (int i = 0; i < Constants.DIGITS.length(); i++) {
-            if (character == Constants.DIGITS.charAt(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-
-    public static String formatProperName(String string) {
-        String formattedProperName = removeNonLetters(string);
-        formattedProperName = capitaliseString(formattedProperName);
-        return formattedProperName;
-    }
-
-
     private static String removeNonLetters(String string) {
         String result = "";
         for (int i = 0; i < string.length(); i++) {
@@ -63,6 +39,17 @@ class ContactDataFormatter {
             }
         }
         return result;
+    }    
+
+
+
+    private static boolean isDigit(char character) {
+        for (int i = 0; i < Constants.DIGITS.length(); i++) {
+            if (character == Constants.DIGITS.charAt(i)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean isLetter(char character) {
@@ -74,9 +61,18 @@ class ContactDataFormatter {
         return false;
     }
 
+
+
+
     private static String capitaliseString(String string) {
         return string.substring(0,1).toUpperCase() + string.substring(1).toLowerCase();
     }
+
+
+    private static String removeCharAt(String string, int index) {
+        return string.substring(0, index) + string.substring(index);
+    }
+
 
 }
 

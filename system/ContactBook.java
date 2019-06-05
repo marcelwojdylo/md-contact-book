@@ -1,25 +1,29 @@
 package system;
 
-
-
-
-
 class ContactBook {
+
     private Contact[] contacts;
+
+
+
     public Contact[] getContacts() {
         return contacts;
     }
+
+
 
     public ContactBook() {
         initializeContactsArray(100);
         fillArrayWithGenericContacts(10);
     }
 
+
+
     private void initializeContactsArray(int capacityOfArray) {
         contacts = new Contact[capacityOfArray];
     }
 
-    // METHODS FOR MANIPULATING CONTACT OBJECTS IN ARRAY
+
 
     public void addContact(Contact contact) {
         this.contacts[contact.getContactID()] = contact;        
@@ -32,8 +36,38 @@ class ContactBook {
     public void removeContact(int contactID) {
         this.contacts[contactID] = null;
     }
+
+
+
+    public void printContactBook() {
+        for(int i = 0; i < Contact.getNumberOfContacts(); i++) {
+            if (this.contacts[i] == null) {
+                continue;
+            }
+            System.out.println(this.contacts[i]);
+        } 
+    }   
+
+    public void printContactsSortedByLastNameInitial() {
+        for (Contact c : sortContactsByLastNameInitial()) {
+            if (c == null) {continue;}
+            System.out.println(c);
+        }
+    }
+
+    public void printContactsWithLastNameInitial(char initial) {
+        for (Contact c : getContactsWithLastNameInitial(initial)) {
+            if (c == null) {continue;}
+            System.out.println(c);
+        }
+    }
     
-    // METHODS FOR SORTING CONTACTS 
+    public void printContact(int contactID) {
+        System.out.println(this.getContacts()[contactID]);
+    
+    }
+
+
 
     public Contact[] sortContactsByLastNameInitial() {
         Contact[] result = new Contact[Contact.getNumberOfContacts()];
@@ -70,35 +104,7 @@ class ContactBook {
         return result;
     }
     
-    // METHODS FOR PRINTING
     
-    public void printContactBook() {
-        for(int i = 0; i < Contact.getNumberOfContacts(); i++) {
-            if (this.contacts[i] == null) {
-                continue;
-            }
-            System.out.println(this.contacts[i]);
-        } 
-    }   
-
-    public void printContactsSortedByLastNameInitial() {
-        for (Contact c : sortContactsByLastNameInitial()) {
-            if (c == null) {continue;}
-            System.out.println(c);
-        }
-    }
-
-    public void printContactsWithLastNameInitial(char initial) {
-        for (Contact c : getContactsWithLastNameInitial(initial)) {
-            if (c == null) {continue;}
-            System.out.println(c);
-        }
-    }
-    
-    public void printContact(int contactID) {
-        System.out.println(this.getContacts()[contactID]);
-    
-    }
     
     // METHODS INTENDED FOR TESTING PURPOSES
     
@@ -133,10 +139,7 @@ class ContactBook {
         }
         return contactArray;
     }
-    
-    // METHODS INTENDED FOR TESTING
-    private long genericPhoneNumber = 444222113;
-    
+        
     private String[] genericSurnames() {
         String[] stringArray = new String[10];
         stringArray[0] = "Abrowski";

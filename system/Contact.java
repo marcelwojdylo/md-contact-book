@@ -2,21 +2,11 @@ package system;
 
 
 class Contact {
-    private static int numberOfContacts = 0;
-    public static int getNumberOfContacts () {
-        return numberOfContacts;
-    }
 
+    private static int numberOfContacts = 0;
     private final int contactID;
-    public int getContactID() {
-        return contactID;
-    }
     public final String firstName;
     public final String lastName;
-    public final int[] dateOfBirth;
-    private static final int DAY_OF_BIRTH_INDEX = 0;
-    private static final int MONTH_OF_BIRTH_INDEX = 1;
-    private static final int YEAR_OF_BIRTH_INDEX = 2;
     public final String addressStreet;
     public final String addressHouse;
     public final String addressFlat;
@@ -25,14 +15,27 @@ class Contact {
     public final String addressCountry;
     public final String phoneNumber;
     public final String email;
+    public final int[] dateOfBirth;
+    private static final int DAY_OF_BIRTH_INDEX = 0;
+    private static final int MONTH_OF_BIRTH_INDEX = 1;
+    private static final int YEAR_OF_BIRTH_INDEX = 2;
+
+
+
+    public static int getNumberOfContacts () {
+        return numberOfContacts;
+    }
+
+    public int getContactID() {
+        return contactID;
+    }
 
 
 
     public static class Builder {
-        //Required parameters
+
         private final int contactID;
 
-        //Optional parameters and their defaults
         private String firstName = "";
         private String lastName = "";
         private int[] dateOfBirth = new int[3];
@@ -146,7 +149,7 @@ class Contact {
         email = builder.email;
     }
 
-    // TODO: CONVERT TO LIST<STRING> TYPE OBJECT
+
 
     private static boolean contains(final int[] array, final int v) {
         boolean result = false;
@@ -160,8 +163,6 @@ class Contact {
     }
 
 
-
-    //METHODS FOR PRINTING
 
     public String toString() {
         String result = "";
