@@ -1,6 +1,6 @@
 package system;
 
-class ContactBook {
+public class ContactBook {
 
     private Contact[] contacts;
 

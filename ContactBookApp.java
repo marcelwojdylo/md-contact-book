@@ -1,4 +1,4 @@
-package system;
+import system.*;
 
 public class ContactBookApp {
     public static void main(String[] arg) {
