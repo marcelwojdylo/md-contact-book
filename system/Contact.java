@@ -4,30 +4,82 @@ package system;
 class Contact {
 
     private static int numberOfContacts = 0;
-    private final int contactID;
-    public final String firstName;
-    public final String lastName;
-    public final String addressStreet;
-    public final String addressHouse;
-    public final String addressFlat;
-    public final String addressPostcode; 
-    public final String addressCity;
-    public final String addressCountry;
-    public final String phoneNumber;
-    public final String email;
-    public final int[] dateOfBirth;
     private static final int DAY_OF_BIRTH_INDEX = 0;
     private static final int MONTH_OF_BIRTH_INDEX = 1;
     private static final int YEAR_OF_BIRTH_INDEX = 2;
+    private ContactData contactData = new ContactData();
 
 
 
     public static int getNumberOfContacts () {
         return numberOfContacts;
-    }
+    }  
+
+
+
+    private class ContactData {
+
+	    int contactID;
+	    String firstName;
+	    String lastName;
+	    String addressStreet;
+	    String addressHouse;
+	    String addressFlat;
+	    String addressPostcode; 
+	    String addressCity;
+	    String addressCountry;
+	    String phoneNumber;
+	    String email;
+	    int[] dateOfBirth;
+
+    }    
 
     public int getContactID() {
-        return contactID;
+    	return contactData.contactID;
+    }
+
+    public String getFirstName() {
+    	return contactData.firstName;
+    }
+
+    public String getLastName() {
+    	return contactData.lastName;
+    }
+
+    public String getAddressStreet() {
+    	return contactData.addressStreet;
+    }
+
+    public String getAddressHouse() {
+    	return contactData.addressHouse;
+    }
+
+    public String getAddressFlat() {
+    	return contactData.addressFlat;
+    }
+
+    public String getAddressPostcode() {
+    	return contactData.addressPostcode;
+    }
+
+    public String getAddressCity() {
+    	return contactData.addressCity;
+    }
+
+    public String getAddressCountry() {
+    	return contactData.addressCountry;
+    }
+
+    public String getPhoneNumber() {
+    	return contactData.phoneNumber;
+    }
+
+    public String getEmail() {
+    	return contactData.email;
+    }
+
+    public int[] getDateOfBirth() {
+    	return contactData.dateOfBirth;
     }
 
 
@@ -135,19 +187,19 @@ class Contact {
     }
 
     private Contact (Builder builder) {
-        contactID = builder.contactID;
-        firstName = builder.firstName;
-        lastName = builder.lastName;
-        dateOfBirth = builder.dateOfBirth;
-        addressStreet = builder.addressStreet;
-        addressHouse = builder.addressHouse;
-        addressFlat = builder.addressFlat;
-        addressPostcode = builder.addressPostcode; 
-        addressCity = builder.addressCity;
-        addressCountry = builder.addressCountry;
-        phoneNumber = builder.phoneNumber;
-        email = builder.email;
-    }
+        contactData.contactID = builder.contactID;
+        contactData.firstName = builder.firstName;
+        contactData.lastName = builder.lastName;
+        contactData.dateOfBirth = builder.dateOfBirth;
+        contactData.addressStreet = builder.addressStreet;
+        contactData.addressHouse = builder.addressHouse;
+        contactData.addressFlat = builder.addressFlat;
+        contactData.addressPostcode = builder.addressPostcode; 
+        contactData.addressCity = builder.addressCity;
+        contactData.addressCountry = builder.addressCountry;
+        contactData.phoneNumber = builder.phoneNumber;
+        contactData.email = builder.email;
+    }  
 
 
 
@@ -169,14 +221,14 @@ class Contact {
 
 
         return 
-            "Contact ID: " + contactID + ",\n" +
-            "First Name: " + firstName + ",\n" +
-            "Last Name: " + lastName + ",\n" +
-            "Date of Birth: " + dateOfBirth[DAY_OF_BIRTH_INDEX] + "/" + dateOfBirth[MONTH_OF_BIRTH_INDEX] + "/" + dateOfBirth[YEAR_OF_BIRTH_INDEX] + ",\n" +
-            "Address:" + addressStreet + " " + addressHouse + "/" + addressFlat + ",\n" +
-            "         " + addressPostcode + " " + addressCity + ", " + addressCountry + ",\n" +
-            "Phone number: " + phoneNumber + ",\n" +
-            "E-mail: " + email + "\n";
+            "Contact ID: " + contactData.contactID + ",\n" +
+            "First Name: " + contactData.firstName + ",\n" +
+            "Last Name: " + contactData.lastName + ",\n" +
+            "Date of Birth: " + contactData.dateOfBirth[DAY_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[MONTH_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[YEAR_OF_BIRTH_INDEX] + ",\n" +
+            "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
+            "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
+            "Phone number: " + contactData.phoneNumber + ",\n" +
+            "E-mail: " + contactData.email + "\n";
     }
 }
 

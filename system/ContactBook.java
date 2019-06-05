@@ -26,25 +26,25 @@ class ContactBook {
 
 
     public void addContact(Contact contact) {
-        this.contacts[contact.getContactID()] = contact;        
+        contacts[contact.getContactID()] = contact;        
     }    
     
     public void removeContact(Contact contact) {
-        this.contacts[contact.getContactID()] = null;
+        contacts[contact.getContactID()] = null;
     }
     
     public void removeContact(int contactID) {
-        this.contacts[contactID] = null;
+        contacts[contactID] = null;
     }
 
 
 
     public void printContactBook() {
         for(int i = 0; i < Contact.getNumberOfContacts(); i++) {
-            if (this.contacts[i] == null) {
+            if (contacts[i] == null) {
                 continue;
             }
-            System.out.println(this.contacts[i]);
+            System.out.println(contacts[i]);
         } 
     }   
 
@@ -63,7 +63,7 @@ class ContactBook {
     }
     
     public void printContact(int contactID) {
-        System.out.println(this.getContacts()[contactID]);
+        System.out.println(getContacts()[contactID]);
     
     }
 
@@ -79,7 +79,7 @@ class ContactBook {
                     continue;
                 }
 
-                if (contacts[j].lastName.charAt(0) == Constants.LETTERS.charAt(i)) {
+                if (contacts[j].getLastName().charAt(0) == Constants.LETTERS.charAt(i)) {
                     result[indexCounter] = contacts[j];
                     indexCounter++;
                 }
@@ -95,7 +95,7 @@ class ContactBook {
             if (contacts[i] == null) {
                 continue;
             }
-            if (contacts[i].lastName.charAt(0) == initial) {
+            if (contacts[i].getLastName().charAt(0) == initial) {
                 result[i] = contacts[i];
             }
 
@@ -110,10 +110,10 @@ class ContactBook {
     
     private void fillArrayWithGenericContacts(int limitOfContacts) {
         int i = 0;
-        Contact[] genericContactsArray = this.genericContacts();
+        Contact[] genericContactsArray = genericContacts();
         while (i <= limitOfContacts-1) {
             Contact contact = genericContactsArray[i];
-            this.contacts[contact.getContactID()] = contact;
+            contacts[contact.getContactID()] = contact;
             i++;
         }
     }
@@ -123,7 +123,7 @@ class ContactBook {
         Contact[] contactArray = new Contact[10];
         while (i <= 9) {
             contactArray[i] = new Contact.Builder()
-                .lastName(this.genericSurnames()[i])
+                .lastName(genericSurnames()[i])
                 .firstName("Generyk")
                 .phoneNumber("666-666-666oijdsfknadsf")
                 .dateOfBirth(13, 12, 1990)
