@@ -2,7 +2,7 @@ package system;
 
 public class ContactBook {
 
-    private Contact[] contacts;
+    private static Contact[] contacts;
 
 
 
@@ -35,6 +35,15 @@ public class ContactBook {
     
     public void removeContact(int contactID) {
         contacts[contactID] = null;
+    }
+
+    public static boolean isPresent (int contactID) {
+        for (int i = 0; i < Contact.getNumberOfContacts(); i++) {
+            if (contacts[i].getContactID() == contactID) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

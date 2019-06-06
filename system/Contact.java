@@ -276,7 +276,7 @@ class Contact {
             "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
             "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
             "Phone number: " + contactData.phoneNumber + ",\n" +
-            "E-mail: " + contactData.email + "\n";
+            "E-mail: " + contactData.email;
     }
 }
 
