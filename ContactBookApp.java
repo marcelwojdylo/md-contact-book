@@ -1,4 +1,8 @@
 import system.*;
+import commandlineinterface.*;
+
+import java.util.Scanner;
+
 
 public class ContactBookApp {
     public static void main(String[] arg) {
@@ -12,6 +16,10 @@ public class ContactBookApp {
         int[] date = {1, 2, 3};
         contactBook.setDateOfBirth(contactBook.getContacts()[6], date);
         contactBook.printContact(6);
+        CommandLineInterface CLI = new CommandLineInterface();
+        
+
+
     }
 }
 
