@@ -265,8 +265,6 @@ class Contact {
 
 
     public String toString() {
-        String result = "";
-
 
         return 
             "Contact ID: " + contactData.contactID + ",\n" +
