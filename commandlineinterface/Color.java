@@ -18,6 +18,10 @@ class Color {
         return ANSI.YELLOW + string + ANSI.RESET;
     }
 
+    public static final String makeBlue (String string) {
+        return ANSI.BLUE + string + ANSI.RESET;
+    }
+
     public static final String makeWhite (String string) {
         return ANSI.WHITE + string + ANSI.RESET;
     }

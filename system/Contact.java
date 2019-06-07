@@ -1,7 +1,7 @@
 package system;
 
 
-class Contact {
+public class Contact {
 
     private static int numberOfContacts = 0;
     private static final int DAY_OF_BIRTH_INDEX = 0;
@@ -267,7 +267,7 @@ class Contact {
     public String toString() {
 
         return 
-            "Contact ID: " + contactData.contactID + ",\n" +
+            "\nContact ID: " + contactData.contactID + ",\n" +
             "First Name: " + contactData.firstName + ",\n" +
             "Last Name: " + contactData.lastName + ",\n" +
             "Date of Birth: " + contactData.dateOfBirth[DAY_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[MONTH_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[YEAR_OF_BIRTH_INDEX] + ",\n" +
