@@ -20,10 +20,10 @@ public class CommandLineInterface {
             command = scanner.nextLine();
             pause(500);
             switch (command) {
-                case (Commands.PRINT_CONTACT):
+                case (Commands.PRINT_CONTACT): //problem
                     printContactByID();
                     break;
-                case (Commands.NEW_CONTACT):
+                case (Commands.NEW_CONTACT): //problem
                     createNewContact();
                     break;
                 case (Commands.PRINT_HELP):
@@ -74,12 +74,10 @@ public class CommandLineInterface {
             "print contact 1 - prints contact with ID number 1,\n";
     }
 
-    private static void printIDQuery() {
-        System.out.println(Color.makeWhite("Kindly input contact ID:"));
-    }
+
 
     private static void printContactByID() {
-        printIDQuery();
+        System.out.println(Color.makeWhite("Kindly input contact ID:"));
         int contactID = scanner.nextInt();
         if (ContactBook.isPresent(contactID)) {
             contactBook.printContact(contactID);
