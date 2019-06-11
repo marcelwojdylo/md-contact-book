@@ -18,7 +18,6 @@ public class CommandLineInterface {
         while (!quit) {
             System.out.print(">");
             command = scanner.nextLine();
-            pause(500);
             switch (command) {
                 case (Commands.PRINT_CONTACT): //problem
                     printContactByID();
@@ -108,48 +107,50 @@ public class CommandLineInterface {
         String email;
 
 
-        pause(1000);
+        // pause(1000);
+
         System.out.println(Color.makeYellow("░░░ Contact Creation Wizard ░░░"));
+
         System.out.println(Color.makeWhite("Press 'return' to skip a field"));
+
         System.out.println(Color.makeBlue("Enter last name:"));
         lastName = scanner.next();
-        pause(500);
+
         System.out.println(Color.makeBlue("Enter first name:"));
         firstName = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter phone number:"));
         phoneNumber = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter day of birth:"));
         dateOfBirth[0] = scanner.nextInt();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter month of birth:"));
         dateOfBirth[1] = scanner.nextInt();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter year of birth:"));
         dateOfBirth[2] = scanner.nextInt();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address street:"));
         addressStreet = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address house:"));
         addressHouse = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address flat:"));
         addressFlat = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address postcode:"));
         addressPostcode = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address city:"));
         addressCity = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter address country:"));
         addressCountry = scanner.next();
-        pause(500);
+        
         System.out.println(Color.makeBlue("Enter e-mail:"));
         email = scanner.next();
-        pause(500);
 
         Contact contact = new Contact.Builder()
         .lastName(lastName)
