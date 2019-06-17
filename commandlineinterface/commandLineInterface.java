@@ -6,12 +6,11 @@ import system.*;
 public class CommandLineInterface {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean quit = false;
-    private static String command = "";
+    private static String command;
     private static ContactBook contactBook = new ContactBook();
 
     public static void run() {
         printBanner();
-
         while (!quit) {
             System.out.print(">");
             command = scanner.nextLine();
@@ -58,6 +57,8 @@ public class CommandLineInterface {
 
     private static void test() {
         System.out.println("Test!");
+        int number = Integer.parseInt(scanner.nextLine());
+        System.out.println(number*number);
     }
 
 
@@ -82,7 +83,7 @@ public class CommandLineInterface {
 
     private static void printContactByID() {
         System.out.println(Color.makeWhite("Kindly input contact ID:"));
-        int contactID = scanner.nextInt();
+        int contactID = Integer.parseInt(scanner.nextLine());
         if (ContactBook.isPresent(contactID)) {
             contactBook.printContact(contactID);
         } else {
@@ -119,43 +120,43 @@ public class CommandLineInterface {
         System.out.println(Color.makeWhite("Press 'return' to skip a field"));
 
         System.out.println(Color.makeBlue("Enter last name:"));
-        lastName = scanner.next();
+        lastName = scanner.nextLine();
 
         System.out.println(Color.makeBlue("Enter first name:"));
-        firstName = scanner.next();
+        firstName = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter phone number:"));
-        phoneNumber = scanner.next();
+        phoneNumber = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter day of birth:"));
-        dateOfBirth[0] = scanner.nextInt();
+        dateOfBirth[0] = Integer.parseInt(scanner.nextLine());
         
         System.out.println(Color.makeBlue("Enter month of birth:"));
-        dateOfBirth[1] = scanner.nextInt();
+        dateOfBirth[1] = Integer.parseInt(scanner.nextLine());
         
         System.out.println(Color.makeBlue("Enter year of birth:"));
-        dateOfBirth[2] = scanner.nextInt();
+        dateOfBirth[2] = Integer.parseInt(scanner.nextLine());
         
         System.out.println(Color.makeBlue("Enter address street:"));
-        addressStreet = scanner.next();
+        addressStreet = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter address house:"));
-        addressHouse = scanner.next();
+        addressHouse = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter address flat:"));
-        addressFlat = scanner.next();
+        addressFlat = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter address postcode:"));
-        addressPostcode = scanner.next();
+        addressPostcode = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter address city:"));
-        addressCity = scanner.next();
+        addressCity = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter address country:"));
-        addressCountry = scanner.next();
+        addressCountry = scanner.nextLine();
         
         System.out.println(Color.makeBlue("Enter e-mail:"));
-        email = scanner.next();
+        email = scanner.nextLine();
 
         Contact contact = new Contact.Builder()
         .lastName(lastName)
