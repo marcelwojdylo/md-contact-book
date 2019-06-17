@@ -1,4 +1,5 @@
 package system;
+import java.time.*;
 
 public class ContactBook {
 
@@ -88,7 +89,7 @@ public class ContactBook {
         contact.setEmail(string);
     }
 
-    public void setDateOfBirth(Contact contact, int[] date) {
+    public void setDateOfBirth(Contact contact, LocalDate date) {
         contact.setDateOfBirth(date);
     }
 
@@ -181,7 +182,7 @@ public class ContactBook {
                 .lastName(genericSurnames()[i])
                 .firstName("Generyk")
                 .phoneNumber("666-666-666oijdsfknadsf")
-                .dateOfBirth(13, 12, 1990)
+                .dateOfBirth(LocalDate.of(1990, 12, 13))
                 .addressStreet("Rajska")
                 .addressHouse("2")
                 .addressFlat(1293)

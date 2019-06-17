@@ -1,5 +1,6 @@
 package system;
 
+import java.time.LocalDate;
 
 public class Contact {
 
@@ -30,7 +31,7 @@ public class Contact {
 	    String addressCountry;
 	    String phoneNumber;
 	    String email;
-	    int[] dateOfBirth;
+	    LocalDate dateOfBirth;
 
     }    
 
@@ -78,7 +79,7 @@ public class Contact {
     	return contactData.email;
     }
 
-    public int[] getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
     	return contactData.dateOfBirth;
     }
 
@@ -124,8 +125,8 @@ public class Contact {
         contactData.email = string;
     }
 
-    public void setDateOfBirth(int[] array) {
-        contactData.dateOfBirth = array;
+    public void setDateOfBirth(LocalDate date) {
+        contactData.dateOfBirth = date;
     }
 
 
@@ -138,7 +139,7 @@ public class Contact {
 
         private String firstName = "";
         private String lastName = "";
-        private int[] dateOfBirth = new int[3];
+        private LocalDate dateOfBirth;
         private String addressStreet = "";
         private String addressHouse = "";
         private String addressFlat = "";
@@ -163,10 +164,8 @@ public class Contact {
             return this;
         }
 
-        public Builder dateOfBirth (int day, int month, int year) {
-            dateOfBirth[DAY_OF_BIRTH_INDEX] = day;
-            dateOfBirth[MONTH_OF_BIRTH_INDEX] = month;
-            dateOfBirth[YEAR_OF_BIRTH_INDEX] = year;
+        public Builder dateOfBirth (LocalDate date) {
+            dateOfBirth = date;
             return this;
         }
 
@@ -270,7 +269,7 @@ public class Contact {
             "\nContact ID: " + contactData.contactID + ",\n" +
             "First Name: " + contactData.firstName + ",\n" +
             "Last Name: " + contactData.lastName + ",\n" +
-            "Date of Birth: " + contactData.dateOfBirth[DAY_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[MONTH_OF_BIRTH_INDEX] + "/" + contactData.dateOfBirth[YEAR_OF_BIRTH_INDEX] + ",\n" +
+            "Date of Birth: " + contactData.dateOfBirth + ",\n" +
             "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
             "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
             "Phone number: " + contactData.phoneNumber + ",\n" +

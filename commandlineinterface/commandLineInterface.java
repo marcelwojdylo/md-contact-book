@@ -1,6 +1,7 @@
 package commandlineinterface;
 import java.util.Scanner;
 import java.lang.Thread;
+import java.time.*;
 import system.*;
 
 public class CommandLineInterface {
@@ -91,7 +92,7 @@ public class CommandLineInterface {
         String lastName;
         String firstName;
         String phoneNumber;
-        int[] dateOfBirth = new int[3];
+        LocalDate dateOfBirth;
         String addressStreet;
         String addressHouse;
         String addressFlat;
@@ -116,11 +117,8 @@ public class CommandLineInterface {
         System.out.println(Color.makeBlue("Enter phone number:"));
         phoneNumber = inputNumbers();
         
-        System.out.println(Color.makeBlue("Enter date of birth (dd/mm/yyyy):"));
-        String fullDateOfBirth = inputDateOfBirth();
-        dateOfBirth[0] = Integer.parseInt(fullDateOfBirth.split("/")[0]);
-        dateOfBirth[1] = Integer.parseInt(fullDateOfBirth.split("/")[1]);
-        dateOfBirth[2] = Integer.parseInt(fullDateOfBirth.split("/")[2]);
+        System.out.println(Color.makeBlue("Enter date of birth (yyyy-mm-dd):"));
+        dateOfBirth = inputDateOfBirth();
         
         System.out.println(Color.makeBlue("Enter address street:"));
         addressStreet = inputLetters();
@@ -147,7 +145,7 @@ public class CommandLineInterface {
         .lastName(lastName)
         .firstName(firstName)
         .phoneNumber(phoneNumber)
-        .dateOfBirth(dateOfBirth[0], dateOfBirth[1], dateOfBirth[2])
+        .dateOfBirth(dateOfBirth)
         .addressStreet(addressStreet)
         .addressHouse(addressHouse)
         .addressFlat(addressFlat)
@@ -201,13 +199,36 @@ public class CommandLineInterface {
         return string;
     }
 
-    private static String inputDateOfBirth() {
-        String string = scanner.nextLine();
-        while (!string.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
-            System.out.println(Color.makeRed("Please enter date of birth in dd/mm/yyyy format."));
-            string = scanner.nextLine();
+    private static LocalDate inputDateOfBirth() {
+        boolean isValid = false;
+        LocalDate dateOfBirth = LocalDate.now();
+
+        while (!isValid) {
+            String DateOfBirthInput = scanner.nextLine();
+            if (!DateOfBirthInput.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
+                System.out.println(Color.makeRed("Please enter date of birth in yyyy-mm-dd format."));
+                continue;
+            }
+            
+            int year = Integer.parseInt(DateOfBirthInput.split("-")[0]);
+            int month = Integer.parseInt(DateOfBirthInput.split("-")[1]);
+            int day = Integer.parseInt(DateOfBirthInput.split("-")[2]);
+            try {
+                dateOfBirth = LocalDate.of(year, month, day);
+            } catch (DateTimeException e) {
+                System.out.println(Color.makeRed("Please enter valid date."));
+                continue;
+            }
+        
+
+            if (dateOfBirth.isAfter(LocalDate.now())) {
+                System.out.println(Color.makeRed("Please enter a past date."));
+                continue;
+            } else {
+                isValid = true;
+            }
         }
-        return string;
+        return dateOfBirth;
     }
 
     private static boolean containsNumbersOnly(String string) {
