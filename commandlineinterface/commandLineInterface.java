@@ -183,7 +183,7 @@ public class CommandLineInterface {
 
     private static String inputEmail() {
         String string = scanner.nextLine();
-        while (!string.matches(Constants.EMAIL_CHECK_REGEX)) {
+        while (!string.matches(Constants.EMAIL_CHECK_REGEX) && !string.isEmpty()) {
             System.out.println(Color.makeRed("Please enter a valid e-mail address."));
             string = scanner.nextLine();
         }
@@ -192,7 +192,7 @@ public class CommandLineInterface {
 
     private static String inputPostCode() {
         String string = scanner.nextLine();
-        while (!string.matches(Constants.POSTCODE_CHECK_REGEX)) {
+        while (!string.matches(Constants.POSTCODE_CHECK_REGEX) && !string.isEmpty()) {
             System.out.println(Color.makeRed("Please enter post code in 00-000 format."));
             string = scanner.nextLine();
         }
@@ -204,15 +204,20 @@ public class CommandLineInterface {
         LocalDate dateOfBirth = LocalDate.now();
 
         while (!isValid) {
-            String DateOfBirthInput = scanner.nextLine();
-            if (!DateOfBirthInput.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
+            String dateOfBirthInput = scanner.nextLine();
+            if (dateOfBirthInput.isEmpty()) {
+                isValid = true;
+                continue;
+            }
+
+            if (!dateOfBirthInput.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
                 System.out.println(Color.makeRed("Please enter date of birth in yyyy-mm-dd format."));
                 continue;
             }
             
-            int year = Integer.parseInt(DateOfBirthInput.split("-")[0]);
-            int month = Integer.parseInt(DateOfBirthInput.split("-")[1]);
-            int day = Integer.parseInt(DateOfBirthInput.split("-")[2]);
+            int year = Integer.parseInt(dateOfBirthInput.split("-")[0]);
+            int month = Integer.parseInt(dateOfBirthInput.split("-")[1]);
+            int day = Integer.parseInt(dateOfBirthInput.split("-")[2]);
             try {
                 dateOfBirth = LocalDate.of(year, month, day);
             } catch (DateTimeException e) {
