@@ -8,17 +8,17 @@ public class CommandLineInterface {
     private static boolean quit = false;
     private static String command = "";
     private static ContactBook contactBook = new ContactBook();
-    public static void main(String[] args) {
-        run();
-    }
 
-    private static void run() {
+    public static void run() {
         printBanner();
 
         while (!quit) {
             System.out.print(">");
             command = scanner.nextLine();
             switch (command) {
+                case (Commands.TEST_HYPOTHESIS):
+                    test();
+                    break;
                 case (Commands.PRINT_CONTACT): //problem
                     printContactByID();
                     break;
@@ -53,6 +53,11 @@ public class CommandLineInterface {
         static final String PRINT_CONTACT_BOOK_BY_ID = "print contactbook byID";
         static final String QUIT = "quit";
         static final String NEW_CONTACT = "new contact";
+        static final String TEST_HYPOTHESIS = "test";
+    }
+
+    private static void test() {
+        System.out.println("Test!");
     }
 
 
