@@ -15,9 +15,6 @@ public class CommandLineInterface {
             System.out.print(">");
             command = scanner.nextLine();
             switch (command) {
-                case (Commands.TEST_HYPOTHESIS):
-                    test();
-                    break;
                 case (Commands.PRINT_CONTACT): //problem
                     printContactByID();
                     break;
@@ -52,16 +49,7 @@ public class CommandLineInterface {
         static final String PRINT_CONTACT_BOOK_BY_ID = "print contactbook byID";
         static final String QUIT = "quit";
         static final String NEW_CONTACT = "new contact";
-        static final String TEST_HYPOTHESIS = "test";
     }
-
-    private static void test() {
-        System.out.println("Test!");
-        int number = Integer.parseInt(scanner.nextLine());
-        System.out.println(number*number);
-    }
-
-
 
     private static void quit() {
         quit = true;
@@ -120,43 +108,40 @@ public class CommandLineInterface {
         System.out.println(Color.makeWhite("Press 'return' to skip a field"));
 
         System.out.println(Color.makeBlue("Enter last name:"));
-        lastName = scanner.nextLine();
+        lastName = inputLetters();
 
         System.out.println(Color.makeBlue("Enter first name:"));
-        firstName = scanner.nextLine();
+        firstName = inputLetters();
         
         System.out.println(Color.makeBlue("Enter phone number:"));
-        phoneNumber = scanner.nextLine();
+        phoneNumber = inputNumbers();
         
-        System.out.println(Color.makeBlue("Enter day of birth:"));
-        dateOfBirth[0] = Integer.parseInt(scanner.nextLine());
-        
-        System.out.println(Color.makeBlue("Enter month of birth:"));
-        dateOfBirth[1] = Integer.parseInt(scanner.nextLine());
-        
-        System.out.println(Color.makeBlue("Enter year of birth:"));
-        dateOfBirth[2] = Integer.parseInt(scanner.nextLine());
+        System.out.println(Color.makeBlue("Enter date of birth (dd/mm/yyyy):"));
+        String fullDateOfBirth = inputDateOfBirth();
+        dateOfBirth[0] = Integer.parseInt(fullDateOfBirth.split("/")[0]);
+        dateOfBirth[1] = Integer.parseInt(fullDateOfBirth.split("/")[1]);
+        dateOfBirth[2] = Integer.parseInt(fullDateOfBirth.split("/")[2]);
         
         System.out.println(Color.makeBlue("Enter address street:"));
-        addressStreet = scanner.nextLine();
+        addressStreet = inputLetters();
         
         System.out.println(Color.makeBlue("Enter address house:"));
-        addressHouse = scanner.nextLine();
+        addressHouse = inputNumbers();
         
         System.out.println(Color.makeBlue("Enter address flat:"));
-        addressFlat = scanner.nextLine();
+        addressFlat = inputNumbers();
         
         System.out.println(Color.makeBlue("Enter address postcode:"));
-        addressPostcode = scanner.nextLine();
+        addressPostcode = inputPostCode();
         
         System.out.println(Color.makeBlue("Enter address city:"));
-        addressCity = scanner.nextLine();
+        addressCity = inputLetters();
         
         System.out.println(Color.makeBlue("Enter address country:"));
-        addressCountry = scanner.nextLine();
+        addressCountry = inputLetters();
         
         System.out.println(Color.makeBlue("Enter e-mail:"));
-        email = scanner.nextLine();
+        email = inputEmail();
 
         Contact contact = new Contact.Builder()
         .lastName(lastName)
@@ -180,6 +165,88 @@ public class CommandLineInterface {
         }
     }
 
+    private static String inputLetters() {
+        String string = scanner.nextLine();
+        while (!containsLettersOnly(string)) {
+            System.out.println(Color.makeRed("Please use letters only."));
+            string = scanner.nextLine(); 
+        }
+        return string;
+    }
+
+    private static String inputNumbers() {
+        String string = scanner.nextLine();
+        while (!containsNumbersOnly(string)) {
+            System.out.println(Color.makeRed("Please use numbers only."));
+            string = scanner.nextLine();
+        }
+        return string;
+    }
+
+    private static String inputEmail() {
+        String string = scanner.nextLine();
+        while (!string.matches(Constants.EMAIL_CHECK_REGEX)) {
+            System.out.println(Color.makeRed("Please enter a valid e-mail address."));
+            string = scanner.nextLine();
+        }
+        return string;
+    }
+
+    private static String inputPostCode() {
+        String string = scanner.nextLine();
+        while (!string.matches(Constants.POSTCODE_CHECK_REGEX)) {
+            System.out.println(Color.makeRed("Please enter post code in 00-000 format."));
+            string = scanner.nextLine();
+        }
+        return string;
+    }
+
+    private static String inputDateOfBirth() {
+        String string = scanner.nextLine();
+        while (!string.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
+            System.out.println(Color.makeRed("Please enter date of birth in dd/mm/yyyy format."));
+            string = scanner.nextLine();
+        }
+        return string;
+    }
+
+    private static boolean containsNumbersOnly(String string) {
+        boolean result = true;
+        for (int i = 0; i < string.length(); i++) {
+            if (!isDigit(string.charAt(i))) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    private static boolean containsLettersOnly(String string) {
+        boolean result = true;
+        for (int i = 0; i < string.length(); i++) {
+            if (!isLetter(string.charAt(i))) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    private static boolean isDigit(char character) {
+        for (int i = 0; i < Constants.DIGITS.length(); i++) {
+            if (character == Constants.DIGITS.charAt(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isLetter(char character) {
+        for (int i = 0; i < Constants.LETTERS.length(); i++) {
+            if (character == Constants.LETTERS.charAt(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     private static void pause(long milliseconds) {
         try {

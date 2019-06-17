@@ -154,12 +154,12 @@ public class Contact {
         }
 
         public Builder firstName (String value) {
-            firstName = ContactDataFormatter.formatProperName(value);
+            firstName = value;
             return this;
         }
 
         public Builder lastName (String value) {
-            lastName = ContactDataFormatter.formatProperName(value);
+            lastName = value;
             return this;
         }
 
@@ -171,7 +171,7 @@ public class Contact {
         }
 
         public Builder addressStreet (String value) {
-            addressStreet = ContactDataFormatter.formatProperName(value);
+            addressStreet = value;
             return this;
         }
 
@@ -203,23 +203,23 @@ public class Contact {
         }
 
         public Builder addressCity (String value) {
-            addressCity = ContactDataFormatter.formatProperName(value);
+            addressCity = value;
             return this;
         }
 
         public Builder addressCountry (String value) {
-            addressCountry = ContactDataFormatter.formatProperName(value);
+            addressCountry = value;
             return this;
         }
 
         public Builder phoneNumber (String value) {
-            phoneNumber = ContactDataFormatter.formatPhoneNumber(value);
+            phoneNumber = value;
             return this;
         }
 
         public Builder phoneNumber (int value) {
             String string = Integer.toString(value);
-            phoneNumber = ContactDataFormatter.formatPhoneNumber(string);
+            phoneNumber = string;
             return this;
         }
         
