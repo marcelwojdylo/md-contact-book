@@ -6,7 +6,6 @@ public class ContactBook {
     private static Contact[] contacts;
 
 
-
     public Contact[] getContacts() {
         return contacts;
     }
@@ -25,6 +24,10 @@ public class ContactBook {
     }
 
 
+
+    public int getNumberOfContacts() {
+        return Contact.getNumberOfContacts();
+    }
 
     public void addContact(Contact contact) {
         contacts[contact.getContactID()] = contact;        

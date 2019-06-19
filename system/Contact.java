@@ -5,9 +5,6 @@ import java.time.LocalDate;
 public class Contact {
 
     private static int numberOfContacts = 0;
-    private static final int DAY_OF_BIRTH_INDEX = 0;
-    private static final int MONTH_OF_BIRTH_INDEX = 1;
-    private static final int YEAR_OF_BIRTH_INDEX = 2;
     private ContactData contactData = new ContactData();
 
 

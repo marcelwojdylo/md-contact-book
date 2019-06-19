@@ -10,6 +10,10 @@ public class CommandLineInterface {
     private static String command;
     private static ContactBook contactBook = new ContactBook();
 
+    public static void main(String[] args) {
+        run();
+    }
+
     public static void run() {
         printBanner();
         while (!quit) {
