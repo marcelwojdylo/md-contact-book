@@ -96,7 +96,7 @@ public class CommandLineInterface {
         String lastName;
         String firstName;
         String phoneNumber;
-        LocalDate dateOfBirth;
+        String dateOfBirth;
         String addressStreet;
         String addressHouse;
         String addressFlat;
@@ -203,34 +203,35 @@ public class CommandLineInterface {
         return string;
     }
 
-    private static LocalDate inputDateOfBirth() {
+    private static String inputDateOfBirth() {
         boolean isValid = false;
-        LocalDate dateOfBirth = LocalDate.now();
+        String dateOfBirth = "";
 
         while (!isValid) {
-            String dateOfBirthInput = scanner.nextLine();
-            if (dateOfBirthInput.isEmpty()) {
+            dateOfBirth = scanner.nextLine();
+            if (dateOfBirth.isEmpty()) {
                 isValid = true;
                 continue;
             }
 
-            if (!dateOfBirthInput.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
+            if (!dateOfBirth.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
                 System.out.println(Color.makeRed("Please enter date of birth in yyyy-mm-dd format."));
                 continue;
             }
             
-            int year = Integer.parseInt(dateOfBirthInput.split("-")[0]);
-            int month = Integer.parseInt(dateOfBirthInput.split("-")[1]);
-            int day = Integer.parseInt(dateOfBirthInput.split("-")[2]);
+            int year = Integer.parseInt(dateOfBirth.split("-")[0]);
+            int month = Integer.parseInt(dateOfBirth.split("-")[1]);
+            int day = Integer.parseInt(dateOfBirth.split("-")[2]);
+            LocalDate tempDate;
             try {
-                dateOfBirth = LocalDate.of(year, month, day);
+                tempDate = LocalDate.of(year, month, day);
             } catch (DateTimeException e) {
                 System.out.println(Color.makeRed("Please enter valid date."));
                 continue;
             }
         
 
-            if (dateOfBirth.isAfter(LocalDate.now())) {
+            if (tempDate.isAfter(LocalDate.now())) {
                 System.out.println(Color.makeRed("Please enter a past date."));
                 continue;
             } else {

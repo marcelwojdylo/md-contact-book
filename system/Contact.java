@@ -1,13 +1,33 @@
 package system;
-
+import org.json.simple.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+@SuppressWarnings("unchecked")
 
 public class Contact {
 
     private static int numberOfContacts = 0;
     private ContactData contactData = new ContactData();
 
-
+    public JSONObject getJSON() {
+        JSONObject data = new JSONObject();
+        data.put("contactID", contactData.contactID);
+        data.put("firstName", contactData.firstName);
+        data.put("lastName", contactData.lastName);
+        data.put("addressStreet", contactData.addressStreet);
+        data.put("addressHouse", contactData.addressHouse);
+        data.put("addressFlat", contactData.addressFlat);
+        data.put("addressPostcode", contactData.addressPostcode);
+        data.put("addressCity", contactData.addressCity);
+        data.put("addressCountry", contactData.addressCountry);
+        data.put("phoneNumber", contactData.phoneNumber);
+        data.put("email", contactData.email);
+        data.put("dateOfBirth", contactData.dateOfBirth);
+        JSONObject contact = new JSONObject();
+        contact.put(contactData.contactID, data);
+        return data;
+    }
 
     public static int getNumberOfContacts () {
         return numberOfContacts;
@@ -28,7 +48,7 @@ public class Contact {
 	    String addressCountry;
 	    String phoneNumber;
 	    String email;
-	    LocalDate dateOfBirth;
+	    String dateOfBirth;
 
     }    
 
@@ -76,7 +96,7 @@ public class Contact {
     	return contactData.email;
     }
 
-    public LocalDate getDateOfBirth() {
+    public String getDateOfBirth() {
     	return contactData.dateOfBirth;
     }
 
@@ -122,7 +142,7 @@ public class Contact {
         contactData.email = string;
     }
 
-    public void setDateOfBirth(LocalDate date) {
+    public void setDateOfBirth(String date) {
         contactData.dateOfBirth = date;
     }
 
@@ -136,7 +156,7 @@ public class Contact {
 
         private String firstName = "";
         private String lastName = "";
-        private LocalDate dateOfBirth;
+        private String dateOfBirth;
         private String addressStreet = "";
         private String addressHouse = "";
         private String addressFlat = "";
@@ -161,7 +181,7 @@ public class Contact {
             return this;
         }
 
-        public Builder dateOfBirth (LocalDate date) {
+        public Builder dateOfBirth (String date) {
             dateOfBirth = date;
             return this;
         }

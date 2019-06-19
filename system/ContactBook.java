@@ -1,9 +1,23 @@
 package system;
 import java.time.*;
+import org.json.simple.*;
+import java.io.FileWriter;
+import java.io.IOException;
+@SuppressWarnings("unchecked")
 
 public class ContactBook {
 
     private static Contact[] contacts;
+    
+    public JSONArray getJSON() {
+        JSONArray array = new JSONArray();
+        for (int i = 0; i < Contact.getNumberOfContacts(); i++) {
+            if (contacts[i] != null) {
+                array.add(contacts[i].getJSON());
+            }
+        }
+        return array;
+    }
 
 
     public Contact[] getContacts() {
@@ -92,7 +106,7 @@ public class ContactBook {
         contact.setEmail(string);
     }
 
-    public void setDateOfBirth(Contact contact, LocalDate date) {
+    public void setDateOfBirth(Contact contact, String date) {
         contact.setDateOfBirth(date);
     }
 
@@ -185,7 +199,7 @@ public class ContactBook {
                 .lastName(genericSurnames()[i])
                 .firstName("Generyk")
                 .phoneNumber("666-666-666oijdsfknadsf")
-                .dateOfBirth(LocalDate.of(1990, 12, 13))
+                .dateOfBirth("1990-13-12")
                 .addressStreet("Rajska")
                 .addressHouse("2")
                 .addressFlat(1293)
