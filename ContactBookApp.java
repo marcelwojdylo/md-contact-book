@@ -18,28 +18,27 @@ public class ContactBookApp {
     public static void main(String[] arg) {
 
         ContactBook contactBook = new ContactBook();
-        JSONController.writeJSON(JSONController.makeJSONFromContactBook(contactBook));
+        contactBook.printContactBook();
+        // JSONController.writeJSON(JSONController.makeJSONFromContactBook(contactBook));
 
-        JSONParser parser = new JSONParser();
+        // JSONParser parser = new JSONParser();
 
-        try {
-            Object obj = parser.parse(new FileReader("contactBookData.json"));
-            System.out.println(obj);
-            JSONArray jsonArray = (JSONArray) obj;
-            System.out.println(jsonArray.get(0));
-            JSONObject contact = (JSONObject) jsonArray.get(0);
-            System.out.println(contact.get("firstName"));
-            String firstname = (String) contact.get("firstName");
-            System.out.println(firstname);
-            Contact contactFromJSON = JSONController.makeContactFromJSON(contact);
-            System.out.println(contactFromJSON);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("contactBookData.json"));
+        //     System.out.println(jsonArray.get(0));
+        //     JSONObject contact = (JSONObject) jsonArray.get(0);
+        //     System.out.println(contact.get("firstName"));
+        //     String firstname = (String) contact.get("firstName");
+        //     System.out.println(firstname);
+        //     Contact contactFromJSON = JSONController.makeContactFromJSON(contact);
+        //     System.out.println(contactFromJSON);
+        // } catch (FileNotFoundException e) {
+        //     e.printStackTrace();
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // } catch (ParseException e) {
+        //     e.printStackTrace();
+        // }
     }
 }
 

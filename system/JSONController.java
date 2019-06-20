@@ -3,6 +3,7 @@ import org.json.simple.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -81,5 +82,37 @@ public class JSONController {
             .addressCountry((String) json.get("addressCountry"))
             .email((String) json.get("email"))
             .build();
+    }
+
+    public static JSONArray readJSONArrayFromFile() {
+        JSONParser parser = new JSONParser();
+        JSONArray jsonArray = new JSONArray();
+        try {
+            jsonArray = (JSONArray) parser.parse(new FileReader("contactBookData.json"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
+    public static Contact[] makeContactArrayFromJSONArray(JSONArray array) {
+        Contact[] contactArray = new Contact[ContactBook.getContactBookCapacity()];
+        boolean finished = false;
+        int i = 0;
+        while (!finished) {
+            try {
+                JSONObject contactJSON = (JSONObject) array.get(i);
+                Contact contactFromJSON = JSONController.makeContactFromJSON(contactJSON);
+                contactArray[i] = contactFromJSON;
+                i++;
+            } catch (IndexOutOfBoundsException e) {
+                finished = true;
+            }
+        }
+        return contactArray;
     }
 }

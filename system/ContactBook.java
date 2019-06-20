@@ -28,7 +28,8 @@ public class ContactBook {
 
     public ContactBook() {
         initializeContactsArray(contactBookCapacity);
-        fillArrayWithGenericContacts(10);
+        // fillArrayWithGenericContacts(10);
+        loadContactsFromFile();
     }
 
 
@@ -219,6 +220,12 @@ public class ContactBook {
         stringArray[8] = "Goleniowski";
         stringArray[9] = "Umbajski";
         return stringArray;
+    }
+
+    private void loadContactsFromFile() {
+        JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();
+        Contact[] contactsArray = JSONController.makeContactArrayFromJSONArray(contactsJSON);
+        contacts = contactsArray;
     }
 
 }
