@@ -18,7 +18,9 @@ public class ContactBookApp {
     public static void main(String[] arg) {
 
         ContactBook contactBook = new ContactBook();
-        contactBook.printContactBook();
+        Contact jozek = new Contact.Builder().firstName("Jozek").lastName("Józkoski").build();
+        contactBook.addContact(jozek);
+        
         // JSONController.writeJSON(JSONController.makeJSONFromContactBook(contactBook));
 
         // JSONParser parser = new JSONParser();

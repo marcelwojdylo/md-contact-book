@@ -43,16 +43,21 @@ public class ContactBook {
     public void addContact(Contact contact) {
         contacts[contact.getContactID()] = contact;        
         numberOfContacts++;
+        saveContactsToFile();
     }    
     
     public void removeContact(Contact contact) {
         contacts[contact.getContactID()] = null;
         numberOfContacts--;
+        saveContactsToFile();
+
     }
     
     public void removeContact(int contactID) {
         contacts[contactID] = null;
         numberOfContacts--;
+        saveContactsToFile();
+
     }
 
     public static boolean isPresent (int contactID) {
@@ -226,6 +231,10 @@ public class ContactBook {
         JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();
         Contact[] contactsArray = JSONController.makeContactArrayFromJSONArray(contactsJSON);
         contacts = contactsArray;
+    }
+
+    private void saveContactsToFile() {
+        JSONController.writeJSON(JSONController.makeJSONFromContactBook(this));
     }
 
 }
