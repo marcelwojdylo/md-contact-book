@@ -1,39 +1,9 @@
 package system;
-import org.json.simple.*;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-@SuppressWarnings("unchecked")
 
 public class Contact {
 
-    private static int numberOfContacts = 0;
+    private static int nextID = 0;
     private ContactData contactData = new ContactData();
-
-    public JSONObject getJSON() {
-        JSONObject data = new JSONObject();
-        data.put("contactID", contactData.contactID);
-        data.put("firstName", contactData.firstName);
-        data.put("lastName", contactData.lastName);
-        data.put("addressStreet", contactData.addressStreet);
-        data.put("addressHouse", contactData.addressHouse);
-        data.put("addressFlat", contactData.addressFlat);
-        data.put("addressPostcode", contactData.addressPostcode);
-        data.put("addressCity", contactData.addressCity);
-        data.put("addressCountry", contactData.addressCountry);
-        data.put("phoneNumber", contactData.phoneNumber);
-        data.put("email", contactData.email);
-        data.put("dateOfBirth", contactData.dateOfBirth);
-        JSONObject contact = new JSONObject();
-        contact.put(contactData.contactID, data);
-        return data;
-    }
-
-    public static int getNumberOfContacts () {
-        return numberOfContacts;
-    }  
-
-
 
     private class ContactData {
 
@@ -152,8 +122,7 @@ public class Contact {
 
     public static class Builder {
 
-        private final int contactID;
-
+        private int contactID;
         private String firstName = "";
         private String lastName = "";
         private String dateOfBirth;
@@ -167,8 +136,13 @@ public class Contact {
         private String email = "";
 
         public Builder () {
-            contactID = Contact.numberOfContacts;
-            Contact.numberOfContacts++;
+            contactID = Contact.nextID;
+            Contact.nextID++;
+        }
+
+        public Builder contactID (int value) {
+            contactID = value;
+            return this;
         }
 
         public Builder firstName (String value) {

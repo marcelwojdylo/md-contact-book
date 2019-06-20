@@ -8,26 +8,26 @@ import java.io.IOException;
 public class ContactBook {
 
     private static Contact[] contacts;
-    
-    public JSONArray getJSON() {
-        JSONArray array = new JSONArray();
-        for (int i = 0; i < Contact.getNumberOfContacts(); i++) {
-            if (contacts[i] != null) {
-                array.add(contacts[i].getJSON());
-            }
-        }
-        return array;
-    }
-
-
     public Contact[] getContacts() {
         return contacts;
     }
 
+    private static int contactBookCapacity = 100;
+    public static int getContactBookCapacity() {
+        return contactBookCapacity;
+    }
+
+    private static int numberOfContacts = 0;
+    public int getNumberOfContacts() {
+        return numberOfContacts;
+    }
+
+
+
 
 
     public ContactBook() {
-        initializeContactsArray(100);
+        initializeContactsArray(contactBookCapacity);
         fillArrayWithGenericContacts(10);
     }
 
@@ -39,24 +39,23 @@ public class ContactBook {
 
 
 
-    public int getNumberOfContacts() {
-        return Contact.getNumberOfContacts();
-    }
-
     public void addContact(Contact contact) {
         contacts[contact.getContactID()] = contact;        
+        numberOfContacts++;
     }    
     
     public void removeContact(Contact contact) {
         contacts[contact.getContactID()] = null;
+        numberOfContacts--;
     }
     
     public void removeContact(int contactID) {
         contacts[contactID] = null;
+        numberOfContacts--;
     }
 
     public static boolean isPresent (int contactID) {
-        for (int i = 0; i < Contact.getNumberOfContacts(); i++) {
+        for (int i = 0; i < contacts.length; i++) {
             if (contacts[i].getContactID() == contactID) {
                 return true;
             }
@@ -113,11 +112,10 @@ public class ContactBook {
 
 
     public void printContactBook() {
-        for(int i = 0; i < Contact.getNumberOfContacts(); i++) {
-            if (contacts[i] == null) {
-                continue;
+        for(int i = 0; i < contacts.length; i++) {
+            if (contacts[i] != null) {
+                System.out.println(contacts[i]);
             }
-            System.out.println(contacts[i]);
         } 
     }   
 
@@ -143,11 +141,11 @@ public class ContactBook {
 
 
     public Contact[] sortContactsByLastNameInitial() {
-        Contact[] result = new Contact[Contact.getNumberOfContacts()];
+        Contact[] result = new Contact[contacts.length];
         int indexCounter = 0;
 
         for (int i = 0; i < Constants.LETTERS.length(); i++) {
-            for (int j = 0; j < Contact.getNumberOfContacts(); j++) {
+            for (int j = 0; j < contacts.length; j++) {
                 if (contacts[j] == null) {
                     continue;
                 }
@@ -163,17 +161,12 @@ public class ContactBook {
     }
     
     public Contact[] getContactsWithLastNameInitial(char initial) {
-        Contact[] result = new Contact[Contact.getNumberOfContacts()];
-        for (int i = 0; i <= Contact.getNumberOfContacts(); i ++) {
-            if (contacts[i] == null) {
-                continue;
-            }
-            if (contacts[i].getLastName().charAt(0) == initial) {
+        Contact[] result = new Contact[contacts.length];
+        for (int i = 0; i <= contacts.length; i ++) {
+            if (contacts[i] != null && contacts[i].getLastName().charAt(0) == initial) {
                 result[i] = contacts[i];
             }
-
         }
-
         return result;
     }
     

@@ -18,22 +18,21 @@ public class ContactBookApp {
     public static void main(String[] arg) {
 
         ContactBook contactBook = new ContactBook();
-
-        try (FileWriter file = new FileWriter("obj.json")) {
- 
-            file.write(contactBook.getJSON().toJSONString());
-            file.flush();
- 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        JSONController.writeJSON(JSONController.makeJSONFromContactBook(contactBook));
 
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader("obj.json"));
-            JSONArray jsonObject = (JSONArray) obj;
-            System.out.println(jsonObject.get(0));
+            Object obj = parser.parse(new FileReader("contactBookData.json"));
+            System.out.println(obj);
+            JSONArray jsonArray = (JSONArray) obj;
+            System.out.println(jsonArray.get(0));
+            JSONObject contact = (JSONObject) jsonArray.get(0);
+            System.out.println(contact.get("firstName"));
+            String firstname = (String) contact.get("firstName");
+            System.out.println(firstname);
+            Contact contactFromJSON = JSONController.makeContactFromJSON(contact);
+            System.out.println(contactFromJSON);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
