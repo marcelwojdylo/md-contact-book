@@ -3,7 +3,6 @@ import java.time.*;
 import org.json.simple.*;
 import java.io.FileWriter;
 import java.io.IOException;
-@SuppressWarnings("unchecked")
 
 public class ContactBook {
 
@@ -12,8 +11,8 @@ public class ContactBook {
         return contacts;
     }
 
-    private static int contactBookCapacity = 100;
-    public static int getContactBookCapacity() {
+    private int contactBookCapacity = Config.CONTACT_BOOK_CAPACITY;
+    public int getContactBookCapacity() {
         return contactBookCapacity;
     }
 
@@ -28,8 +27,10 @@ public class ContactBook {
 
     public ContactBook() {
         initializeContactsArray(contactBookCapacity);
-        // fillArrayWithGenericContacts(10);
         loadContactsFromFile();
+        Testing.addGenericContacts(this, 10);
+        Testing.addGenericContacts(this, 10);
+
     }
 
 
@@ -58,15 +59,6 @@ public class ContactBook {
         numberOfContacts--;
         saveContactsToFile();
 
-    }
-
-    public static boolean isPresent (int contactID) {
-        for (int i = 0; i < contacts.length; i++) {
-            if (contacts[i].getContactID() == contactID) {
-                return true;
-            }
-        }
-        return false;
     }
 
 
@@ -127,15 +119,17 @@ public class ContactBook {
 
     public void printContactsSortedByLastNameInitial() {
         for (Contact c : sortContactsByLastNameInitial()) {
-            if (c == null) {continue;}
-            System.out.println(c);
+            if (c != null) {
+                System.out.println(c);
+            }
         }
     }
 
     public void printContactsWithLastNameInitial(char initial) {
         for (Contact c : getContactsWithLastNameInitial(initial)) {
-            if (c == null) {continue;}
-            System.out.println(c);
+            if (c != null) {
+                System.out.println(c);
+            }
         }
     }
     
@@ -150,13 +144,13 @@ public class ContactBook {
         Contact[] result = new Contact[contacts.length];
         int indexCounter = 0;
 
-        for (int i = 0; i < Constants.LETTERS.length(); i++) {
+        for (int i = 0; i < Config.Constants.LETTERS.length(); i++) {
             for (int j = 0; j < contacts.length; j++) {
                 if (contacts[j] == null) {
                     continue;
                 }
 
-                if (contacts[j].getLastName().charAt(0) == Constants.LETTERS.charAt(i)) {
+                if (contacts[j].getLastName().charAt(0) == Config.Constants.LETTERS.charAt(i)) {
                     result[indexCounter] = contacts[j];
                     indexCounter++;
                 }
@@ -177,55 +171,6 @@ public class ContactBook {
     }
     
     
-    
-    // METHODS INTENDED FOR TESTING PURPOSES
-    
-    private void fillArrayWithGenericContacts(int limitOfContacts) {
-        int i = 0;
-        Contact[] genericContactsArray = genericContacts();
-        while (i <= limitOfContacts-1) {
-            Contact contact = genericContactsArray[i];
-            contacts[contact.getContactID()] = contact;
-            i++;
-        }
-    }
-    
-    private Contact[] genericContacts() {
-        int i = 0;
-        Contact[] contactArray = new Contact[10];
-        while (i <= 9) {
-            contactArray[i] = new Contact.Builder()
-                .lastName(genericSurnames()[i])
-                .firstName("Generyk")
-                .phoneNumber("666-666-666oijdsfknadsf")
-                .dateOfBirth("1990-13-12")
-                .addressStreet("Rajska")
-                .addressHouse("2")
-                .addressFlat(1293)
-                .addressPostcode("02-972")
-                .addressCity("warszawa")
-                .addressCountry("polska")
-                .email("generyk@generyk.gn")
-                .build();
-            i++;    
-        }
-        return contactArray;
-    }
-        
-    private String[] genericSurnames() {
-        String[] stringArray = new String[10];
-        stringArray[0] = "Abrowski";
-        stringArray[1] = "Boniewski";
-        stringArray[2] = "Czarnobylski";
-        stringArray[3] = "czeKOws00::::::ki";
-        stringArray[4] = "Frajowski";
-        stringArray[5] = "Szakajowski";
-        stringArray[6] = "Bombalakowski";
-        stringArray[7] = "Maksinski";
-        stringArray[8] = "Goleniowski";
-        stringArray[9] = "Umbajski";
-        return stringArray;
-    }
 
     private void loadContactsFromFile() {
         JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();

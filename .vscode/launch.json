@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - CommandLineInterface",
+            "request": "launch",
+            "mainClass": "commandlineinterface.CommandLineInterface",
+            "projectName": "JAVA_CONTACTS_EX_8db4c20f"
+        },
+        {
+            "type": "java",
             "name": "Debug (Launch) - Current File",
             "request": "launch",
             "mainClass": "${file}"

@@ -20,10 +20,10 @@ public class CommandLineInterface {
             System.out.print(">");
             command = scanner.nextLine();
             switch (command) {
-                case (Commands.PRINT_CONTACT): //problem
+                case (Commands.PRINT_CONTACT):
                     printContactByID();
                     break;
-                case (Commands.NEW_CONTACT): //problem
+                case (Commands.NEW_CONTACT):
                     createNewContact();
                     break;
                 case (Commands.PRINT_HELP):
@@ -77,15 +77,15 @@ public class CommandLineInterface {
     private static void printContactByID() {
         System.out.println(Color.makeWhite("Kindly input contact ID:"));
         int contactID = Integer.parseInt(scanner.nextLine());
-        if (ContactBook.isPresent(contactID)) {
+        try {
             contactBook.printContact(contactID);
-        } else {
+        } catch (NullPointerException e) {
             errorContactIDNotFound();
         }
     }
 
     private static void printBanner() {
-        System.out.println(Color.makeWhite("░░░░░░░░░░░░░░░░░░░░░░░░░░░░ MD Contact Book ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"));
+        System.out.println(Color.makeWhite("░░░░░░░░░░ MD Contact Book ░░░░░░░░░░"));
     }
 
     private static void printExitMessage(){
@@ -106,7 +106,6 @@ public class CommandLineInterface {
         String email;
 
 
-        // pause(1000);
 
         System.out.println(Color.makeYellow("░░░ Contact Creation Wizard ░░░"));
 
@@ -160,11 +159,7 @@ public class CommandLineInterface {
         .build();
 
         contactBook.addContact(contact);
-        if (ContactBook.isPresent(contact.getContactID())) {
-            System.out.println(Color.makeYellow("Contact with ID "+contact.getContactID()+" created successfully."));
-        } else {
-            System.out.println(Color.makeRed("Something went wrong, the contact was not created."));
-        }
+        System.out.println(Color.makeYellow("Contact with ID "+contact.getContactID()+" created successfully."));
     }
 
     private static String inputLetters() {
@@ -187,7 +182,7 @@ public class CommandLineInterface {
 
     private static String inputEmail() {
         String string = scanner.nextLine();
-        while (!string.matches(Constants.EMAIL_CHECK_REGEX) && !string.isEmpty()) {
+        while (!string.matches(Config.Constants.EMAIL_CHECK_REGEX) && !string.isEmpty()) {
             System.out.println(Color.makeRed("Please enter a valid e-mail address."));
             string = scanner.nextLine();
         }
@@ -196,7 +191,7 @@ public class CommandLineInterface {
 
     private static String inputPostCode() {
         String string = scanner.nextLine();
-        while (!string.matches(Constants.POSTCODE_CHECK_REGEX) && !string.isEmpty()) {
+        while (!string.matches(Config.Constants.POSTCODE_CHECK_REGEX) && !string.isEmpty()) {
             System.out.println(Color.makeRed("Please enter post code in 00-000 format."));
             string = scanner.nextLine();
         }
@@ -214,7 +209,7 @@ public class CommandLineInterface {
                 continue;
             }
 
-            if (!dateOfBirth.matches(Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
+            if (!dateOfBirth.matches(Config.Constants.DATE_OF_BIRTH_CHECK_REGEX)) {
                 System.out.println(Color.makeRed("Please enter date of birth in yyyy-mm-dd format."));
                 continue;
             }
@@ -262,8 +257,8 @@ public class CommandLineInterface {
     }
 
     private static boolean isDigit(char character) {
-        for (int i = 0; i < Constants.DIGITS.length(); i++) {
-            if (character == Constants.DIGITS.charAt(i)) {
+        for (int i = 0; i < Config.Constants.DIGITS.length(); i++) {
+            if (character == Config.Constants.DIGITS.charAt(i)) {
                 return true;
             }
         }
@@ -271,20 +266,12 @@ public class CommandLineInterface {
     }
 
     private static boolean isLetter(char character) {
-        for (int i = 0; i < Constants.LETTERS.length(); i++) {
-            if (character == Constants.LETTERS.charAt(i)) {
+        for (int i = 0; i < Config.Constants.LETTERS.length(); i++) {
+            if (character == Config.Constants.LETTERS.charAt(i)) {
                 return true;
             }
         }
         return false;
-    }
-
-    private static void pause(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            System.out.println(Color.makeRed("Pause interrupted!"));
-        }
     }
 
 

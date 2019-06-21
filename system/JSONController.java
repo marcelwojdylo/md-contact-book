@@ -10,30 +10,30 @@ import java.io.FileReader;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-@SuppressWarnings("unchecked")
 
 public class JSONController {
-    
+
+    @SuppressWarnings("unchecked")
     public static JSONObject makeJSONFromContact (Contact contact) {
+        
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("contactID", Integer.toString(contact.getContactID()));
+        jsonObject.put("firstName", contact.getFirstName());
+        jsonObject.put("lastName", contact.getLastName());
+        jsonObject.put("addressStreet", contact.getAddressStreet());
+        jsonObject.put("addressHouse", contact.getAddressHouse());
+        jsonObject.put("addressFlat", contact.getAddressFlat());
+        jsonObject.put("addressPostcode", contact.getAddressPostcode());
+        jsonObject.put("addressCity", contact.getAddressCity());
+        jsonObject.put("addressCountry", contact.getAddressCountry());
+        jsonObject.put("phoneNumber", contact.getPhoneNumber());
+        jsonObject.put("email", contact.getEmail());
+        jsonObject.put("dateOfBirth", contact.getDateOfBirth());
 
-        JSONObject data = new JSONObject();
-        data.put("contactID", Integer.toString(contact.getContactID()));
-        data.put("firstName", contact.getFirstName());
-        data.put("lastName", contact.getLastName());
-        data.put("addressStreet", contact.getAddressStreet());
-        data.put("addressHouse", contact.getAddressHouse());
-        data.put("addressFlat", contact.getAddressFlat());
-        data.put("addressPostcode", contact.getAddressPostcode());
-        data.put("addressCity", contact.getAddressCity());
-        data.put("addressCountry", contact.getAddressCountry());
-        data.put("phoneNumber", contact.getPhoneNumber());
-        data.put("email", contact.getEmail());
-        data.put("dateOfBirth", contact.getDateOfBirth());
-
-
-        return data;
+        return jsonObject;
     }
 
+    @SuppressWarnings("unchecked")
     public static JSONArray makeJSONFromContactBook (ContactBook contactBook) {
         JSONArray array = new JSONArray();
         for (int i = 0; i < contactBook.getContactBookCapacity(); i++) {
@@ -45,7 +45,7 @@ public class JSONController {
     }
 
     public static void writeJSON (JSONObject json) {
-        try (FileWriter file = new FileWriter("contactBookData.json")) {
+        try (FileWriter file = new FileWriter(Config.STORAGE_PATH)) {
  
             file.write(json.toJSONString());
             file.flush();
@@ -57,7 +57,7 @@ public class JSONController {
     }
 
     public static void writeJSON (JSONArray json) {
-        try (FileWriter file = new FileWriter("contactBookData.json")) {
+        try (FileWriter file = new FileWriter(Config.STORAGE_PATH)) {
  
             file.write(json.toJSONString());
             file.flush();
@@ -88,9 +88,9 @@ public class JSONController {
         JSONParser parser = new JSONParser();
         JSONArray jsonArray = new JSONArray();
         try {
-            jsonArray = (JSONArray) parser.parse(new FileReader("contactBookData.json"));
+            jsonArray = (JSONArray) parser.parse(new FileReader(Config.STORAGE_PATH));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Failed to load contact book from JSON file.");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -100,7 +100,7 @@ public class JSONController {
     }
 
     public static Contact[] makeContactArrayFromJSONArray(JSONArray array) {
-        Contact[] contactArray = new Contact[ContactBook.getContactBookCapacity()];
+        Contact[] contactArray = new Contact[Config.CONTACT_BOOK_CAPACITY];
         boolean finished = false;
         int i = 0;
         while (!finished) {

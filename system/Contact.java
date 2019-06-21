@@ -241,19 +241,6 @@ public class Contact {
 
 
 
-    private static boolean contains(final int[] array, final int v) {
-        boolean result = false;
-        for (int i : array) {
-            if (i == v) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
-
-
     public String toString() {
 
         return 
