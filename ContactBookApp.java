@@ -16,10 +16,7 @@ import org.json.simple.parser.ParseException;
 
 public class ContactBookApp {
     public static void main(String[] arg) {
-
-        ContactBook contactBook = new ContactBook();
-        Contact jozek = new Contact.Builder().firstName("Jozek").lastName("Józkoski").build();
-        contactBook.addContact(jozek);
+        GraphicalUserInterface.run();
     }
 }
 

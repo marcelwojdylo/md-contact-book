@@ -31,7 +31,6 @@ public class Testing {
                 .build();
             i++;    
         }
-        System.out.println(contactArray);
         return contactArray;
     }
         

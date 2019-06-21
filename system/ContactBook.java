@@ -28,9 +28,6 @@ public class ContactBook {
     public ContactBook() {
         initializeContactsArray(contactBookCapacity);
         loadContactsFromFile();
-        Testing.addGenericContacts(this, 10);
-        Testing.addGenericContacts(this, 10);
-
     }
 
 
@@ -170,7 +167,17 @@ public class ContactBook {
         return result;
     }
     
-    
+    public String[] toArray() {
+        String[] string = new String[Config.CONTACT_BOOK_CAPACITY];
+        int i = 0;
+        for (Contact c : contacts) {
+            if (c != null) {
+                string[i] = c.toString();
+            }
+            i++;
+        }
+        return string;
+    }
 
     private void loadContactsFromFile() {
         JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();
