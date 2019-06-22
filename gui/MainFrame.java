@@ -61,19 +61,35 @@ public class MainFrame extends JFrame implements ActionListener {
         c.weighty = 0.1;
         add(search, c);
 
-        contacts = new JList<String>(GraphicalUserInterface.getContactBook().toArray());
+        contacts = labels();
 
         scrollPane = new JScrollPane(contacts);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 1;
-        c.gridheight = 10;
+        c.gridheight = 9;
         c.gridwidth = 6;
         c.weightx = 1;
         c.weighty = 0.9;
         add(scrollPane, c);
 
     }
+
+    private JList labels () {
+        Contact[] contacts = GraphicalUserInterface.getContactBook().sortContactsByLastNameInitial();
+        String[] array = new String[Config.CONTACT_BOOK_CAPACITY];
+        for (int i = 0; i < Config.CONTACT_BOOK_CAPACITY; i++) {
+            if (contacts[i] != null) {
+                Contact c = contacts[i];
+                String string = c.getLastName() + " " + c.getFirstName();
+                array[i] = string;
+            }
+        }
+        JList jList = new JList<String>(array);
+
+        return jList;
+    }
+
     private void setActions() {
         showContactByID.addActionListener(this);
     }
