@@ -21,6 +21,12 @@ public class ContactBook {
         return numberOfContacts;
     }
 
+    private void updateNumberOfContacts() {
+        for (int i = 0; i < Config.CONTACT_BOOK_CAPACITY; i++) {
+            if (contacts[i] != null) {numberOfContacts++;}
+        }
+    }
+
 
 
 
@@ -183,12 +189,12 @@ public class ContactBook {
         JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();
         Contact[] contactsArray = JSONController.makeContactArrayFromJSONArray(contactsJSON);
         contacts = contactsArray;
+        updateNumberOfContacts();
     }
 
     private void saveContactsToFile() {
         JSONController.writeJSON(JSONController.makeJSONFromContactBook(this));
     }
-
 }
 
 

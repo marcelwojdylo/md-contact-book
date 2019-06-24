@@ -7,7 +7,8 @@ public class Contact {
 
     private class ContactData {
 
-	    int contactID;
+        int contactID;
+        String contactLabel;
 	    String firstName;
 	    String lastName;
 	    String addressStreet;
@@ -237,21 +238,22 @@ public class Contact {
         contactData.addressCountry = builder.addressCountry;
         contactData.phoneNumber = builder.phoneNumber;
         contactData.email = builder.email;
+        contactData.contactLabel = builder.firstName + " " + builder.lastName;
     }  
 
 
 
     public String toString() {
-
-        return 
-            "\nContact ID: " + contactData.contactID + ",\n" +
-            "First Name: " + contactData.firstName + ",\n" +
-            "Last Name: " + contactData.lastName + ",\n" +
-            "Date of Birth: " + contactData.dateOfBirth + ",\n" +
-            "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
-            "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
-            "Phone number: " + contactData.phoneNumber + ",\n" +
-            "E-mail: " + contactData.email;
+        return contactData.contactLabel;
+        // return 
+        //     "\nContact ID: " + contactData.contactID + ",\n" +
+        //     "First Name: " + contactData.firstName + ",\n" +
+        //     "Last Name: " + contactData.lastName + ",\n" +
+        //     "Date of Birth: " + contactData.dateOfBirth + ",\n" +
+        //     "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
+        //     "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
+        //     "Phone number: " + contactData.phoneNumber + ",\n" +
+        //     "E-mail: " + contactData.email;
     }
 }
 

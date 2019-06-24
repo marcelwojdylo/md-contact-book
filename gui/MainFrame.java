@@ -1,28 +1,31 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.event.*;
+
 import java.awt.*;
 import java.awt.event.*;
 
 import system.*;
 
-public class MainFrame extends JFrame implements ActionListener {
-
-    private static JTextField contactID;
-    private static JButton showContactByID;
-    private static JTextArea contactInfo;
+public class MainFrame extends JFrame {
 
     final static boolean shouldFill = true;
     final static boolean shouldWeightX = true;
     final static boolean RIGHT_TO_LEFT = false;
 
+    private static Contact[] contacts = new Contact[Config.CONTACT_BOOK_CAPACITY];
+    private ContactLabelsList labelsList;
+
     public MainFrame() {
+        
         setBackground(Color.BLACK);
         setSize(Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         setLayout(new GridLayout(3, 1, 50, 50));
         setUndecorated(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        makeContactLabels();
         setComponents();
         // setActions();
         setVisible(true);
@@ -35,7 +38,6 @@ public class MainFrame extends JFrame implements ActionListener {
         JButton createContact;
         JTextField search;
         JScrollPane scrollPane;
-        JList contacts;
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -44,7 +46,7 @@ public class MainFrame extends JFrame implements ActionListener {
             c.fill = GridBagConstraints.BOTH;
         }
 
-        createContact = new JButton("+");
+        createContact = new CreateContactButton();
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 0;
@@ -52,7 +54,7 @@ public class MainFrame extends JFrame implements ActionListener {
         c.weighty = 0.1;
         add(createContact, c);
 
-        search = new JTextField("Type to search");
+        search = new SearchField();
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 1;
         c.gridy = 0;
@@ -61,9 +63,8 @@ public class MainFrame extends JFrame implements ActionListener {
         c.weighty = 0.1;
         add(search, c);
 
-        contacts = labels();
-
-        scrollPane = new JScrollPane(contacts);
+        labelsList = new ContactLabelsList(contacts);
+        scrollPane = new JScrollPane(labelsList);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 1;
@@ -75,36 +76,121 @@ public class MainFrame extends JFrame implements ActionListener {
 
     }
 
-    private JList labels () {
-        Contact[] contacts = GraphicalUserInterface.getContactBook().sortContactsByLastNameInitial();
-        String[] array = new String[Config.CONTACT_BOOK_CAPACITY];
-        for (int i = 0; i < Config.CONTACT_BOOK_CAPACITY; i++) {
-            if (contacts[i] != null) {
-                Contact c = contacts[i];
-                String string = c.getLastName() + " " + c.getFirstName();
-                array[i] = string;
+    @SuppressWarnings("unchecked")
+    private class CreateContactButton extends JButton implements ActionListener {
+        CreateContactButton() {
+            super("+");
+            this.addActionListener(this);
+        }
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Click!");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private class SearchField extends JTextField implements DocumentListener {
+
+        SearchField() {
+            this.getDocument().addDocumentListener(this);
+        }
+
+        public void insertUpdate(DocumentEvent e) {
+            labelsList.setListData(filterContactsByString(this.getText()));
+        }
+        public void removeUpdate(DocumentEvent e) {
+            labelsList.setListData(filterContactsByString(this.getText()));
+        }
+        public void changedUpdate(DocumentEvent e) {
+
+        }
+    }
+
+    private boolean containsString (Contact contact, String string) {
+        if (contact.getAddressCity().contains(string)) {return true;}
+        if (contact.getAddressCountry().contains(string)) {return true;}
+        if (contact.getAddressStreet().contains(string)) {return true;}
+        if (contact.getFirstName().contains(string)) {return true;}
+        if (contact.getLastName().contains(string)) {return true;}
+        if (contact.getEmail().contains(string)) {return true;}
+        return false;
+    }
+
+    private Contact[] filterContactsByString (String string) {
+        Contact[] temp = new Contact[contacts.length];
+        int resultCount = 0;
+        System.out.println(temp.length);
+        for (int i = 0; i < contacts.length; i++) {
+            if (contacts[i] != null && containsString(contacts[i], string)) {
+                temp[i] = contacts[i];
+                resultCount++;
             }
         }
-        JList jList = new JList<String>(array);
-
-        return jList;
+        Contact[] results = new Contact[resultCount];
+        int index = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                results[index] = temp[i];
+                index++;
+            }
+        }
+        return results;
     }
 
-    private void setActions() {
-        showContactByID.addActionListener(this);
+    private void makeContactLabels() {
+
+        Contact[] temp = GraphicalUserInterface.getContactBook().sortContactsByLastNameInitial();
+        Contact[] results = new Contact[GraphicalUserInterface.getContactBook().getNumberOfContacts()];
+        System.out.println(GraphicalUserInterface.getContactBook().getNumberOfContacts());
+        int index = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                results[index] = temp[i];
+                index++;
+            }
+        }
+        contacts = results;
+       
     }
 
-    public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == showContactByID) {
-            try {
-                contactInfo.setText(GraphicalUserInterface.getContactBook().getContacts()[Integer.parseInt(contactID.getText())].toString());
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                contactInfo.setText("No such contact ID!");
-            } catch (NullPointerException exception) {
-                contactInfo.setText("No such contact ID!");
-            } catch (NumberFormatException exception) {
+    @SuppressWarnings("unchecked")
+    private class ContactLabelsList extends JList implements ListSelectionListener {
+      
+        ContactLabelsList(Contact[] array) {
+            super(array);
+            this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            this.addListSelectionListener(this);
+
+        }
+
+        public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting() && this.getSelectedIndex() != -1) {
+                int index = this.getSelectedIndex();
+                System.out.println("Now selected: " + contacts[index]);
+            }
+        }
+
+
+
+    
+    }
+
+
+
+    // private void setActions() {
+    //     showContactByID.addActionListener(this);
+    // }
+
+    // public void actionPerformed(ActionEvent event) {
+    //     if (event.getSource() == showContactByID) {
+    //         try {
+    //             contactInfo.setText(GraphicalUserInterface.getContactBook().getContacts()[Integer.parseInt(contactID.getText())].toString());
+    //         } catch (ArrayIndexOutOfBoundsException exception) {
+    //             contactInfo.setText("No such contact ID!");
+    //         } catch (NullPointerException exception) {
+    //             contactInfo.setText("No such contact ID!");
+    //         } catch (NumberFormatException exception) {
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 }
