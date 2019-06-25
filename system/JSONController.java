@@ -20,12 +20,8 @@ public class JSONController {
         jsonObject.put("contactID", Integer.toString(contact.getContactID()));
         jsonObject.put("firstName", contact.getFirstName());
         jsonObject.put("lastName", contact.getLastName());
-        jsonObject.put("addressStreet", contact.getAddressStreet());
-        jsonObject.put("addressHouse", contact.getAddressHouse());
-        jsonObject.put("addressFlat", contact.getAddressFlat());
-        jsonObject.put("addressPostcode", contact.getAddressPostcode());
-        jsonObject.put("addressCity", contact.getAddressCity());
-        jsonObject.put("addressCountry", contact.getAddressCountry());
+        jsonObject.put("addressLine1", contact.getAddressLine1());
+        jsonObject.put("addressLine2", contact.getAddressLine2());
         jsonObject.put("phoneNumber", contact.getPhoneNumber());
         jsonObject.put("email", contact.getEmail());
         jsonObject.put("dateOfBirth", contact.getDateOfBirth());
@@ -74,12 +70,8 @@ public class JSONController {
             .firstName((String) json.get("firstName"))
             .phoneNumber((String) json.get("phoneNumber"))
             .dateOfBirth((String) json.get("dateOfBirth"))
-            .addressStreet((String) json.get("addressStreet"))
-            .addressHouse((String) json.get("addressHouse"))
-            .addressFlat((String) json.get("addressFlat"))
-            .addressPostcode((String) json.get("addressPostcode"))
-            .addressCity((String) json.get("addressCity"))
-            .addressCountry((String) json.get("addressCountry"))
+            .addressLine1((String) json.get("addressLine1"))
+            .addressLine2((String) json.get("addressLine2"))
             .email((String) json.get("email"))
             .build();
     }

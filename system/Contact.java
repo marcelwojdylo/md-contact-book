@@ -3,6 +3,9 @@ package system;
 public class Contact {
 
     private static int nextID = 0;
+    public static int getNextID() {
+        return nextID;
+    }
     private ContactData contactData = new ContactData();
 
     private class ContactData {
@@ -11,12 +14,8 @@ public class Contact {
         String contactLabel;
 	    String firstName;
 	    String lastName;
-	    String addressStreet;
-	    String addressHouse;
-	    String addressFlat;
-	    String addressPostcode; 
-	    String addressCity;
-	    String addressCountry;
+        String addressLine1;
+        String addressLine2;
 	    String phoneNumber;
 	    String email;
 	    String dateOfBirth;
@@ -35,28 +34,12 @@ public class Contact {
     	return contactData.lastName;
     }
 
-    public String getAddressStreet() {
-    	return contactData.addressStreet;
+    public String getAddressLine1() {
+    	return contactData.addressLine1;
     }
 
-    public String getAddressHouse() {
-    	return contactData.addressHouse;
-    }
-
-    public String getAddressFlat() {
-    	return contactData.addressFlat;
-    }
-
-    public String getAddressPostcode() {
-    	return contactData.addressPostcode;
-    }
-
-    public String getAddressCity() {
-    	return contactData.addressCity;
-    }
-
-    public String getAddressCountry() {
-    	return contactData.addressCountry;
+    public String getAddressLine2() {
+    	return contactData.addressLine2;
     }
 
     public String getPhoneNumber() {
@@ -71,6 +54,10 @@ public class Contact {
     	return contactData.dateOfBirth;
     }
 
+    public String getContactLabel() {
+        return contactData.contactLabel;
+    }
+
 
 
     public void setFirstName(String string) {
@@ -81,28 +68,12 @@ public class Contact {
         contactData.lastName = string;
     }
 
-    public void setAddressStreet(String string) {
-        contactData.addressStreet = string;
+    public void setAddressLine1(String string) {
+        contactData.addressLine1 = string;
     }
 
-    public void setAddressHouse(String string) {
-        contactData.addressStreet = string;
-    }
-
-    public void setAddressFlat(String string) {
-        contactData.addressStreet = string;
-    }
-
-    public void setAddressPostcode(String string) {
-        contactData.addressPostcode = string;
-    }
-
-    public void setAddressCity(String string) {
-        contactData.addressCity = string;
-    }
-
-    public void setAddressCountry(String string) {
-        contactData.addressCountry = string;
+    public void setAddressLine2(String string) {
+        contactData.addressLine2 = string;
     }
 
     public void setPhoneNumber(String string) {
@@ -117,6 +88,10 @@ public class Contact {
         contactData.dateOfBirth = date;
     }
 
+    public void updateContactLabel() {
+        contactData.contactLabel = contactData.firstName + " " + contactData.lastName;
+    }
+
 
 
 
@@ -127,12 +102,8 @@ public class Contact {
         private String firstName = "";
         private String lastName = "";
         private String dateOfBirth;
-        private String addressStreet = "";
-        private String addressHouse = "";
-        private String addressFlat = "";
-        private String addressPostcode = "";
-        private String addressCity = "";
-        private String addressCountry = "";
+        private String addressLine1 = "";
+        private String addressLine2 = "";
         private String phoneNumber = "";
         private String email = "";
 
@@ -161,56 +132,18 @@ public class Contact {
             return this;
         }
 
-        public Builder addressStreet (String value) {
-            addressStreet = value;
+        public Builder addressLine1 (String value) {
+            addressLine1 = value;
             return this;
         }
 
-        public Builder addressHouse (String value) {
-            addressHouse = value;
-            return this;
-        }
-
-        public Builder addressHouse (int value) {
-            String string = Integer.toString(value);
-            addressHouse = string;
-            return this;
-        }
-
-        public Builder addressFlat (String value) {
-            addressFlat = value;
-            return this;
-        }
-
-        public Builder addressFlat (int value) {
-            String string = Integer.toString(value);
-            addressFlat = string;
-            return this;
-        }
-
-        public Builder addressPostcode (String value) {
-            addressPostcode = value;
-            return this;
-        }
-
-        public Builder addressCity (String value) {
-            addressCity = value;
-            return this;
-        }
-
-        public Builder addressCountry (String value) {
-            addressCountry = value;
+        public Builder addressLine2 (String value) {
+            addressLine2 = value;
             return this;
         }
 
         public Builder phoneNumber (String value) {
             phoneNumber = value;
-            return this;
-        }
-
-        public Builder phoneNumber (int value) {
-            String string = Integer.toString(value);
-            phoneNumber = string;
             return this;
         }
         
@@ -230,30 +163,30 @@ public class Contact {
         contactData.firstName = builder.firstName;
         contactData.lastName = builder.lastName;
         contactData.dateOfBirth = builder.dateOfBirth;
-        contactData.addressStreet = builder.addressStreet;
-        contactData.addressHouse = builder.addressHouse;
-        contactData.addressFlat = builder.addressFlat;
-        contactData.addressPostcode = builder.addressPostcode; 
-        contactData.addressCity = builder.addressCity;
-        contactData.addressCountry = builder.addressCountry;
         contactData.phoneNumber = builder.phoneNumber;
+        contactData.addressLine1 = builder.addressLine1;
+        contactData.addressLine2 = builder.addressLine2;
         contactData.email = builder.email;
         contactData.contactLabel = builder.firstName + " " + builder.lastName;
     }  
 
 
 
+    public String toStringCLI() {
+        return
+        "\n" +
+        "Contact ID: " + contactData.contactID + ",\n" +
+        "First Name: " + contactData.firstName + ",\n" +
+        "Last Name: " + contactData.lastName + ",\n" +
+        "Date of Birth: " + contactData.dateOfBirth + ",\n" +
+        "Address: " + contactData.addressLine1 + "\n" +
+        "         " + contactData.addressLine2 + "\n" +
+        "Phone number: " + contactData.phoneNumber + "\n" +
+        "E-mail: " + contactData.email;
+    }
+
     public String toString() {
         return contactData.contactLabel;
-        // return 
-        //     "\nContact ID: " + contactData.contactID + ",\n" +
-        //     "First Name: " + contactData.firstName + ",\n" +
-        //     "Last Name: " + contactData.lastName + ",\n" +
-        //     "Date of Birth: " + contactData.dateOfBirth + ",\n" +
-        //     "Address:" + contactData.addressStreet + " " + contactData.addressHouse + "/" + contactData.addressFlat + ",\n" +
-        //     "         " + contactData.addressPostcode + " " + contactData.addressCity + ", " + contactData.addressCountry + ",\n" +
-        //     "Phone number: " + contactData.phoneNumber + ",\n" +
-        //     "E-mail: " + contactData.email;
     }
 }
 

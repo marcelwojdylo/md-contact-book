@@ -22,6 +22,7 @@ public class ContactBook {
     }
 
     private void updateNumberOfContacts() {
+        numberOfContacts = 0;
         for (int i = 0; i < Config.CONTACT_BOOK_CAPACITY; i++) {
             if (contacts[i] != null) {numberOfContacts++;}
         }
@@ -33,6 +34,7 @@ public class ContactBook {
 
     public ContactBook() {
         initializeContactsArray(contactBookCapacity);
+        // Testing.addGenericContacts(this, 10);
         loadContactsFromFile();
     }
 
@@ -49,6 +51,11 @@ public class ContactBook {
         numberOfContacts++;
         saveContactsToFile();
     }    
+
+    public void updateContact(Contact contact) {
+        contacts[contact.getContactID()] = contact;
+        saveContactsToFile();
+    }
     
     public void removeContact(Contact contact) {
         contacts[contact.getContactID()] = null;
@@ -56,58 +63,16 @@ public class ContactBook {
         saveContactsToFile();
 
     }
+
+    public Contact getContactByID(int id) {
+        return contacts[id];
+    }
     
     public void removeContact(int contactID) {
         contacts[contactID] = null;
         numberOfContacts--;
         saveContactsToFile();
 
-    }
-
-
-
-    public void setFirstName(Contact contact, String string) {
-        contact.setFirstName(string);
-    }
-
-    public void setLastName(Contact contact, String string) {
-        contact.setLastName(string);
-    }
-
-    public void setAddressStreet(Contact contact, String string) {
-        contact.setAddressStreet(string);
-    }
-
-    public void setAddressHouse(Contact contact, String string) {
-        contact.setAddressHouse(string);
-    }
-
-    public void setAddressFlat(Contact contact, String string) {
-        contact.setAddressFlat(string);
-    }
-
-    public void setAddressPostcode(Contact contact, String string) {
-        contact.setAddressPostcode(string);
-    }
-
-    public void setAddressCity(Contact contact, String string) {
-        contact.setAddressCity(string);
-    }
-
-    public void setAddressCountry(Contact contact, String string) {
-        contact.setAddressCountry(string);
-    }
-
-    public void setPhoneNumber(Contact contact, String string) {
-        contact.setPhoneNumber(string);
-    }
-
-    public void setEmail(Contact contact, String string) {
-        contact.setEmail(string);
-    }
-
-    public void setDateOfBirth(Contact contact, String date) {
-        contact.setDateOfBirth(date);
     }
 
 
@@ -123,7 +88,7 @@ public class ContactBook {
     public void printContactsSortedByLastNameInitial() {
         for (Contact c : sortContactsByLastNameInitial()) {
             if (c != null) {
-                System.out.println(c);
+                System.out.println(c.toStringCLI());
             }
         }
     }
@@ -131,7 +96,7 @@ public class ContactBook {
     public void printContactsWithLastNameInitial(char initial) {
         for (Contact c : getContactsWithLastNameInitial(initial)) {
             if (c != null) {
-                System.out.println(c);
+                System.out.println(c.toStringCLI());
             }
         }
     }

@@ -97,12 +97,8 @@ public class CommandLineInterface {
         String firstName;
         String phoneNumber;
         String dateOfBirth;
-        String addressStreet;
-        String addressHouse;
-        String addressFlat;
-        String addressPostcode;
-        String addressCity;
-        String addressCountry;
+        String addressLine1;
+        String addressLine2;
         String email;
 
 
@@ -123,23 +119,11 @@ public class CommandLineInterface {
         System.out.println(Color.makeBlue("Enter date of birth (yyyy-mm-dd):"));
         dateOfBirth = inputDateOfBirth();
         
-        System.out.println(Color.makeBlue("Enter address street:"));
-        addressStreet = inputLetters();
-        
-        System.out.println(Color.makeBlue("Enter address house:"));
-        addressHouse = inputNumbers();
-        
-        System.out.println(Color.makeBlue("Enter address flat:"));
-        addressFlat = inputNumbers();
-        
-        System.out.println(Color.makeBlue("Enter address postcode:"));
-        addressPostcode = inputPostCode();
-        
-        System.out.println(Color.makeBlue("Enter address city:"));
-        addressCity = inputLetters();
-        
-        System.out.println(Color.makeBlue("Enter address country:"));
-        addressCountry = inputLetters();
+        System.out.println(Color.makeBlue("Enter address line 1:"));
+        addressLine1 = inputLetters();
+
+        System.out.println(Color.makeBlue("Enter address line 2:"));
+        addressLine2 = inputLetters();
         
         System.out.println(Color.makeBlue("Enter e-mail:"));
         email = inputEmail();
@@ -149,12 +133,8 @@ public class CommandLineInterface {
         .firstName(firstName)
         .phoneNumber(phoneNumber)
         .dateOfBirth(dateOfBirth)
-        .addressStreet(addressStreet)
-        .addressHouse(addressHouse)
-        .addressFlat(addressFlat)
-        .addressPostcode(addressPostcode)
-        .addressCity(addressCity)
-        .addressCountry(addressCountry)
+        .addressLine1(addressLine1)
+        .addressLine2(addressLine2)
         .email(email)
         .build();
 

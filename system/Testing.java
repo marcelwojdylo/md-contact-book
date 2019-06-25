@@ -19,14 +19,10 @@ public class Testing {
             contactArray[i] = new Contact.Builder()
                 .lastName(genericSurnames()[i])
                 .firstName("Generyk")
-                .phoneNumber("666-666-666oijdsfknadsf")
+                .phoneNumber("666-666-666")
                 .dateOfBirth("1990-13-12")
-                .addressStreet("Rajska")
-                .addressHouse("2")
-                .addressFlat(1293)
-                .addressPostcode("02-972")
-                .addressCity("warszawa")
-                .addressCountry("polska")
+                .addressLine1("Helclów 21/1")
+                .addressLine2("02-927 Warszawa, Polska")
                 .email("generyk@generyk.gn")
                 .build();
             i++;    
