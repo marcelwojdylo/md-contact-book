@@ -99,7 +99,7 @@ public class JSONController {
             try {
                 JSONObject contactJSON = (JSONObject) array.get(i);
                 Contact contactFromJSON = JSONController.makeContactFromJSON(contactJSON);
-                contactArray[i] = contactFromJSON;
+                contactArray[contactFromJSON.getContactID()] = contactFromJSON;
                 i++;
             } catch (IndexOutOfBoundsException e) {
                 finished = true;

@@ -105,11 +105,9 @@ public class MainFrame extends JFrame {
     }
 
     private boolean containsString (Contact contact, String string) {
-        if (contact.getAddressLine1().contains(string)) {return true;}
-        if (contact.getAddressLine2().contains(string)) {return true;}
-        if (contact.getFirstName().contains(string)) {return true;}
-        if (contact.getLastName().contains(string)) {return true;}
-        if (contact.getEmail().contains(string)) {return true;}
+        string = string.toLowerCase();
+        if (contact.getFirstName().toLowerCase().contains(string)) {return true;}
+        if (contact.getLastName().toLowerCase().contains(string)) {return true;}
         return false;
     }
 
@@ -160,8 +158,9 @@ public class MainFrame extends JFrame {
 
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting() && this.getSelectedIndex() != -1) {
-                int index = this.getSelectedIndex();
-                ViewContact view = new ViewContact(contacts[index]);
+                Contact contact = (Contact) this.getSelectedValue();
+                int id = contact.getContactID();                
+                ViewContact view = new ViewContact(GraphicalUserInterface.getContactBook().getContactByID(id));
                 dispose();
             }
         }

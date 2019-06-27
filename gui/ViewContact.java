@@ -12,7 +12,7 @@ public class ViewContact extends JFrame {
     final static boolean shouldFill = true;
     final static boolean shouldWeightX = true;
     final static boolean RIGHT_TO_LEFT = false;
-    private static Contact contact;
+    private Contact contact;
 
     public ViewContact (Contact contact) {
         this.contact = contact;
@@ -32,17 +32,17 @@ public class ViewContact extends JFrame {
         }
     }
 
-    private String getContactInfo (Contact contact) {
+    private String getContactInfo (Contact source) {
         return
         "<html>" +
-        "Contact ID: " + contact.getContactID() + ",<br>" +
-        "First Name: " + contact.getFirstName() + ",<br>" +
-        "Last Name: " + contact.getLastName() + ",<br>" +
-        "Date of Birth: " + contact.getDateOfBirth() + ",<br>" +
-        "Address: " + contact.getAddressLine1() + ",<br>" +
-        "         " + contact.getAddressLine2() + ",<br>" +
-        "Phone number: " + contact.getPhoneNumber() + ",<br>" +
-        "E-mail: " + contact.getEmail() +
+        "Contact ID: " + source.getContactID() + ",<br>" +
+        "First Name: " + source.getFirstName() + ",<br>" +
+        "Last Name: " + source.getLastName() + ",<br>" +
+        "Date of Birth: " + source.getDateOfBirth() + ",<br>" +
+        "Address: " + source.getAddressLine1() + ",<br>" +
+        "         " + source.getAddressLine2() + ",<br>" +
+        "Phone number: " + source.getPhoneNumber() + ",<br>" +
+        "E-mail: " + source.getEmail() +
         "</html>";
     }
 

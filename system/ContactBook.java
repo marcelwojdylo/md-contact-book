@@ -48,7 +48,7 @@ public class ContactBook {
 
     public void addContact(Contact contact) {
         contacts[contact.getContactID()] = contact;        
-        numberOfContacts++;
+        updateNumberOfContacts();
         saveContactsToFile();
     }    
 
@@ -59,7 +59,7 @@ public class ContactBook {
     
     public void removeContact(Contact contact) {
         contacts[contact.getContactID()] = null;
-        numberOfContacts--;
+        updateNumberOfContacts();
         saveContactsToFile();
 
     }
@@ -70,7 +70,7 @@ public class ContactBook {
     
     public void removeContact(int contactID) {
         contacts[contactID] = null;
-        numberOfContacts--;
+        updateNumberOfContacts();
         saveContactsToFile();
 
     }
