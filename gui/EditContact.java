@@ -73,6 +73,38 @@ public class EditContact extends JFrame {
         setVisible(true);
     }
 
+
+    private class CrucialField extends JTextField implements DocumentListener {
+
+        CrucialField (String string) {
+            super(string);
+            this.getDocument().addDocumentListener(this);
+        }
+
+        public void changedUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
+            }
+        }
+        public void removeUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
+            }
+        }
+        public void insertUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
+            }
+        }
+    }
+
+
     private void setComponents() {
 
         if (RIGHT_TO_LEFT) {
@@ -93,7 +125,7 @@ public class EditContact extends JFrame {
         c.weightx = 0.1;
         add(firstNameLabel, c);
         
-        firstNameInput = new JTextField(firstName);
+        firstNameInput = new CrucialField(firstName);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 1;
         c.gridy = 0;
@@ -111,7 +143,7 @@ public class EditContact extends JFrame {
         c.weightx = 0.1;
         add(lastNameLabel, c);
 
-        lastNameInput = new JTextField(lastName);
+        lastNameInput = new CrucialField(lastName);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 1;
         c.gridy = 1;
@@ -209,7 +241,9 @@ public class EditContact extends JFrame {
         c.gridheight = 1;
         add(doneButton, c);
 
-        
+        if (mode == Mode.NEW_CONTACT) {
+            doneButton.setEnabled(false);
+        }        
     }
 
 
@@ -221,8 +255,7 @@ public class EditContact extends JFrame {
         public void actionPerformed (ActionEvent e) {
             if (mode == Mode.NEW_CONTACT) {
                 createContactFromFields();
-            }
-            if (mode == Mode.EDIT_CONTACT) {
+            } else if (mode == Mode.EDIT_CONTACT) {
                 applyFieldsToContact();
             }
             MainFrame mainFrame = new MainFrame();
