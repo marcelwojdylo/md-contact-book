@@ -9,26 +9,25 @@ import system.*;
 
 public class EditContact extends JFrame {
 
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
+    private Mode mode;
 
-    JTextField firstNameInput;
-    JLabel firstNameLabel;
-    JTextField lastNameInput;
-    JLabel lastNameLabel;
-    JTextField dateOfBirthInput;
-    JLabel dateOfBirthLabel;
-    JTextField addressLine1Input;
-    JLabel addressLine1Label;
-    JTextField addressLine2Input;
-    JTextField phoneNumberInput;
-    JLabel phoneNumberLabel;
-    JTextField emailInput;
-    JLabel emailLabel;
-    JButton doneButton;
-    BackButton backButton;
+    private CrucialField firstNameInput;
+    private JLabel firstNameLabel;
+    private CrucialField lastNameInput;
+    private JLabel lastNameLabel;
+    private JTextField dateOfBirthInput;
+    private JLabel dateOfBirthLabel;
+    private JTextField addressLine1Input;
+    private JLabel addressLine1Label;
+    private JTextField addressLine2Input;
+    private JTextField phoneNumberInput;
+    private JLabel phoneNumberLabel;
+    private JTextField emailInput;
+    private JLabel emailLabel;
+    private DoneButton doneButton;
+    private BackButton backButton;
 
+    private Contact contact;
     private String firstName = "";
     private String lastName = "";
     private String dateOfBirth = "";
@@ -37,9 +36,6 @@ public class EditContact extends JFrame {
     private String phoneNumber = "";
     private String email = "";
 
-    Mode mode;
-
-    Contact contact;
 
     EditContact () {
 
@@ -63,10 +59,16 @@ public class EditContact extends JFrame {
 
     }
 
+
+
+
     private enum Mode {
         NEW_CONTACT,
         EDIT_CONTACT;
     }
+
+
+
 
     private void setUpFrame() {
         setBackground(Color.BLACK);
@@ -80,44 +82,10 @@ public class EditContact extends JFrame {
     }
 
 
-    private class CrucialField extends JTextField implements DocumentListener {
-
-        CrucialField (String string) {
-            super(string);
-            this.getDocument().addDocumentListener(this);
-        }
-
-        public void changedUpdate(DocumentEvent e) {
-            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
-                doneButton.setEnabled(true);
-            } else  {
-                doneButton.setEnabled(false);
-            }
-        }
-        public void removeUpdate(DocumentEvent e) {
-            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
-                doneButton.setEnabled(true);
-            } else  {
-                doneButton.setEnabled(false);
-            }
-        }
-        public void insertUpdate(DocumentEvent e) {
-            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
-                doneButton.setEnabled(true);
-            } else  {
-                doneButton.setEnabled(false);
-            }
-        }
-    }
-
 
     private void setComponents() {
 
-        if (RIGHT_TO_LEFT) {
-            setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
-
-
+        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -226,7 +194,6 @@ public class EditContact extends JFrame {
         c.gridx = 0;
         c.gridy = 6;
         c.weightx = 0.1;
-
         c.gridwidth = 1;
         c.gridheight = 1;
         add(emailLabel, c);
@@ -237,7 +204,15 @@ public class EditContact extends JFrame {
         c.gridy = 6;
         c.gridwidth = 2;
         c.gridheight = 1;
-        add(emailInput, c);
+        add(emailInput, c);   
+
+        backButton = new BackButton();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 7;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        add(backButton, c);
 
         doneButton = new DoneButton();
         c.fill = GridBagConstraints.BOTH;
@@ -249,34 +224,44 @@ public class EditContact extends JFrame {
 
         if (mode == Mode.NEW_CONTACT) {
             doneButton.setEnabled(false);
-        }        
-
-        backButton = new BackButton();
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 7;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        add(backButton, c);
-
+        }     
     }
 
 
-    private class DoneButton extends JButton implements ActionListener {
-        DoneButton () {
-            super("Done");
-            addActionListener(this);
+
+
+    private class CrucialField extends JTextField implements DocumentListener {
+
+        CrucialField (String string) {
+            super(string);
+            this.getDocument().addDocumentListener(this);
         }
-        public void actionPerformed (ActionEvent e) {
-            if (mode == Mode.NEW_CONTACT) {
-                createContactFromFields();
-            } else if (mode == Mode.EDIT_CONTACT) {
-                applyFieldsToContact();
+
+        public void changedUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
             }
-            MainFrame mainFrame = new MainFrame();
-            dispose();
+        }
+        public void removeUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
+            }
+        }
+        public void insertUpdate(DocumentEvent e) {
+            if (!firstNameInput.getText().equals("") || !lastNameInput.getText().equals("")) {
+                doneButton.setEnabled(true);
+            } else  {
+                doneButton.setEnabled(false);
+            }
         }
     }
+
+
+
 
     private class BackButton extends JButton implements ActionListener {
         BackButton () {
@@ -290,7 +275,29 @@ public class EditContact extends JFrame {
         }
     }
 
-    private void applyFieldsToContact() {
+
+
+
+    private class DoneButton extends JButton implements ActionListener {
+        DoneButton () {
+            super("Done");
+            addActionListener(this);
+        }
+        public void actionPerformed (ActionEvent e) {
+            if (mode == Mode.NEW_CONTACT) {
+                createContactFromFields();
+            } else if (mode == Mode.EDIT_CONTACT) {
+                applyChangesToContact();
+            }
+            new MainFrame();
+            dispose();
+        }
+    }
+
+
+
+
+    private void applyChangesToContact() {
         contact.setFirstName(firstNameInput.getText());
         contact.setLastName(lastNameInput.getText());
         contact.setPhoneNumber(phoneNumberInput.getText());
@@ -312,7 +319,6 @@ public class EditContact extends JFrame {
             .addressLine2(addressLine2Input.getText())
             .email(emailInput.getText())
             .build();
-        System.out.println(Contact.getNextID());
         GraphicalUserInterface.getContactBook().addContact(contact);
     }
 }

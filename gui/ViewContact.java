@@ -9,9 +9,6 @@ import system.*;
 
 public class ViewContact extends JFrame {
 
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
     private Contact contact;
 
     public ViewContact (Contact contact) {
@@ -24,16 +21,44 @@ public class ViewContact extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setComponents();
         setVisible(true);
-        System.out.println("Viewing contact number: "+contact.getContactID());
     }
 
-    private class ContactInfoLabel extends JLabel {
-        ContactInfoLabel () {
-            super(getContactInfo(contact));
-        }
+
+
+    private void setComponents() {
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 5;
+        c.weightx = 1;
+        c.weighty = 0.9;
+        add(new JLabel(presentContactInfo(contact)), c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 5;
+        c.weighty = 0.1;
+        add(new EditButton(), c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 5;
+        c.weighty = 0.1;
+        add(new RemoveButton(), c);
+
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = 5;
+        c.weighty = 0.1;
+        add(new BackButton(), c);
     }
 
-    private String getContactInfo (Contact source) {
+
+
+
+
+    private String presentContactInfo (Contact source) {
         return
         "<html>" +
         "Contact ID: " + source.getContactID() + ",<br>" +
@@ -47,37 +72,7 @@ public class ViewContact extends JFrame {
         "</html>";
     }
 
-    private void setComponents() {
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 5;
-        c.weightx = 1;
-        c.weighty = 0.9;
-        add(new ContactInfoLabel(), c);
 
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 5;
-        c.weighty = 0.1;
-        add(new EditButton(), c);
-
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 5;
-        c.weighty = 0.1;
-        add(new RemoveButton(), c);
-
-        c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
-        c.gridy = 3;
-        c.gridwidth = 5;
-        c.weighty = 0.1;
-        add(new BackButton(), c);
-    }
 
     private class EditButton extends JButton implements ActionListener {
         EditButton() {
@@ -91,17 +86,8 @@ public class ViewContact extends JFrame {
         }
     }
 
-    private class BackButton extends JButton implements ActionListener {
-        BackButton() {
-            super("Back");
-            addActionListener(this);
-        }
-        
-        public void actionPerformed (ActionEvent e) {
-            MainFrame mainFrame = new MainFrame();
-            dispose();
-        }
-    }
+
+
 
     private class RemoveButton extends JButton implements ActionListener {
         RemoveButton() {
@@ -111,6 +97,20 @@ public class ViewContact extends JFrame {
         
         public void actionPerformed (ActionEvent e) {
             GraphicalUserInterface.getContactBook().removeContact(contact.getContactID());
+            MainFrame mainFrame = new MainFrame();
+            dispose();
+        }
+    }
+
+
+
+    private class BackButton extends JButton implements ActionListener {
+        BackButton() {
+            super("Back");
+            addActionListener(this);
+        }
+        
+        public void actionPerformed (ActionEvent e) {
             MainFrame mainFrame = new MainFrame();
             dispose();
         }

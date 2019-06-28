@@ -6,8 +6,8 @@ public class Contact {
     public static int getNextID() {
         return nextID;
     }
-    private ContactData contactData = new ContactData();
 
+    private ContactData contactData = new ContactData();
     private class ContactData {
 
         int contactID;
@@ -172,21 +172,6 @@ public class Contact {
         contactData.email = builder.email;
         contactData.contactLabel = builder.firstName + " " + builder.lastName;
     }  
-
-
-
-    public String toStringCLI() {
-        return
-        "\n" +
-        "Contact ID: " + contactData.contactID + ",\n" +
-        "First Name: " + contactData.firstName + ",\n" +
-        "Last Name: " + contactData.lastName + ",\n" +
-        "Date of Birth: " + contactData.dateOfBirth + ",\n" +
-        "Address: " + contactData.addressLine1 + "\n" +
-        "         " + contactData.addressLine2 + "\n" +
-        "Phone number: " + contactData.phoneNumber + "\n" +
-        "E-mail: " + contactData.email;
-    }
 
     public String toString() {
         return contactData.contactLabel;

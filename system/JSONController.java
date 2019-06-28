@@ -14,7 +14,18 @@ import org.json.simple.parser.ParseException;
 public class JSONController {
 
     @SuppressWarnings("unchecked")
-    public static JSONObject makeJSONFromContact (Contact contact) {
+    public static JSONArray makeJSONArrayFromContactBook (ContactBook contactBook) {
+        JSONArray array = new JSONArray();
+        for (int i = 0; i < Config.CONTACT_BOOK_CAPACITY; i++) {
+            if (contactBook.getContacts()[i] != null) {
+                array.add(makeJSONObjectFromContact(contactBook.getContacts()[i]));
+            }
+        }
+        return array;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static JSONObject makeJSONObjectFromContact (Contact contact) {
         
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("contactID", Integer.toString(contact.getContactID()));
@@ -27,17 +38,6 @@ public class JSONController {
         jsonObject.put("dateOfBirth", contact.getDateOfBirth());
 
         return jsonObject;
-    }
-
-    @SuppressWarnings("unchecked")
-    public static JSONArray makeJSONFromContactBook (ContactBook contactBook) {
-        JSONArray array = new JSONArray();
-        for (int i = 0; i < contactBook.getContactBookCapacity(); i++) {
-            if (contactBook.getContacts()[i] != null) {
-                array.add(makeJSONFromContact(contactBook.getContacts()[i]));
-            }
-        }
-        return array;
     }
 
     public static void writeJSON (JSONObject json) {
@@ -63,18 +63,8 @@ public class JSONController {
         }
     }
 
-    public static Contact makeContactFromJSON (JSONObject json) {
-        return new Contact.Builder()
-            .contactID(Integer.parseInt((String) json.get("contactID")))
-            .lastName((String) json.get("lastName"))
-            .firstName((String) json.get("firstName"))
-            .phoneNumber((String) json.get("phoneNumber"))
-            .dateOfBirth((String) json.get("dateOfBirth"))
-            .addressLine1((String) json.get("addressLine1"))
-            .addressLine2((String) json.get("addressLine2"))
-            .email((String) json.get("email"))
-            .build();
-    }
+
+
 
     public static JSONArray readJSONArrayFromFile() {
         JSONParser parser = new JSONParser();
@@ -107,4 +97,21 @@ public class JSONController {
         }
         return contactArray;
     }
+
+    public static Contact makeContactFromJSON (JSONObject json) {
+        return new Contact.Builder()
+            .contactID(Integer.parseInt((String) json.get("contactID")))
+            .lastName((String) json.get("lastName"))
+            .firstName((String) json.get("firstName"))
+            .phoneNumber((String) json.get("phoneNumber"))
+            .dateOfBirth((String) json.get("dateOfBirth"))
+            .addressLine1((String) json.get("addressLine1"))
+            .addressLine2((String) json.get("addressLine2"))
+            .email((String) json.get("email"))
+            .build();
+    }
+
+
+
+
 }

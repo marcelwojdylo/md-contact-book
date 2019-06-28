@@ -11,14 +11,8 @@ public class GraphicalUserInterface {
     private static ContactBook contactBook = new ContactBook();
     public static ContactBook getContactBook() {return contactBook;}
 
-
-
     public static void run() {
-        MainFrame mainFrame = new MainFrame();
-
-
-
-
+        new MainFrame();
     }
 
 

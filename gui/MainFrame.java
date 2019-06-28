@@ -10,12 +10,13 @@ import system.*;
 
 public class MainFrame extends JFrame {
 
-    final static boolean shouldFill = true;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = false;
-
-    private static Contact[] contactLabels = new Contact[Config.CONTACT_BOOK_CAPACITY];
+    private static Contact[] contactLabels;
     private ContactLabelsList labelsList;
+    private CreateContactButton createContact;
+    private SearchField search;
+    private JScrollPane scrollPane;
+
+
 
     public MainFrame() {
         setBackground(Color.BLACK);
@@ -24,28 +25,19 @@ public class MainFrame extends JFrame {
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // GraphicalUserInterface.getContactBook().printContactBook();
-
         makeContactLabels();
-        // GraphicalUserInterface.getContactBook().printContactBook();
-
         setComponents();
         setVisible(true);
     }
 
+
+
+
     private void setComponents () {
-        if (RIGHT_TO_LEFT) {
-            setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
-        JButton createContact;
-        JTextField search;
-        JScrollPane scrollPane;
+        
+        setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         GridBagConstraints c = new GridBagConstraints();
-
-        if (shouldFill) {
-            c.fill = GridBagConstraints.BOTH;
-        }
 
         createContact = new CreateContactButton();
         c.fill = GridBagConstraints.BOTH;
@@ -77,17 +69,8 @@ public class MainFrame extends JFrame {
 
     }
 
-    @SuppressWarnings("unchecked")
-    private class CreateContactButton extends JButton implements ActionListener {
-        CreateContactButton() {
-            super("+");
-            this.addActionListener(this);
-        }
-        public void actionPerformed(ActionEvent e) {
-            EditContact edit = new EditContact();
-            dispose();
-        }
-    }
+
+    
 
     @SuppressWarnings("unchecked")
     private class SearchField extends JTextField implements DocumentListener {
@@ -105,13 +88,6 @@ public class MainFrame extends JFrame {
         public void changedUpdate(DocumentEvent e) {
 
         }
-    }
-
-    private boolean containsString (Contact contact, String string) {
-        string = string.toLowerCase();
-        if (contact.getFirstName().toLowerCase().contains(string)) {return true;}
-        if (contact.getLastName().toLowerCase().contains(string)) {return true;}
-        return false;
     }
 
     private Contact[] filterContactsByString (String string) {
@@ -134,20 +110,30 @@ public class MainFrame extends JFrame {
         return results;
     }
 
-    private void makeContactLabels() {
-
-        Contact[] temp = GraphicalUserInterface.getContactBook().sortContactsLexicographically();
-        Contact[] results = new Contact[GraphicalUserInterface.getContactBook().getNumberOfContacts()];
-        int index = 0;
-        for (int i = 0; i < temp.length; i++) {
-            if (temp[i] != null) {
-                results[index] = temp[i];
-                index++;
-            }
-        }
-        contactLabels = results;
-       
+    private boolean containsString (Contact contact, String string) {
+        string = string.toLowerCase();
+        if (contact.getFirstName().toLowerCase().contains(string)) {return true;}
+        if (contact.getLastName().toLowerCase().contains(string)) {return true;}
+        return false;
     }
+
+
+
+
+    @SuppressWarnings("unchecked")
+    private class CreateContactButton extends JButton implements ActionListener {
+        CreateContactButton() {
+            super("+");
+            this.addActionListener(this);
+        }
+        public void actionPerformed(ActionEvent e) {
+            EditContact edit = new EditContact();
+            dispose();
+        }
+    }
+
+
+
 
     @SuppressWarnings("unchecked")
     private class ContactLabelsList extends JList implements ListSelectionListener {
@@ -163,14 +149,22 @@ public class MainFrame extends JFrame {
             if (!e.getValueIsAdjusting() && this.getSelectedIndex() != -1) {
                 Contact contact = (Contact) this.getSelectedValue();
                 int id = contact.getContactID();                
-                System.out.println("Trying to view contact with ID: " + id);
                 ViewContact view = new ViewContact(GraphicalUserInterface.getContactBook().getContactByID(id));
                 dispose();
             }
+        }    
+    }
+
+    private void makeContactLabels() {
+        Contact[] temp = GraphicalUserInterface.getContactBook().sortContactsLexicographically();
+        Contact[] results = new Contact[GraphicalUserInterface.getContactBook().getNumberOfContacts()];
+        int index = 0;
+        for (int i = 0; i < temp.length; i++) {
+            if (temp[i] != null) {
+                results[index] = temp[i];
+                index++;
+            }
         }
-
-
-
-    
+        contactLabels = results;
     }
 }
