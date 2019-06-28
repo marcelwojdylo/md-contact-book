@@ -319,6 +319,6 @@ public class EditContact extends JFrame {
             .addressLine2(addressLine2Input.getText())
             .email(emailInput.getText())
             .build();
-        GraphicalUserInterface.getContactBook().addContact(contact);
+            GraphicalUserInterface.getContactBook().addContact(contact);
     }
 }
