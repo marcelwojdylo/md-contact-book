@@ -27,6 +27,7 @@ public class EditContact extends JFrame {
     JTextField emailInput;
     JLabel emailLabel;
     JButton doneButton;
+    BackButton backButton;
 
     private String firstName = "";
     private String lastName = "";
@@ -41,11 +42,14 @@ public class EditContact extends JFrame {
     Contact contact;
 
     EditContact () {
+
         mode = Mode.NEW_CONTACT;
         setUpFrame();
+
     }
 
     EditContact (Contact c) {
+
         contact = c;
         firstName = c.getFirstName();
         lastName = c.getLastName();
@@ -56,6 +60,7 @@ public class EditContact extends JFrame {
         email = c.getEmail();
         mode = Mode.EDIT_CONTACT;
         setUpFrame();
+
     }
 
     private enum Mode {
@@ -236,15 +241,24 @@ public class EditContact extends JFrame {
 
         doneButton = new DoneButton();
         c.fill = GridBagConstraints.BOTH;
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 7;
-        c.gridwidth = 10;
+        c.gridwidth = 1;
         c.gridheight = 1;
         add(doneButton, c);
 
         if (mode == Mode.NEW_CONTACT) {
             doneButton.setEnabled(false);
         }        
+
+        backButton = new BackButton();
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 7;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        add(backButton, c);
+
     }
 
 
@@ -260,6 +274,18 @@ public class EditContact extends JFrame {
                 applyFieldsToContact();
             }
             MainFrame mainFrame = new MainFrame();
+            dispose();
+        }
+    }
+
+    private class BackButton extends JButton implements ActionListener {
+        BackButton () {
+            super("Back");
+            this.addActionListener(this);
+        }
+
+        public void actionPerformed (ActionEvent e) {
+            new MainFrame();
             dispose();
         }
     }
