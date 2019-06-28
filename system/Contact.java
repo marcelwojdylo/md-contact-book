@@ -114,6 +114,9 @@ public class Contact {
 
         public Builder contactID (int value) {
             contactID = value;
+            if (contactID > nextID) {
+                nextID = contactID + 1;
+            }
             return this;
         }
 

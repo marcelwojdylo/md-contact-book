@@ -51,6 +51,7 @@ public class EditContact extends JFrame {
         lastName = c.getLastName();
         dateOfBirth = c.getDateOfBirth();
         addressLine1 = c.getAddressLine1();
+        addressLine2 = c.getAddressLine2();
         phoneNumber = c.getPhoneNumber();
         email = c.getEmail();
         mode = Mode.EDIT_CONTACT;

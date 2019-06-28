@@ -111,7 +111,6 @@ public class ContactBook {
 
 
     public Contact[] sortContactsLexicographically() {
-        printContactBook();
         Contact[] result = new Contact[Config.CONTACT_BOOK_CAPACITY];
         for (int i = 0; i < contacts.length; i++) {
             result[i] = contacts[i];
@@ -144,7 +143,6 @@ public class ContactBook {
                 }
             }
         }
-        printContactBook();
 
 
         return result;
