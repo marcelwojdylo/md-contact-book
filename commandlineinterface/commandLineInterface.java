@@ -11,7 +11,8 @@ public class CommandLineInterface {
     private static ContactBook contactBook = new ContactBook();
 
     public static void main(String[] args) {
-        run();
+        contactBook.printContactBook();
+        // run();
     }
 
     public static void run() {

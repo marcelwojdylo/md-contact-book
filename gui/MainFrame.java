@@ -14,18 +14,21 @@ public class MainFrame extends JFrame {
     final static boolean shouldWeightX = true;
     final static boolean RIGHT_TO_LEFT = false;
 
-    private static Contact[] contacts = new Contact[Config.CONTACT_BOOK_CAPACITY];
+    private static Contact[] contactLabels = new Contact[Config.CONTACT_BOOK_CAPACITY];
     private ContactLabelsList labelsList;
 
     public MainFrame() {
-        
         setBackground(Color.BLACK);
         setSize(Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
         setUndecorated(false);
         setLayout(new GridBagLayout());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // GraphicalUserInterface.getContactBook().printContactBook();
+
         makeContactLabels();
+        // GraphicalUserInterface.getContactBook().printContactBook();
+
         setComponents();
         setVisible(true);
     }
@@ -61,7 +64,7 @@ public class MainFrame extends JFrame {
         c.weighty = 0.1;
         add(search, c);
 
-        labelsList = new ContactLabelsList(contacts);
+        labelsList = new ContactLabelsList(contactLabels);
         scrollPane = new JScrollPane(labelsList);
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
@@ -112,11 +115,11 @@ public class MainFrame extends JFrame {
     }
 
     private Contact[] filterContactsByString (String string) {
-        Contact[] temp = new Contact[contacts.length];
+        Contact[] temp = new Contact[contactLabels.length];
         int resultCount = 0;
-        for (int i = 0; i < contacts.length; i++) {
-            if (contacts[i] != null && containsString(contacts[i], string)) {
-                temp[i] = contacts[i];
+        for (int i = 0; i < contactLabels.length; i++) {
+            if (contactLabels[i] != null && containsString(contactLabels[i], string)) {
+                temp[i] = contactLabels[i];
                 resultCount++;
             }
         }
@@ -133,7 +136,7 @@ public class MainFrame extends JFrame {
 
     private void makeContactLabels() {
 
-        Contact[] temp = GraphicalUserInterface.getContactBook().sortContactsByLastNameInitial();
+        Contact[] temp = GraphicalUserInterface.getContactBook().sortContactsLexicographically();
         Contact[] results = new Contact[GraphicalUserInterface.getContactBook().getNumberOfContacts()];
         int index = 0;
         for (int i = 0; i < temp.length; i++) {
@@ -142,7 +145,7 @@ public class MainFrame extends JFrame {
                 index++;
             }
         }
-        contacts = results;
+        contactLabels = results;
        
     }
 
@@ -160,6 +163,7 @@ public class MainFrame extends JFrame {
             if (!e.getValueIsAdjusting() && this.getSelectedIndex() != -1) {
                 Contact contact = (Contact) this.getSelectedValue();
                 int id = contact.getContactID();                
+                System.out.println("Trying to view contact with ID: " + id);
                 ViewContact view = new ViewContact(GraphicalUserInterface.getContactBook().getContactByID(id));
                 dispose();
             }

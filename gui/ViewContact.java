@@ -24,6 +24,7 @@ public class ViewContact extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setComponents();
         setVisible(true);
+        System.out.println("Viewing contact number: "+contact.getContactID());
     }
 
     private class ContactInfoLabel extends JLabel {

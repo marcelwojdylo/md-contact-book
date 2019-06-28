@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ContactBook {
 
-    private static Contact[] contacts;
+    private Contact[] contacts;
     public Contact[] getContacts() {
         return contacts;
     }
@@ -80,13 +80,15 @@ public class ContactBook {
     public void printContactBook() {
         for(int i = 0; i < contacts.length; i++) {
             if (contacts[i] != null) {
+                System.out.println("\nContact at index: " + i);
+                System.out.println("Contact id: " + contacts[i].getContactID());
                 System.out.println(contacts[i]);
             }
         } 
     }   
 
     public void printContactsSortedByLastNameInitial() {
-        for (Contact c : sortContactsByLastNameInitial()) {
+        for (Contact c : sortContactsLexicographically()) {
             if (c != null) {
                 System.out.println(c.toStringCLI());
             }
@@ -108,22 +110,42 @@ public class ContactBook {
 
 
 
-    public Contact[] sortContactsByLastNameInitial() {
-        Contact[] result = new Contact[contacts.length];
-        int indexCounter = 0;
+    public Contact[] sortContactsLexicographically() {
+        printContactBook();
+        Contact[] result = new Contact[Config.CONTACT_BOOK_CAPACITY];
+        for (int i = 0; i < contacts.length; i++) {
+            result[i] = contacts[i];
+        }
 
-        for (int i = 0; i < Config.Constants.LETTERS.length(); i++) {
-            for (int j = 0; j < contacts.length; j++) {
-                if (contacts[j] == null) {
-                    continue;
-                }
-
-                if (contacts[j].getLastName().charAt(0) == Config.Constants.LETTERS.charAt(i)) {
-                    result[indexCounter] = contacts[j];
-                    indexCounter++;
+        for (int i = 0; i < result.length-1; i++) {
+            for (int j = i + 1; j < result.length; j++) {
+                if (result[i] != null && result[j] != null) {
+                    String toCompareI;
+                    String toCompareJ;
+    
+                    if (result[i].getLastName().isEmpty()) {
+                        toCompareI = result[i].getFirstName();
+                    } else {
+                        toCompareI = result[i].getLastName();
+                    }
+    
+                    if (result[j].getLastName().isEmpty()) {
+                        toCompareJ = result[j].getFirstName();
+                    } else {
+                        toCompareJ = result[j].getLastName();
+                    }
+    
+    
+                    if (toCompareI.compareToIgnoreCase(toCompareJ) > 0 ) {
+                        Contact temp = result[i];
+                        result[i] = result[j];
+                        result[j] = temp;
+                    }
                 }
             }
         }
+        printContactBook();
+
 
         return result;
     }
@@ -153,7 +175,12 @@ public class ContactBook {
     private void loadContactsFromFile() {
         JSONArray contactsJSON = (JSONArray) JSONController.readJSONArrayFromFile();
         Contact[] contactsArray = JSONController.makeContactArrayFromJSONArray(contactsJSON);
-        contacts = contactsArray;
+        for (int i = 0; i < contactsArray.length; i++) {
+            if (contactsArray[i] != null) {
+                contacts[contactsArray[i].getContactID()] = contactsArray[i];
+            }
+        }
+        // contacts = contactsArray;
         updateNumberOfContacts();
     }
 
