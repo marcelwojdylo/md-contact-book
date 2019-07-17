@@ -43,17 +43,18 @@ public class MainFrame extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = 0.1;
-        c.weighty = 0.1;
+        c.weightx = 0.01;
+        c.weighty = 0.01;
+        c.gridwidth = 1;
         add(createContact, c);
 
         search = new SearchField();
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 1;
         c.gridy = 0;
-        c.gridwidth = 5;
-        c.weightx = 0.9;
-        c.weighty = 0.1;
+        c.gridwidth = 19;
+        c.weightx = 0.99;
+        c.weighty = 0.01;
         add(search, c);
 
         labelsList = new ContactLabelsList(contactLabels);
@@ -61,10 +62,10 @@ public class MainFrame extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 1;
-        c.gridheight = 9;
-        c.gridwidth = 6;
+        c.gridheight = 20;
+        c.gridwidth = 20;
         c.weightx = 1;
-        c.weighty = 0.9;
+        c.weighty = 0.99;
         add(scrollPane, c);
 
     }

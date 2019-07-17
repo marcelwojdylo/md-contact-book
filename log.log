@@ -1,0 +1,1451 @@
+commit a38f8781e4aeb00264feb30be3a6976055a5ac3f
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 28 17:32:19 2019 +0200
+
+    NEXT STEPS:
+            - make it possible to navigate the
+              components with keyboard
+            - make window stay in the same spot
+              between frame changes
+            - format all labels and components
+            - implement a way to standardize
+              date of birth, phone number, and
+              (maybe) e-mail input
+            - make it possible to associate
+              an image with each contact, and
+              then have that image displayed
+              on the view contact screen
+              (optionally)
+            - find a way to modify the look
+              and feel of the application
+            - rebuild the layouts of the
+              ViewContact and EditContact
+              frames
+            - implement ArrayLists as way
+              to store Contact objects instead
+              of the present Contact[] method
+            - find way to encrypt contacts
+
+ backup.json           |   2 +-
+ contactBookData.json  |   2 +-
+ gui/EditContact.java  |   2 +-
+ gui/img/dick_icon.png | Bin 3469 -> 0 bytes
+ 4 files changed, 3 insertions(+), 3 deletions(-)
+
+commit f488a7bdb8484dfde74932b6c0da2aee89139d42
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 28 16:24:56 2019 +0200
+
+    Cleaned up and reorganized code
+    
+            - Removed files associated with the command
+              line interface, removed all fields, methods
+              and references to them which are now obsolete
+    
+            - Reordered methods and fields in all classes
+    
+            - Removed odds and ends left over from previous
+              implementation attempts of various methods and
+              classes
+
+ .DS_Store                                          | Bin 8196 -> 8196 bytes
+ ContactBookApp.class                               | Bin 328 -> 328 bytes
+ ContactBookApp.java                                |  13 -
+ commandlineinterface/Color$ANSI.class              | Bin 648 -> 0 bytes
+ commandlineinterface/Color.class                   | Bin 1044 -> 0 bytes
+ commandlineinterface/Color.java                    |  33 ---
+ .../CommandLineInterface$Commands.class            | Bin 696 -> 0 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 0 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 6791 -> 0 bytes
+ commandlineinterface/commandLineInterface.java     | 269 ---------------------
+ gui/CreateContact$AddressCityInput.class           | Bin 398 -> 0 bytes
+ gui/CreateContact$AddressCityLabel.class           | Bin 394 -> 0 bytes
+ gui/CreateContact$AddressCountryInput.class        | Bin 404 -> 0 bytes
+ gui/CreateContact$AddressFlatInput.class           | Bin 398 -> 0 bytes
+ gui/CreateContact$AddressFlatLabel.class           | Bin 394 -> 0 bytes
+ gui/CreateContact$AddressPostcodeInput.class       | Bin 406 -> 0 bytes
+ gui/CreateContact$AddressPostcodeLabel.class       | Bin 402 -> 0 bytes
+ gui/CreateContact$AddressStreetInput.class         | Bin 402 -> 0 bytes
+ gui/CreateContact$AddressStreetLabel.class         | Bin 398 -> 0 bytes
+ gui/CreateContact$CreateContactButton.class        | Bin 529 -> 0 bytes
+ gui/CreateContact$DateOfBirthInput.class           | Bin 398 -> 0 bytes
+ gui/CreateContact$DateOfBirthLabel.class           | Bin 394 -> 0 bytes
+ gui/CreateContact$EmailInput.class                 | Bin 386 -> 0 bytes
+ gui/CreateContact$FirstNameInput.class             | Bin 394 -> 0 bytes
+ gui/CreateContact$FirstNameLabel.class             | Bin 390 -> 0 bytes
+ gui/CreateContact$PhoneNumberInput.class           | Bin 398 -> 0 bytes
+ gui/CreateContact$SecondNameInput.class            | Bin 396 -> 0 bytes
+ gui/CreateContact$SecondNameLabel.class            | Bin 392 -> 0 bytes
+ gui/CreateContact.class                            | Bin 2217 -> 0 bytes
+ gui/CreateContact.java                             | 105 --------
+ gui/EditContact$AddressCityInput.class             | Bin 388 -> 0 bytes
+ gui/EditContact$AddressCityLabel.class             | Bin 384 -> 0 bytes
+ gui/EditContact$AddressCountryInput.class          | Bin 394 -> 0 bytes
+ gui/EditContact$AddressFlatInput.class             | Bin 388 -> 0 bytes
+ gui/EditContact$AddressFlatLabel.class             | Bin 384 -> 0 bytes
+ gui/EditContact$AddressLine1Input.class            | Bin 390 -> 0 bytes
+ gui/EditContact$AddressLine2Input.class            | Bin 390 -> 0 bytes
+ gui/EditContact$AddressPostcodeInput.class         | Bin 396 -> 0 bytes
+ gui/EditContact$AddressPostcodeLabel.class         | Bin 392 -> 0 bytes
+ gui/EditContact$AddressStreetInput.class           | Bin 392 -> 0 bytes
+ gui/EditContact$AddressStreetLabel.class           | Bin 388 -> 0 bytes
+ gui/EditContact$BackButton.class                   | Bin 693 -> 693 bytes
+ gui/EditContact$CrucialField.class                 | Bin 1408 -> 1449 bytes
+ gui/EditContact$DateOfBirthInput.class             | Bin 388 -> 0 bytes
+ gui/EditContact$DateOfBirthLabel.class             | Bin 384 -> 0 bytes
+ gui/EditContact$DoneButton.class                   | Bin 979 -> 980 bytes
+ gui/EditContact$EmailInput.class                   | Bin 376 -> 0 bytes
+ gui/EditContact$FinishEditing.class                | Bin 507 -> 0 bytes
+ gui/EditContact$FirstNameInput.class               | Bin 396 -> 0 bytes
+ gui/EditContact$FirstNameLabel.class               | Bin 380 -> 0 bytes
+ gui/EditContact$LastNameInput.class                | Bin 382 -> 0 bytes
+ gui/EditContact$Mode.class                         | Bin 938 -> 938 bytes
+ gui/EditContact$PhoneNumberInput.class             | Bin 388 -> 0 bytes
+ gui/EditContact$SecondNameInput.class              | Bin 386 -> 0 bytes
+ gui/EditContact$SecondNameLabel.class              | Bin 382 -> 0 bytes
+ gui/EditContact.class                              | Bin 5820 -> 5749 bytes
+ gui/EditContact.java                               | 170 ++++++-------
+ gui/GraphicalUserInterface.class                   | Bin 531 -> 531 bytes
+ gui/GraphicalUserInterface.java                    |   8 +-
+ gui/MainFrame$ContactLabelsList.class              | Bin 1869 -> 1283 bytes
+ gui/MainFrame$CreateContactButton.class            | Bin 700 -> 700 bytes
+ gui/MainFrame$SearchField.class                    | Bin 1132 -> 1132 bytes
+ gui/MainFrame.class                                | Bin 3088 -> 3241 bytes
+ gui/MainFrame.java                                 | 100 ++++----
+ gui/ViewContact$BackButton.class                   | Bin 693 -> 693 bytes
+ gui/ViewContact$EditButton.class                   | Bin 980 -> 980 bytes
+ gui/ViewContact$RemoveButton.class                 | Bin 950 -> 950 bytes
+ gui/ViewContact.class                              | Bin 3121 -> 2757 bytes
+ gui/ViewContact.java                               |  66 ++---
+ system/Config.class                                | Bin 660 -> 564 bytes
+ system/Config.java                                 |  10 -
+ system/Contact.class                               | Bin 3103 -> 2707 bytes
+ system/Contact.java                                |  17 +-
+ system/ContactBook.class                           | Bin 4244 -> 3160 bytes
+ system/ContactBook.java                            | 140 ++++-------
+ system/JSONController.class                        | Bin 3865 -> 3839 bytes
+ system/JSONController.java                         |  55 +++--
+ 77 files changed, 246 insertions(+), 740 deletions(-)
+
+commit 1d79ac83c864572ad3a95a4d1827f42dce2fe625
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 28 15:26:31 2019 +0200
+
+    Added cancel button to Edit/Create frame
+    
+    NEXT STEPS:
+            - Get frames to inherit size and locations
+              from the frames which instantiated them
+
+ contactBookData.json               |   2 +-
+ gui/EditContact$BackButton.class   | Bin 0 -> 693 bytes
+ gui/EditContact$CrucialField.class | Bin 1408 -> 1408 bytes
+ gui/EditContact$DoneButton.class   | Bin 979 -> 979 bytes
+ gui/EditContact$Mode.class         | Bin 938 -> 938 bytes
+ gui/EditContact.class              | Bin 5584 -> 5820 bytes
+ gui/EditContact.java               |  30 ++++++++++++++++++++++++++++--
+ 7 files changed, 29 insertions(+), 3 deletions(-)
+
+commit a0ff586052d9a73efe5a6dd8bf3379c1b1c4f798
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 28 14:38:24 2019 +0200
+
+    Fixed id/index mismatch bug and addressLine2 bug
+    
+            The nextID static field in the Contact
+            class is now incremented when a new
+            contact is created from scratch, and
+            also updated to the highest existing
+            ID + 1 when loading contacts from
+            disk.
+    
+    NEXT STEPS:
+            - get newly instantiated JFrames to
+              inherit their location and size from
+              the JFrame in which they were insta-
+              ntiated.
+            - When sorting contacts lexicographically,
+              when a string is encountered which
+              does not start with a letter, put it at
+              the end of the list.
+            - Add button to cancel editing/creating
+              a contact.
+
+ contactBookData.json         |   2 +-
+ gui/EditContact.java         |   1 +
+ system/Contact$Builder.class | Bin 1250 -> 1302 bytes
+ system/Contact.class         | Bin 3103 -> 3103 bytes
+ system/Contact.java          |   3 +++
+ system/ContactBook.class     | Bin 4270 -> 4244 bytes
+ system/ContactBook.java      |   2 --
+ 7 files changed, 5 insertions(+), 3 deletions(-)
+
+commit 1d9e802ab852e88b6e75e882d0d88cdcb9e72ed0
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 28 12:11:03 2019 +0200
+
+    Implemented lexicographical sorting
+    
+            Got the makeContactLabels method to
+            work properly. It now sorts by first
+            name if last name is not present.
+            Fixed the issue of sortContactsLexi-
+            cographically() method in ContactBook
+            class messing with the Contact[] contacts
+            array.
+    
+    BUG:
+            There is a problem when creating new contacts
+            whereby a new contact is assigned an ID that is
+            already in use, therefore overwriting the
+            contact that previously held that ID.
+    
+            This is likely due to the way contacts are
+            assigned new IDs using the nextID field
+            which increments every time a new contact is
+            created, but not when a contact with an alre-
+            ady assigned ID is loaded from file.
+
+ .../CommandLineInterface$Commands.class            | Bin 696 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 6798 -> 6791 bytes
+ commandlineinterface/commandLineInterface.java     |   3 +-
+ contactBookData.json                               |   2 +-
+ gui/MainFrame$ContactLabelsList.class              | Bin 1283 -> 1869 bytes
+ gui/MainFrame$CreateContactButton.class            | Bin 700 -> 700 bytes
+ gui/MainFrame$SearchField.class                    | Bin 1132 -> 1132 bytes
+ gui/MainFrame.class                                | Bin 3083 -> 3088 bytes
+ gui/MainFrame.java                                 |  22 ++++----
+ gui/ViewContact$BackButton.class                   | Bin 693 -> 693 bytes
+ gui/ViewContact$ContactInfoLabel.class             | Bin 523 -> 523 bytes
+ gui/ViewContact$EditButton.class                   | Bin 980 -> 980 bytes
+ gui/ViewContact$RemoveButton.class                 | Bin 950 -> 950 bytes
+ gui/ViewContact.class                              | Bin 2900 -> 3121 bytes
+ gui/ViewContact.java                               |   1 +
+ system/ContactBook.class                           | Bin 3561 -> 4270 bytes
+ system/ContactBook.java                            |  57 +++++++++++++++------
+ 18 files changed, 59 insertions(+), 26 deletions(-)
+
+commit d5473c2721f97078acc689ddff99a858a48db4b3
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 27 17:01:27 2019 +0200
+
+    Made it impossible to create contacts without no first or last name
+    
+            In EditContact class the doneButton is now
+            disabled if either the firstNameInput or
+            the lastNameInput is empty.
+    
+    NEXT STEPS:
+            Improve the way the label list in the main
+            frame is built:
+    
+            - lexicographical order
+    
+            - if last name is not present
+              use first name when ordering
+    
+            - if last name starts with a
+              non-letter character, add
+              it to the end of the label list
+    
+            - get the window to stay in place
+              after you change jframe
+    
+            - solve issue with addressLine2
+              disappearing when entering the
+              EditContact frame
+              (possible connection to how the
+              contact was created, as this ha-
+              ppened after a new one was crea-
+              ted throgh the gui, and not loaded
+              from file or generated in source
+    
+            - add button to go back to main frame
+              in the Create/Edit contact screen
+
+ contactBookData.json               |   2 +-
+ gui/EditContact$CrucialField.class | Bin 0 -> 1408 bytes
+ gui/EditContact$DoneButton.class   | Bin 976 -> 979 bytes
+ gui/EditContact.class              | Bin 5368 -> 5584 bytes
+ gui/EditContact.java               |  43 ++++++++++++++++++++++++++++++++-----
+ 5 files changed, 39 insertions(+), 6 deletions(-)
+
+commit cd9a79d3311d0a596204156f361f913848a46844
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 27 15:29:28 2019 +0200
+
+    Fixed JSONController.makeContactArrayFromJSONArray()
+    
+            JSONController.makeContactArrayFromJSONArray()
+            contained a mistake which messed up contact IDs
+            as they were loaded from the JSON file.
+    
+    Fixed issue with viewing the wrong contact  after search
+    
+    Made search ignore case
+    
+    NEXT STEP:
+            Fix issue when building labels for a
+            contact without a last name
+    
+            Make contact label list in the main frame
+            do proper lexicographical comparison in-
+            stead of the current initial letter compa-
+            rison.
+
+ backup.json                            |   2 +-
+ contactBookData.json                   |   2 +-
+ gui/MainFrame$ContactLabelsList.class  | Bin 1055 -> 1283 bytes
+ gui/MainFrame.class                    | Bin 3175 -> 3083 bytes
+ gui/MainFrame.java                     |  13 ++++++-------
+ gui/ViewContact$ContactInfoLabel.class | Bin 522 -> 523 bytes
+ gui/ViewContact$EditButton.class       | Bin 976 -> 980 bytes
+ gui/ViewContact$RemoveButton.class     | Bin 946 -> 950 bytes
+ gui/ViewContact.class                  | Bin 2901 -> 2900 bytes
+ gui/ViewContact.java                   |  20 ++++++++++----------
+ system/ContactBook.class               | Bin 3573 -> 3561 bytes
+ system/ContactBook.java                |   6 +++---
+ system/JSONController.class            | Bin 3861 -> 3865 bytes
+ system/JSONController.java             |   2 +-
+ 14 files changed, 22 insertions(+), 23 deletions(-)
+
+commit 07e984e2e3c64e8512c556cff6edda63c34e1c87
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Tue Jun 25 14:16:02 2019 +0200
+
+    Added further functionality to the GUI
+    
+            There is now an EditContact class which
+            displays a JFrame which can edit existing
+            contacts, or add new ones if the constructor
+            which accepts a Contact object is invoked.
+    
+            There is now a ViewContact class which
+            displays a JFrame showing a contact's data
+            along with three buttons:
+                    - 'Back' takes the user back to the
+                      main screen
+                    - 'Edit' fires up the EditContact
+                      screen
+                    - 'Remove' removes the contact
+                      from the contact book and takes
+                      the user back to the main screen
+    
+    NEXT STEPS:
+    
+            Solve issue with conflicting contact IDs
+    
+            Solve issue with UI crashing when a contact
+            does not have a last name (occurs when sorting
+            contacts by last name for the labels in the
+            scroll pane).
+    
+            Make search ignore letter case
+
+ backup.json                                     |   2 +-
+ commandlineinterface/CommandLineInterface.class | Bin 7150 -> 6798 bytes
+ commandlineinterface/commandLineInterface.java  |  38 +---
+ contactBookData.json                            |   2 +-
+ gui/CreateContact$AddressCityInput.class        | Bin 0 -> 398 bytes
+ gui/CreateContact$AddressCityLabel.class        | Bin 0 -> 394 bytes
+ gui/CreateContact$AddressCountryInput.class     | Bin 0 -> 404 bytes
+ gui/CreateContact$AddressFlatInput.class        | Bin 0 -> 398 bytes
+ gui/CreateContact$AddressFlatLabel.class        | Bin 0 -> 394 bytes
+ gui/CreateContact$AddressPostcodeInput.class    | Bin 0 -> 406 bytes
+ gui/CreateContact$AddressPostcodeLabel.class    | Bin 0 -> 402 bytes
+ gui/CreateContact$AddressStreetInput.class      | Bin 0 -> 402 bytes
+ gui/CreateContact$AddressStreetLabel.class      | Bin 0 -> 398 bytes
+ gui/CreateContact$CreateContactButton.class     | Bin 0 -> 529 bytes
+ gui/CreateContact$DateOfBirthInput.class        | Bin 0 -> 398 bytes
+ gui/CreateContact$DateOfBirthLabel.class        | Bin 0 -> 394 bytes
+ gui/CreateContact$EmailInput.class              | Bin 0 -> 386 bytes
+ gui/CreateContact$FirstNameInput.class          | Bin 0 -> 394 bytes
+ gui/CreateContact$FirstNameLabel.class          | Bin 0 -> 390 bytes
+ gui/CreateContact$PhoneNumberInput.class        | Bin 0 -> 398 bytes
+ gui/CreateContact$SecondNameInput.class         | Bin 0 -> 396 bytes
+ gui/CreateContact$SecondNameLabel.class         | Bin 0 -> 392 bytes
+ gui/CreateContact.class                         | Bin 0 -> 2217 bytes
+ gui/CreateContact.java                          | 105 ++++++++++
+ gui/EditContact$AddressCityInput.class          | Bin 0 -> 388 bytes
+ gui/EditContact$AddressCityLabel.class          | Bin 0 -> 384 bytes
+ gui/EditContact$AddressCountryInput.class       | Bin 0 -> 394 bytes
+ gui/EditContact$AddressFlatInput.class          | Bin 0 -> 388 bytes
+ gui/EditContact$AddressFlatLabel.class          | Bin 0 -> 384 bytes
+ gui/EditContact$AddressLine1Input.class         | Bin 0 -> 390 bytes
+ gui/EditContact$AddressLine2Input.class         | Bin 0 -> 390 bytes
+ gui/EditContact$AddressPostcodeInput.class      | Bin 0 -> 396 bytes
+ gui/EditContact$AddressPostcodeLabel.class      | Bin 0 -> 392 bytes
+ gui/EditContact$AddressStreetInput.class        | Bin 0 -> 392 bytes
+ gui/EditContact$AddressStreetLabel.class        | Bin 0 -> 388 bytes
+ gui/EditContact$DateOfBirthInput.class          | Bin 0 -> 388 bytes
+ gui/EditContact$DateOfBirthLabel.class          | Bin 0 -> 384 bytes
+ gui/EditContact$DoneButton.class                | Bin 0 -> 976 bytes
+ gui/EditContact$EmailInput.class                | Bin 0 -> 376 bytes
+ gui/EditContact$FinishEditing.class             | Bin 0 -> 507 bytes
+ gui/EditContact$FirstNameInput.class            | Bin 0 -> 396 bytes
+ gui/EditContact$FirstNameLabel.class            | Bin 0 -> 380 bytes
+ gui/EditContact$LastNameInput.class             | Bin 0 -> 382 bytes
+ gui/EditContact$Mode.class                      | Bin 0 -> 938 bytes
+ gui/EditContact$PhoneNumberInput.class          | Bin 0 -> 388 bytes
+ gui/EditContact$SecondNameInput.class           | Bin 0 -> 386 bytes
+ gui/EditContact$SecondNameLabel.class           | Bin 0 -> 382 bytes
+ gui/EditContact.class                           | Bin 0 -> 5368 bytes
+ gui/EditContact.java                            | 258 ++++++++++++++++++++++++
+ gui/MainFrame$ContactLabelsList.class           | Bin 1535 -> 1055 bytes
+ gui/MainFrame$CreateContactButton.class         | Bin 751 -> 700 bytes
+ gui/MainFrame$SearchField.class                 | Bin 1132 -> 1132 bytes
+ gui/MainFrame.class                             | Bin 3424 -> 3175 bytes
+ gui/MainFrame.java                              |  37 +---
+ gui/ViewContact$BackButton.class                | Bin 0 -> 693 bytes
+ gui/ViewContact$ContactInfoLabel.class          | Bin 0 -> 522 bytes
+ gui/ViewContact$EditButton.class                | Bin 0 -> 976 bytes
+ gui/ViewContact$RemoveButton.class              | Bin 0 -> 946 bytes
+ gui/ViewContact.class                           | Bin 0 -> 2901 bytes
+ gui/ViewContact.java                            | 117 +++++++++++
+ system/Config$Constants.class                   | Bin 787 -> 787 bytes
+ system/Config.class                             | Bin 612 -> 660 bytes
+ system/Config.java                              |   1 +
+ system/Contact$Builder.class                    | Bin 1864 -> 1250 bytes
+ system/Contact$ContactData.class                | Bin 673 -> 577 bytes
+ system/Contact.class                            | Bin 3223 -> 3103 bytes
+ system/Contact.java                             | 151 ++++----------
+ system/ContactBook.class                        | Bin 4230 -> 3573 bytes
+ system/ContactBook.java                         |  61 ++----
+ system/JSONController.class                     | Bin 4217 -> 3861 bytes
+ system/JSONController.java                      |  16 +-
+ system/Testing.class                            | Bin 1733 -> 1539 bytes
+ system/Testing.java                             |  10 +-
+ 73 files changed, 561 insertions(+), 237 deletions(-)
+
+commit 8f64886f2a9b400842dfd0a919438537df034ac3
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 24 15:53:34 2019 +0200
+
+    Implemented functionality to the GUI MainFrame
+    
+            Search bar now works as planned and
+            feeds the scroll pane with a new
+            list of contacts which contain the
+            typed string in their fields.
+    
+            A ListEventListener is now present and
+            in working order in the ContactLabelList
+            class.
+    
+            An ActionListener is now present and in
+            working order in the CreateContactButton
+            class.
+    
+    NEXT STEPS:
+    
+                Create CreateContact.java in gui package
+                extending JFrame (when '+' button is
+                clicked)
+    
+                Create EditContact.java in gui package
+                extending JFrame (when 'edit' button in
+                ViewContact is clicked)
+    
+                Create ViewContact.java in gui package
+                extending JFrame (when a contact in the
+                contact list scroll pane is clicked)
+
+ contactBookData.json                    |   2 +-
+ gui/MainFrame$ContactLabelsList.class   | Bin 0 -> 1535 bytes
+ gui/MainFrame$CreateContactButton.class | Bin 0 -> 751 bytes
+ gui/MainFrame$SearchField.class         | Bin 0 -> 1132 bytes
+ gui/MainFrame.class                     | Bin 3745 -> 3424 bytes
+ gui/MainFrame.java                      | 154 +++++++++++++++++++++++++-------
+ system/Contact$Builder.class            | Bin 1864 -> 1864 bytes
+ system/Contact$ContactData.class        | Bin 650 -> 673 bytes
+ system/Contact.class                    | Bin 3537 -> 3223 bytes
+ system/Contact.java                     |  24 ++---
+ system/ContactBook.class                | Bin 4090 -> 4230 bytes
+ system/ContactBook.java                 |   8 +-
+ 12 files changed, 141 insertions(+), 47 deletions(-)
+
+commit 47d4713dceaa3b1edf6df57ac1dd49fe7a527368
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Sat Jun 22 19:57:30 2019 +0200
+
+    Create JList labels for display in the MainFrame scroll pane
+    
+            The JList contains strings extracted
+            from GraphicalUserInterface contacts
+            Contact[]
+
+ commandlineinterface/CommandLineInterface.class | Bin 7150 -> 7150 bytes
+ gui/MainFrame.class                             | Bin 2941 -> 3745 bytes
+ gui/MainFrame.java                              |  20 ++++++++++++++++++--
+ system/Config$Constants.class                   | Bin 787 -> 787 bytes
+ system/Config.java                              |   4 ++--
+ system/ContactBook.class                        | Bin 4090 -> 4090 bytes
+ 6 files changed, 20 insertions(+), 4 deletions(-)
+
+commit c3c7032a9db5ddb14a942d8e96ea8e494980faa0
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 21 22:02:30 2019 +0200
+
+    Created broad layout for the GUI using GridBagLayout
+    
+            - The layout is now a 6x10 grid.
+            - 1x1 is the button for creating
+              a new contact
+            - 2x2:2x6 is the search bar
+            - 2x1:10x10 is a scroll pane which
+              contains a Jlist with contacts
+    
+    NEXT STEP:
+            Get the list to show a contact's first
+            and last name only.
+    
+            Get the scroll pane to display only
+            the contacts which contain the given
+            string in one of their fields
+    
+            Create CreateContact.java in gui package
+            extending JFrame (when '+' button is
+            clicked)
+    
+            Create EditContact.java in gui package
+            extending JFrame (when 'edit' button in
+            ViewContact is clicked)
+    
+            Create ViewContact.java in gui package
+            extending JFrame (when a contact in the
+            contact list scroll pane is clicked)
+
+ .DS_Store                          | Bin 8196 -> 8196 bytes
+ ContactBookApp.class               | Bin 642 -> 328 bytes
+ ContactBookApp.java                |   5 +-
+ gui/Dimensions.class               | Bin 286 -> 291 bytes
+ gui/Dimensions.java                |   2 +-
+ gui/GraphicalUserInterface$1.class | Bin 854 -> 1032 bytes
+ gui/GraphicalUserInterface.class   | Bin 1889 -> 531 bytes
+ gui/GraphicalUserInterface.java    |  40 ++++------------
+ gui/MainFrame.class                | Bin 0 -> 2941 bytes
+ gui/MainFrame.java                 |  94 +++++++++++++++++++++++++++++++++++++
+ system/ContactBook.class           | Bin 3939 -> 4090 bytes
+ system/ContactBook.java            |  15 ++++--
+ system/Testing.class               | Bin 1875 -> 1733 bytes
+ system/Testing.java                |   1 -
+ 14 files changed, 117 insertions(+), 40 deletions(-)
+
+commit f06017a67a20db3593d29cc14bfc36978acd5542
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 21 11:54:53 2019 +0200
+
+    Clean up and reorganize code
+    
+            Separated methods for testing from
+            ContactBook class into a separate
+            Testing class, these comprise mostly
+            the method for adding generic conta-
+            cts to a ContactBook, which is now
+            done using ContactBook.addContact().
+    
+            Renamed Constants to Config and
+            separated constant variables of the
+            app from settings.
+    
+            Cleaned up various odds and ends
+    
+    NEXT STEP:
+            Get back to developing GUI
+
+ .vscode/launch.json                             |   7 ++
+ ContactBookApp.class                            | Bin 642 -> 642 bytes
+ ContactBookApp.java                             |  21 ------
+ backup.json                                     |   1 +
+ commandlineinterface/CommandLineInterface.class | Bin 7552 -> 7150 bytes
+ commandlineinterface/commandLineInterface.java  |  39 ++++--------
+ contactBookData.json                            |   2 +-
+ system/Config$Constants.class                   | Bin 0 -> 787 bytes
+ system/Config.class                             | Bin 0 -> 612 bytes
+ system/Config.java                              |  19 ++++++
+ system/Constants.class                          | Bin 971 -> 0 bytes
+ system/Constants.java                           |  14 ----
+ system/Contact.class                            | Bin 3715 -> 3537 bytes
+ system/Contact.java                             |  13 ----
+ system/ContactBook.class                        | Bin 5264 -> 3939 bytes
+ system/ContactBook.java                         |  81 ++++--------------------
+ system/JSONController.class                     | Bin 4045 -> 4217 bytes
+ system/JSONController.java                      |  46 +++++++-------
+ system/Testing.class                            | Bin 0 -> 1875 bytes
+ system/Testing.java                             |  52 +++++++++++++++
+ 20 files changed, 129 insertions(+), 166 deletions(-)
+
+commit a57b68d8baa9c9aaf774ee031a1390d2b8aa03b0
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 20 18:47:26 2019 +0200
+
+    Add method for saving contacts to file
+    
+    Created method saveContactsToFile() in class
+    ContactBook which is now called every time a
+    change is made to the storage array in Con-
+    tactBook (Contact[] contacts).
+    
+    NEXT STEP:
+            Clean up the code a little
+
+ ContactBookApp.class     | Bin 351 -> 642 bytes
+ ContactBookApp.java      |   4 +++-
+ contactBookData.json     |   2 +-
+ system/ContactBook.class | Bin 5016 -> 5264 bytes
+ system/ContactBook.java  |   9 +++++++++
+ 5 files changed, 13 insertions(+), 2 deletions(-)
+
+commit 562bef2730a49d62d1dc9a2b4eb7a302b02f2d98
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 20 18:30:29 2019 +0200
+
+    Add methods for handling JSON files
+    
+    Created methods in system.JSONController class:
+            - one for parsing a JSON file into a JSONArray
+            - one for making a JSONArray into a Contact[]
+    
+    Created method in system.ContactBook class for loading
+    Contact[] contacts up with Contact objects parsed from
+    contactBookData.json.
+    
+    NEXT STEP:
+            Create a method for saving the Contact[] contacts
+            from the ContactBook instance into a JSON file at
+            contactBookData.json.
+
+ ContactBookApp.class        | Bin 1545 -> 351 bytes
+ ContactBookApp.java         |  43 +++++++++++++++++++++----------------------
+ system/ContactBook.class    | Bin 4747 -> 5016 bytes
+ system/ContactBook.java     |   9 ++++++++-
+ system/JSONController.class | Bin 3213 -> 4045 bytes
+ system/JSONController.java  |  33 +++++++++++++++++++++++++++++++++
+ 6 files changed, 62 insertions(+), 23 deletions(-)
+
+commit cba7e786edf94f4b72645cf40c0ffafe4f9bcd9e
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 20 17:40:32 2019 +0200
+
+    Add methods for handling JSON, resolve contactID problems
+    
+    Created system.JSONController class which contains methods for:
+            - turning Contact objects into JSONObjects,
+            - turning JSONObjects into Contact objects,
+            - turning a Contact[] into a JSONArray consisiting of
+              Contact objects turned into JSONObjects
+            - writing a JSONObject or JSONArray into a file
+              (contactBookData.json)
+    
+    Resolved problems with the numberOfContacts field in Contact
+    class. It is now split into a nextID field and a separate
+    counter in class ContactBook which is incremented or decre-
+    mented when adding Contacts to the ContactBook using its
+    internal methods.
+    
+    NEXT STEP:
+            Create method for loading a .json file and
+            turning it into a Contact[] which can then
+            be loaded into a ContactBook instance.
+
+ .DS_Store                        | Bin 8196 -> 8196 bytes
+ ContactBookApp.class             | Bin 1472 -> 1545 bytes
+ ContactBookApp.java              |  23 +++++------
+ contactBookData.json             |   1 +
+ obj.json                         |   1 -
+ system/Contact$Builder.class     | Bin 1825 -> 1864 bytes
+ system/Contact$ContactData.class | Bin 650 -> 650 bytes
+ system/Contact.class             | Bin 4351 -> 3715 bytes
+ system/Contact.java              |  44 +++++---------------
+ system/ContactBook.class         | Bin 4807 -> 4747 bytes
+ system/ContactBook.java          |  55 +++++++++++--------------
+ system/JSONController.class      | Bin 0 -> 3213 bytes
+ system/JSONController.java       |  85 +++++++++++++++++++++++++++++++++++++++
+ 13 files changed, 130 insertions(+), 79 deletions(-)
+
+commit 6b17d28c05795bc788c0b4023a3dd53b7f9e31d3
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 19 19:21:46 2019 +0200
+
+    Created getJSON methods inside Contact and ContactBook classes
+    
+    The getJSON method for Contact class:
+            takes all fields from contactData structure in
+            the Contact object and returns a JSONObject
+            containing the data.
+    
+    The getJSON method fo ContactBook class:
+            iterates through Contact objects contained
+            in Contact[] contacts and puts their
+            getJSON JSONObjects into a new JSONArray
+            which it then returns.
+    
+    Changed type of dateOfBirth field in Contact class to String
+    
+    NEXT STEP:
+            Find a way to make contact_id secure and reliable,
+            as it is there could be potential problems in the
+            ContactBook class field Contact[] contacts, since
+            the elements of that array are addressed by their
+            index which only happens to be the same as their
+            contactID field.
+    
+            Think of a good way to store the data in JSON,
+            so that it's possible to extract contacts by
+            their contactID.
+
+ .DS_Store                                       | Bin 6148 -> 8196 bytes
+ ContactBookApp.class                            | Bin 1964 -> 1472 bytes
+ ContactBookApp.java                             |  38 ++++++++++++++++++++++--
+ commandlineinterface/CommandLineInterface.class | Bin 7600 -> 7552 bytes
+ commandlineinterface/commandLineInterface.java  |  23 +++++++-------
+ json.jar                                        | Bin 0 -> 23737 bytes
+ lib/.DS_Store                                   | Bin 0 -> 6148 bytes
+ lib/json-20180813.jar                           | Bin 0 -> 64597 bytes
+ lib/json-simple-1.1.1.jar.zip                   | Bin 0 -> 20988 bytes
+ lib/json-simple-3.0.2.jar                       | Bin 0 -> 35059 bytes
+ obj.json                                        |   1 +
+ system/Contact$Builder.class                    | Bin 1899 -> 1825 bytes
+ system/Contact$ContactData.class                | Bin 674 -> 650 bytes
+ system/Contact.class                            | Bin 4014 -> 4351 bytes
+ system/Contact.java                             |  34 ++++++++++++++++-----
+ system/ContactBook.class                        | Bin 4704 -> 4807 bytes
+ system/ContactBook.java                         |  18 +++++++++--
+ 17 files changed, 92 insertions(+), 22 deletions(-)
+
+commit 5a05ff182aa325357e983c89306b22f597a8e8dc
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 19 13:08:02 2019 +0200
+
+    Removed obsolete fields from Contact class
+    
+    Suspended GUI development until data storage is solved
+    
+    Tried connecting JDBC to potential database, considered
+    using MySQL for contact storage, decided against it
+    
+    NEXT STEP: Find a way to persist Contact objects into JSON files
+
+ .vscode/launch.json                                |  14 ++++++++
+ ContactBookApp.class                               | Bin 328 -> 1964 bytes
+ .../CommandLineInterface$Commands.class            | Bin 696 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 7512 -> 7600 bytes
+ commandlineinterface/commandLineInterface.java     |   4 +++
+ gui/GraphicalUserInterface$1.class                 | Bin 0 -> 854 bytes
+ gui/GraphicalUserInterface.class                   | Bin 609 -> 1889 bytes
+ gui/GraphicalUserInterface.java                    |  37 +++++++++++++++++----
+ gui/img/dick_icon.png                              | Bin 0 -> 3469 bytes
+ log.txt                                            |   2 ++
+ system/Contact.java                                |   3 --
+ system/ContactBook.class                           | Bin 4662 -> 4704 bytes
+ system/ContactBook.java                            |   5 ++-
+ 14 files changed, 54 insertions(+), 11 deletions(-)
+
+commit f67c9a9cbb5789cb79133c1c50c005d22bad64ad
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 20:29:15 2019 +0200
+
+    Create gui package
+    
+    There is now a gui package which contains:
+    
+    - GraphicalUserInterface class which will manage the GUI window
+    - Dimensions class which will contain various dimensions as constants
+    
+    The CLI branch of this project is now closed -.-'
+    
+    NEXT STEP:
+    Draw out the GUI on a piece of paper.
+
+ ContactBookApp.class              | Bin 343 -> 328 bytes
+ ContactBookApp.java               |   3 +-
+ gui/Dimensions.class              | Bin 0 -> 286 bytes
+ gui/Dimensions.java               |   6 +++
+ gui/GraphicalUserInterface.class  | Bin 0 -> 609 bytes
+ gui/GraphicalUserInterface.java   |  22 ++++++++++
+ system/ContactDataFormatter.class | Bin 2145 -> 0 bytes
+ system/ContactDataFormatter.java  |  82 --------------------------------------
+ 8 files changed, 30 insertions(+), 83 deletions(-)
+
+commit 1d3199d11c9194c2f04c06187e6d47894f61454c
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 18:43:46 2019 +0200
+
+    Make fields optional for new contacts created
+    
+    All fields when creating a contact can now be skipped
+    by pressing 'return'. This results in empty strings
+    or in the case of birth date a LocalDate object with
+    the default date (the day the contact is created).
+    
+    NEXT STEP:
+    Create an actual parser for user commands.
+
+ commandlineinterface/CommandLineInterface.class | Bin 7447 -> 7512 bytes
+ commandlineinterface/commandLineInterface.java  |  19 ++++++++++++-------
+ 2 files changed, 12 insertions(+), 7 deletions(-)
+
+commit 18aa85e0a5c3bf8d8e5ec3cae2c258f30ec1c2a7
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 16:45:13 2019 +0200
+
+    implement LocalDate, set restrictions for date of birth
+    
+    Implemented the LocalDate object to store birth dates instead of the previous int[].
+    
+    When creating a contact the following restrictions now apply:
+    - the input must follow yyyy-mm-dd format,
+    - the date must be valid (uses exception DateTimeException),
+    - the date must be earlier than current date.
+    
+    NEXT STEP:
+    
+    - Implement way to skip parameters when creating contacts.
+
+ .../CommandLineInterface$Commands.class            | Bin 696 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 7040 -> 7447 bytes
+ commandlineinterface/commandLineInterface.java     |  47 +++++++++++++++------
+ system/Constants.class                             | Bin 631 -> 971 bytes
+ system/Constants.java                              |   6 ++-
+ system/Contact$Builder.class                       | Bin 1897 -> 1899 bytes
+ system/Contact$ContactData.class                   | Bin 655 -> 674 bytes
+ system/Contact.class                               | Bin 3958 -> 4014 bytes
+ system/Contact.java                                |  19 ++++-----
+ system/ContactBook.class                           | Bin 4534 -> 4662 bytes
+ system/ContactBook.java                            |   5 ++-
+ 12 files changed, 51 insertions(+), 26 deletions(-)
+
+commit 68bd7e384162bb234f5a2a4760c35c8d87891882
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 12:28:41 2019 +0200
+
+    Restrict user input on contact fields
+    
+    - Created methods for checking if input is correct which
+      display an error message and ask for new input if it
+      does not pass the check.
+    
+    These methods are:
+    
+    - inputLetters()
+      lets users input letters only
+    - inputNumbers()
+      lets users input numbers only
+    - inputDateOfBirth
+      lets users input date of birth in mm/dd/yyyy format only
+      uses Constants.DATE_OF_BIRTH_CHECK_REGEX
+    - inputPostCode
+      lets users input post code in 00-000 format only
+      uses Constants.POSTCODE_CHECK_REGEX
+    - inputEmail
+      lets users input valid e-mail addresses only
+      uses Constants.EMAIL_CHECK_REGEX
+    
+    Remove references to ContactDataFormatter class from  Contact class Builder structure
+    
+    The ContactDataFormatter class is possibly no longer necessary, I am keeping it for now though.
+    
+    NEXT STEPS:
+    - Restrain date of birth input to valid day/month/year values
+      (take care about month lengths and leap years)
+    - Implement some way to skip a parameter when creating new
+      contacts.
+
+ ContactBookApp.class                               | Bin 343 -> 343 bytes
+ .../CommandLineInterface$Commands.class            | Bin 740 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 5482 -> 7040 bytes
+ commandlineinterface/commandLineInterface.java     | 127 ++++++++++++++++-----
+ system/Constants.class                             | Bin 393 -> 631 bytes
+ system/Constants.java                              |   5 +-
+ system/Contact$Builder.class                       | Bin 2051 -> 1897 bytes
+ system/Contact.java                                |  14 +--
+ 9 files changed, 108 insertions(+), 38 deletions(-)
+
+commit 7fb24d43994de2201c7823f29531d8ae077feba5
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 10:57:16 2019 +0200
+
+    Remove problem with nextInt() passing a newline on to the Scanner
+    
+    Turns out the problem was in the nextInt() method in Scanner class, which only reads the integers in the input, leaving the newline used to enter as input for the following nextLine() method.
+    
+    This was solved using Integer.parseInt(scanner.newLine()) instead of newInt().
+    
+    NEXT STEP:
+    
+    Find a way to prevent user from entering unwanted values into the Scanner.
+
+ .../CommandLineInterface$Commands.class            | Bin 740 -> 740 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 5417 -> 5482 bytes
+ commandlineinterface/commandLineInterface.java     |  33 +++++++++++----------
+ 4 files changed, 17 insertions(+), 16 deletions(-)
+
+commit a6bcd1d3b1acb14aae7920a3f6b6e6a6f1d61314
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Mon Jun 17 09:39:19 2019 +0200
+
+    GIT LOG
+    
+    PROBLEM UPDATE:
+    
+    -  Removed main from CommandLineInterface class, the CLI is now run statically with the run() method from ContactBookApp class. This did not fix the problem.
+    -  Used a simple println method test() in CLI class to see if private methods were the cause of the problem, they are not.
+    
+    NEXT STEP:
+    
+    - add more functionality to test() method, see at which point it starts exhibiting unwelcome behavior.:
+
+ ContactBookApp.class                                  | Bin 713 -> 343 bytes
+ ContactBookApp.java                                   |  16 +---------------
+ .../CommandLineInterface$Commands.class               | Bin 696 -> 740 bytes
+ .../CommandLineInterface$Instructions.class           | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class       | Bin 5379 -> 5417 bytes
+ commandlineinterface/commandLineInterface.java        |  13 +++++++++----
+ 6 files changed, 10 insertions(+), 19 deletions(-)
+
+commit 885f4ec19f2fa8cb923a0ec82be870c53266295d
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Tue Jun 11 22:17:52 2019 +0200
+
+    PROBLEM UPDATE:
+    
+    -   removed pauses since they were not the solution
+    
+    The problem might have something to do with the switch statement calling static methods from within its own CommandLineInterface class.
+    
+    NEXT STEP: Try to separate the executive methods of the CLI from the main() method.
+
+ .../CommandLineInterface$Commands.class            | Bin 696 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 5555 -> 5379 bytes
+ commandlineinterface/commandLineInterface.java     |  31 +++++++++++----------
+ 4 files changed, 16 insertions(+), 15 deletions(-)
+
+commit 6ac146fd406c11d40b7fc1a34dae2d9bd32e865e
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Sat Jun 8 09:24:44 2019 +0200
+
+    Removed obsolete method printIDQuery in printContactByID method.
+    
+    PROBLEM UPDATE:
+    
+             - it seems that the default block gets triggered for certain
+               commands
+    
+             - the problem is only present in PRINT_CONTACT and NEW_CONTACT
+               commands.
+    
+             solutions tried:
+    
+             - changing println() to print() in a few places
+             - removing calls for makeYellow() etc.
+             - changing order of cases in switch statement
+    
+    NEXT STEP:
+    
+             - solve the PROBLEM.
+    
+             - create separate methods for the contact creator which will
+               ask the user for input on separate fields,
+    
+             - which will enable us to implement try-catch pattern in a
+               way that is not diminishing to code clarity.
+
+ commandlineinterface/CommandLineInterface.class | Bin 5626 -> 5555 bytes
+ commandlineinterface/commandLineInterface.java  |  10 +-
+ gitlog                                          | 161 ++++++++++++++++++++++++
+ 3 files changed, 165 insertions(+), 6 deletions(-)
+
+commit 01b3e14843e72c333d155c7117641de0c6cb9812
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Fri Jun 7 14:48:10 2019 +0200
+
+    Added CLI functionality:
+    
+    - the user can now create contacts through the 'new contact' command which brings up a series of input prompts for each field
+    
+    PROBLEM: At runtime the program behaves as if in certain moments 'return' were pressed, even though it wasn't.
+    
+    NEXT STEP: Introduce CLI commands for manipulating contact fields.
+
+ commandlineinterface/Color.class                   | Bin 961 -> 1044 bytes
+ commandlineinterface/Color.java                    |   4 +
+ .../CommandLineInterface$Commands.class            | Bin 649 -> 696 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 1257 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 3363 -> 5626 bytes
+ commandlineinterface/commandLineInterface.java     | 126 ++++++++++++++++++---
+ system/Contact.class                               | Bin 3970 -> 3958 bytes
+ system/Contact.java                                |   4 +-
+ 8 files changed, 117 insertions(+), 17 deletions(-)
+
+commit 70d762438d9411e46ac4dfe0a940037a1f0ef93d
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 6 12:42:18 2019 +0200
+
+    Removed some obsolete lines.
+
+ system/Contact.java | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit c89556d1d4f45f36cc57add3bcab6b43d5ae4984
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 6 12:41:26 2019 +0200
+
+    Introduced new CLI functionality:now able to crudely print Contact objects by their contactID field.
+    Also:
+    
+    - created Instructions data structure inside CLI class which will contain help strings
+      now contains 'print help' message which prints the manual for the print command.
+    
+    - created Commands data structure inside CLI class which contains constants for various user commands
+    
+    - modified ContactBook class so that the main Contact[] is static
+    
+    - created Color class in package commandlineinterface which will govern style-related operations on strings. Now includes methods which return strings in a few basic colors, as enumerated in Color.ANSI
+    
+    - implemented method isPresent() in ContactBook which checks if contact of a given ID exists in the main Contact[] array of ContactBook.
+    
+    PROBLEM: ContactBook.isPresent(int ID) is not used locally in ContactBook, should be moved to the CLI.
+    
+    - The CLI can now print ContactBook.contacts by ID or by last name initial.
+    
+    - The CLI now has a little more colour to it.
+    
+    NEXT STEPS: Introduce user prompt tree for modifying contact fields (use setters in ContactBook).
+    
+    FURTHER PERSPECTIVE: Implement a parser to replace the primitive command implementation from specific whole strings.
+
+ commandlineinterface/Color$ANSI.class              | Bin 0 -> 648 bytes
+ commandlineinterface/Color.class                   | Bin 0 -> 961 bytes
+ commandlineinterface/Color.java                    |  29 +++++++++
+ .../CommandLineInterface$Commands.class            | Bin 0 -> 649 bytes
+ .../CommandLineInterface$Instructions.class        | Bin 690 -> 1257 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 2753 -> 3363 bytes
+ commandlineinterface/commandLineInterface.java     |  67 ++++++++++++++++-----
+ system/Contact.class                               | Bin 3971 -> 3970 bytes
+ system/Contact.java                                |   2 +-
+ system/ContactBook.class                           | Bin 4428 -> 4534 bytes
+ system/ContactBook.java                            |  11 +++-
+ 11 files changed, 92 insertions(+), 17 deletions(-)
+
+commit 9e0b2cd53c857a2a3bf08b9ca80f3f9c5b346d18
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu Jun 6 02:49:00 2019 +0200
+
+    Added package commandlineinterface which contains a non-instantiable CommandLineInterface public class with main method.
+    
+    The package uses java.util.Scanner to receive user input. Supports commands: quit printhelp printContactBook.
+    
+    The CommandLineInterface class has a ContactBook field which comes initialized (for now) with a list of generic contacts, as per the testing methods contained in class ContactBook.
+    
+    PROBLEM: The scanner only accepts strings without spaces, treating separate words as separate commands.
+    
+    NEXT STEP: Solve the input problem. Introduce more functionality to the CommandLineInterface class.
+    
+    FUTURE PERSPECTIVE: Move testing methods from class ContactBook to a unit test type entity.
+
+ ContactBookApp.class                               | Bin 649 -> 713 bytes
+ ContactBookApp.java                                |   8 +++
+ .../CommandLineInterface$Instructions.class        | Bin 0 -> 690 bytes
+ commandlineinterface/CommandLineInterface.class    | Bin 0 -> 2753 bytes
+ commandlineinterface/commandLineInterface.java     |  63 +++++++++++++++++++++
+ system/ContactBookApp.class                        | Bin 656 -> 0 bytes
+ 6 files changed, 71 insertions(+)
+
+commit f13ceb0a159564086666806ab2109cc0f0fb657c
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 13:32:38 2019 +0200
+
+    Class ContactBookApp moved to be the main class for the entire application.
+    
+    NEXT STEP: Create command line interface for the application which will:
+    
+    - set contact fields
+    - print contact fields
+    - print contact book
+    - create new contact in contact book
+    - print contact book sorted by name
+    - print contact by id
+    - print contact by last name
+    - print contact by phone number
+
+ ContactBookApp.class                              | Bin 0 -> 649 bytes
+ system/ContactBookApp.java => ContactBookApp.java |   2 +-
+ system/ContactBook.class                          | Bin 4428 -> 4428 bytes
+ system/ContactBook.java                           |   2 +-
+ 4 files changed, 2 insertions(+), 2 deletions(-)
+
+commit bc1489c4ec69cef4afa2097dcd20090baed6ecfd
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 13:27:05 2019 +0200
+
+    Added setters for all fields, one in class ContactBook, which calls its shadow in class Contact.
+    
+    NEXT STEP: Move class ContactBookApp from package 'system' to main catalog
+
+ system/Contact$Builder.class | Bin 2051 -> 2051 bytes
+ system/Contact.class         | Bin 3192 -> 3971 bytes
+ system/Contact.java          |  48 +++++++++++++++++++++++++++++++++++++++++++
+ system/ContactBook.class     | Bin 3508 -> 4428 bytes
+ system/ContactBook.java      |  46 +++++++++++++++++++++++++++++++++++++++++
+ system/ContactBookApp.class  | Bin 528 -> 656 bytes
+ system/ContactBookApp.java   |   8 +++++++-
+ 7 files changed, 101 insertions(+), 1 deletion(-)
+
+commit 04cb3f71f57de13afcc59e7317fa4899af8b4079
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 12:57:36 2019 +0200
+
+    Added package stub comandlineinterface.
+
+ commandlineinterface/commandLineInterface.java | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit ad84603d5a9d58da8d6f342bf4778ea49147d924
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 12:15:01 2019 +0200
+
+    Added nested class ContactData inside Contact class. This is used to store data for each instance of Contact. Accessed now through getters. TODO: create setters for ContactData fields.
+    
+    NEXT STEP: create methods in ContactBook for modifying data in Contact
+
+ system/Constants.class                             | Bin 393 -> 393 bytes
+ system/Contact$Builder.class                       | Bin 2051 -> 2051 bytes
+ system/Contact$ContactData.class                   | Bin 0 -> 655 bytes
+ system/Contact.class                               | Bin 2341 -> 3192 bytes
+ system/Contact.java                                | 122 ++++++---
+ system/ContactBook.class                           | Bin 3555 -> 3508 bytes
+ system/ContactBook.java                            |  22 +-
+ .../address_person_business_contact_backup.java    | 279 ---------------------
+ system/book.ser                                    | Bin 1476 -> 0 bytes
+ 9 files changed, 98 insertions(+), 325 deletions(-)
+
+commit abb98dfdc856c7c0e2f13a3e43cba3f8030ee362
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 11:30:59 2019 +0200
+
+    Cleaned up the code in broad strokes, reordering methods etc.
+    
+    NEXT STEP: Creating a data structure class inside Contact class and figure out a way to hide implementation from other classes. As it is, Contacts has public fields which it maybe does not need.
+
+ system/Constants.java             |   7 ----
+ system/Contact.java               |  33 +++++++++--------
+ system/ContactBook.java           |  75 ++++++++++++++++++++------------------
+ system/ContactDataFormatter.class | Bin 2145 -> 2145 bytes
+ system/ContactDataFormatter.java  |  56 +++++++++++++---------------
+ 5 files changed, 82 insertions(+), 89 deletions(-)
+
+commit e8145a9e9df89e53a4481f4d01681ac0aef7d466
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Wed Jun 5 11:16:12 2019 +0200
+
+    Restructured project into package'
+
+ .DS_Store                         | Bin 0 -> 6148 bytes
+ system/Constants.class            | Bin 391 -> 393 bytes
+ system/Constants.java             |  14 ++
+ system/Contact$Builder.class      | Bin 2002 -> 2051 bytes
+ system/Contact.class              | Bin 2327 -> 2341 bytes
+ system/Contact.java               | 183 ++++++++++++++++
+ system/ContactBook.class          | Bin 3474 -> 3555 bytes
+ system/ContactBook.java           | 161 ++++++++++++++
+ system/ContactBookApp.class       | Bin 514 -> 528 bytes
+ system/ContactBookApp.java        | 440 +-------------------------------------
+ system/ContactDataFormatter.class | Bin 2125 -> 2145 bytes
+ system/ContactDataFormatter.java  |  86 ++++++++
+ 12 files changed, 445 insertions(+), 439 deletions(-)
+
+commit 24a2c10bbea0eb975b9d688464259d7155973051
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Tue Jun 4 13:48:11 2019 +0200
+
+    1. Created non-instantiable utility class ContactDataFormatter for keeping fields of class Contact uniform and remove non-digit characters or non-letter characters as needed, 2. Modified data types for fields in class Contact, 3. Created method in class ContactBook for sorting contacts by last name initial and method for printing the resulting list. NEXT STEP:
+
+ system/Constants.class            | Bin 0 -> 391 bytes
+ system/Contact$Builder.class      | Bin 1535 -> 2002 bytes
+ system/Contact.class              | Bin 1988 -> 2327 bytes
+ system/ContactBook.class          | Bin 2690 -> 3474 bytes
+ system/ContactBookApp.class       | Bin 529 -> 514 bytes
+ system/ContactBookApp.java        | 291 +++++++++++++++++++++++++++++++++++---
+ system/ContactDataFormatter.class | Bin 0 -> 2125 bytes
+ system/Person.class               | Bin 519 -> 0 bytes
+ 8 files changed, 269 insertions(+), 22 deletions(-)
+
+commit 70e10cb49bb0f7ca625da8cd6e638f722a3ad55f
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Sat Jun 1 19:34:43 2019 +0200
+
+    Removed remaining Address.class and Business.class files from the directory
+
+ system/Address.class  | Bin 1156 -> 0 bytes
+ system/Business.class | Bin 371 -> 0 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 2a0058d4390b418c26e87cd21880c721975d42d7
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu May 30 22:01:36 2019 +0200
+
+    Implemented initialization method for generic contacts that gives them names starting with various letters.
+    
+    Added method stub for searching the contacts array for contacts with last names starting with given initial.
+
+ system/Contact$Builder.class                       | Bin 1535 -> 1535 bytes
+ system/Contact.class                               | Bin 1987 -> 1988 bytes
+ system/ContactBook.class                           | Bin 2288 -> 2690 bytes
+ system/ContactBookApp.class                        | Bin 743 -> 529 bytes
+ system/ContactBookApp.java                         |  78 +++++++++++++--------
+ .../address_person_business_contact_backup.java    |   2 +-
+ 6 files changed, 48 insertions(+), 32 deletions(-)
+
+commit 57a5f62e8786fd88c8651e7e26a74a8c973bfefd
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu May 30 20:05:07 2019 +0200
+
+    Implemented the Builder design pattern for Contact class.
+    
+    Contact class no longer references classes Address, Person, Business, which now are gone.
+    
+    NEXT STEP: re-implement generic contacts initialization methods
+
+ system/Contact$Builder.class                       | Bin 0 -> 1535 bytes
+ system/Contact.class                               | Bin 2158 -> 1987 bytes
+ system/ContactBook.class                           | Bin 3034 -> 2288 bytes
+ system/ContactBookApp.class                        | Bin 344 -> 743 bytes
+ system/ContactBookApp.java                         | 351 ++++++++++-----------
+ .../address_person_business_contact_backup.java    | 279 ++++++++++++++++
+ 6 files changed, 439 insertions(+), 191 deletions(-)
+
+commit 05a162fd848e396ce0e4d308f0a8aa8ce29ceffc
+Author: Marcel Wojdylo <marcelwojdylo@gmail.com>
+Date:   Thu May 30 17:18:05 2019 +0200
+
+    FIRST COMMIT
+    
+    Next steps:
+    Remove Business, Person and Address as objects, implement an array instead.
+    
+    Class ContactBook has an array that stores Contact objects.
+    
+    Contact objects  consist of two further objects.
+    
+    One: Address (basically a containter for fields that go in an address.
+    
+    Two: A Person object or a Business object (also ontainers for data)
+
+ system/Address.class                               |  Bin 0 -> 1156 bytes
+ system/Business.class                              |  Bin 0 -> 371 bytes
+ system/Contact.class                               |  Bin 0 -> 2158 bytes
+ system/ContactBook.class                           |  Bin 0 -> 3034 bytes
+ system/ContactBookApp.class                        |  Bin 0 -> 344 bytes
+ system/ContactBookApp.java                         |  276 +++++
+ system/Person.class                                |  Bin 0 -> 519 bytes
+ system/book.ser                                    |  Bin 0 -> 1476 bytes
+ system/log.txt                                     | 1120 ++++++++++++++++++
+ system/node_modules/.bin/mkdirp                    |    1 +
+ system/node_modules/any-promise/.jshintrc          |    4 +
+ system/node_modules/any-promise/.npmignore         |    7 +
+ system/node_modules/any-promise/LICENSE            |   19 +
+ system/node_modules/any-promise/README.md          |  161 +++
+ .../node_modules/any-promise/implementation.d.ts   |    3 +
+ system/node_modules/any-promise/implementation.js  |    1 +
+ system/node_modules/any-promise/index.d.ts         |   73 ++
+ system/node_modules/any-promise/index.js           |    1 +
+ system/node_modules/any-promise/loader.js          |   78 ++
+ system/node_modules/any-promise/optional.js        |    6 +
+ system/node_modules/any-promise/package.json       |   73 ++
+ system/node_modules/any-promise/register-shim.js   |   18 +
+ system/node_modules/any-promise/register.d.ts      |   17 +
+ system/node_modules/any-promise/register.js        |   94 ++
+ .../any-promise/register/bluebird.d.ts             |    1 +
+ .../node_modules/any-promise/register/bluebird.js  |    2 +
+ .../any-promise/register/es6-promise.d.ts          |    1 +
+ .../any-promise/register/es6-promise.js            |    2 +
+ system/node_modules/any-promise/register/lie.d.ts  |    1 +
+ system/node_modules/any-promise/register/lie.js    |    2 +
+ .../any-promise/register/native-promise-only.d.ts  |    1 +
+ .../any-promise/register/native-promise-only.js    |    2 +
+ .../node_modules/any-promise/register/pinkie.d.ts  |    1 +
+ system/node_modules/any-promise/register/pinkie.js |    2 +
+ .../node_modules/any-promise/register/promise.d.ts |    1 +
+ .../node_modules/any-promise/register/promise.js   |    2 +
+ system/node_modules/any-promise/register/q.d.ts    |    1 +
+ system/node_modules/any-promise/register/q.js      |    2 +
+ system/node_modules/any-promise/register/rsvp.d.ts |    1 +
+ system/node_modules/any-promise/register/rsvp.js   |    2 +
+ system/node_modules/any-promise/register/vow.d.ts  |    1 +
+ system/node_modules/any-promise/register/vow.js    |    2 +
+ system/node_modules/any-promise/register/when.d.ts |    1 +
+ system/node_modules/any-promise/register/when.js   |    2 +
+ system/node_modules/byte/History.md                |  165 +++
+ system/node_modules/byte/LICENSE.txt               |   21 +
+ system/node_modules/byte/README.md                 |  207 ++++
+ system/node_modules/byte/lib/byte.js               |  644 +++++++++++
+ system/node_modules/byte/lib/number.js             |   80 ++
+ system/node_modules/byte/package.json              |   88 ++
+ system/node_modules/copy-to/README.md              |   69 ++
+ system/node_modules/copy-to/index.js               |  161 +++
+ system/node_modules/copy-to/package.json           |   61 +
+ system/node_modules/debug/.coveralls.yml           |    1 +
+ system/node_modules/debug/.eslintrc                |   11 +
+ system/node_modules/debug/.npmignore               |    9 +
+ system/node_modules/debug/.travis.yml              |   14 +
+ system/node_modules/debug/CHANGELOG.md             |  362 ++++++
+ system/node_modules/debug/LICENSE                  |   19 +
+ system/node_modules/debug/Makefile                 |   50 +
+ system/node_modules/debug/README.md                |  312 +++++
+ system/node_modules/debug/component.json           |   19 +
+ system/node_modules/debug/karma.conf.js            |   70 ++
+ system/node_modules/debug/node.js                  |    1 +
+ system/node_modules/debug/package.json             |   89 ++
+ system/node_modules/debug/src/browser.js           |  185 +++
+ system/node_modules/debug/src/debug.js             |  202 ++++
+ system/node_modules/debug/src/index.js             |   10 +
+ system/node_modules/debug/src/inspector-log.js     |   15 +
+ system/node_modules/debug/src/node.js              |  248 ++++
+ system/node_modules/escape-html/LICENSE            |   24 +
+ system/node_modules/escape-html/Readme.md          |   43 +
+ system/node_modules/escape-html/index.js           |   78 ++
+ system/node_modules/escape-html/package.json       |   56 +
+ system/node_modules/extend-shallow/LICENSE         |   21 +
+ system/node_modules/extend-shallow/README.md       |   61 +
+ system/node_modules/extend-shallow/index.js        |   33 +
+ system/node_modules/extend-shallow/package.json    |   87 ++
+ system/node_modules/is-extendable/LICENSE          |   21 +
+ system/node_modules/is-extendable/README.md        |   72 ++
+ system/node_modules/is-extendable/index.js         |   13 +
+ system/node_modules/is-extendable/package.json     |   82 ++
+ system/node_modules/java.io/History.md             |  102 ++
+ system/node_modules/java.io/LICENSE                |   21 +
+ system/node_modules/java.io/README.md              |  195 ++++
+ system/node_modules/java.io/lib/constants.js       |  239 ++++
+ system/node_modules/java.io/lib/index.js           |   25 +
+ system/node_modules/java.io/lib/input.js           |  650 +++++++++++
+ system/node_modules/java.io/lib/normalize.js       |  263 +++++
+ .../node_modules/java.io/lib/objects/array_list.js |   79 ++
+ system/node_modules/java.io/lib/objects/date.js    |   22 +
+ .../node_modules/java.io/lib/objects/hash_map.js   |  104 ++
+ .../node_modules/java.io/lib/objects/hash_set.js   |   53 +
+ system/node_modules/java.io/lib/objects/index.js   |   15 +
+ .../java.io/lib/objects/linked_list.js             |   43 +
+ .../node_modules/java.io/lib/objects/tree_map.js   |   37 +
+ .../node_modules/java.io/lib/objects/tree_set.js   |   34 +
+ system/node_modules/java.io/lib/output.js          |  439 +++++++
+ system/node_modules/java.io/package.json           |   80 ++
+ system/node_modules/long/.npmignore                |    3 +
+ system/node_modules/long/.travis.yml               |    5 +
+ system/node_modules/long/LICENSE                   |  202 ++++
+ system/node_modules/long/README.md                 |  513 +++++++++
+ system/node_modules/long/bower.json                |    9 +
+ system/node_modules/long/dist/README.md            |   16 +
+ system/node_modules/long/dist/long.js              | 1209 ++++++++++++++++++++
+ system/node_modules/long/dist/long.min.js          |   20 +
+ system/node_modules/long/dist/long.min.js.gz       |  Bin 0 -> 2752 bytes
+ system/node_modules/long/dist/long.min.map         |    8 +
+ system/node_modules/long/doco/INDEX.md             |    6 +
+ system/node_modules/long/doco/Long.md              |  473 ++++++++
+ system/node_modules/long/donate.png                |  Bin 0 -> 1466 bytes
+ system/node_modules/long/externs/long.js           |  416 +++++++
+ system/node_modules/long/index.js                  |    1 +
+ system/node_modules/long/jsdoc.json                |   13 +
+ system/node_modules/long/long.png                  |  Bin 0 -> 1405 bytes
+ system/node_modules/long/package.json              |   63 +
+ system/node_modules/long/scripts/build.js          |   28 +
+ system/node_modules/long/src/bower.json            |    9 +
+ system/node_modules/long/src/long.js               | 1172 +++++++++++++++++++
+ system/node_modules/long/src/wrap.js               |   38 +
+ system/node_modules/long/tests/goog.math.long.js   |  807 +++++++++++++
+ system/node_modules/long/tests/suite.js            |  195 ++++
+ system/node_modules/minimist/.travis.yml           |    4 +
+ system/node_modules/minimist/LICENSE               |   18 +
+ system/node_modules/minimist/example/parse.js      |    2 +
+ system/node_modules/minimist/index.js              |  187 +++
+ system/node_modules/minimist/package.json          |   71 ++
+ system/node_modules/minimist/readme.markdown       |   73 ++
+ system/node_modules/minimist/test/dash.js          |   24 +
+ system/node_modules/minimist/test/default_bool.js  |   20 +
+ system/node_modules/minimist/test/dotted.js        |   16 +
+ system/node_modules/minimist/test/long.js          |   31 +
+ system/node_modules/minimist/test/parse.js         |  318 +++++
+ .../node_modules/minimist/test/parse_modified.js   |    9 +
+ system/node_modules/minimist/test/short.js         |   67 ++
+ system/node_modules/minimist/test/whitespace.js    |    8 +
+ system/node_modules/mkdirp/.travis.yml             |    8 +
+ system/node_modules/mkdirp/LICENSE                 |   21 +
+ system/node_modules/mkdirp/bin/cmd.js              |   33 +
+ system/node_modules/mkdirp/bin/usage.txt           |   12 +
+ system/node_modules/mkdirp/examples/pow.js         |    6 +
+ system/node_modules/mkdirp/index.js                |   98 ++
+ system/node_modules/mkdirp/package.json            |   62 +
+ system/node_modules/mkdirp/readme.markdown         |  100 ++
+ system/node_modules/mkdirp/test/chmod.js           |   41 +
+ system/node_modules/mkdirp/test/clobber.js         |   38 +
+ system/node_modules/mkdirp/test/mkdirp.js          |   28 +
+ system/node_modules/mkdirp/test/opts_fs.js         |   29 +
+ system/node_modules/mkdirp/test/opts_fs_sync.js    |   27 +
+ system/node_modules/mkdirp/test/perm.js            |   32 +
+ system/node_modules/mkdirp/test/perm_sync.js       |   36 +
+ system/node_modules/mkdirp/test/race.js            |   37 +
+ system/node_modules/mkdirp/test/rel.js             |   32 +
+ system/node_modules/mkdirp/test/return.js          |   25 +
+ system/node_modules/mkdirp/test/return_sync.js     |   24 +
+ system/node_modules/mkdirp/test/root.js            |   19 +
+ system/node_modules/mkdirp/test/sync.js            |   32 +
+ system/node_modules/mkdirp/test/umask.js           |   28 +
+ system/node_modules/mkdirp/test/umask_sync.js      |   32 +
+ system/node_modules/ms/index.js                    |  152 +++
+ system/node_modules/ms/license.md                  |   21 +
+ system/node_modules/ms/package.json                |   69 ++
+ system/node_modules/ms/readme.md                   |   51 +
+ system/node_modules/mz/HISTORY.md                  |   66 ++
+ system/node_modules/mz/LICENSE                     |   22 +
+ system/node_modules/mz/README.md                   |  106 ++
+ system/node_modules/mz/child_process.js            |    8 +
+ system/node_modules/mz/crypto.js                   |    9 +
+ system/node_modules/mz/dns.js                      |   16 +
+ system/node_modules/mz/fs.js                       |   62 +
+ system/node_modules/mz/index.js                    |    8 +
+ system/node_modules/mz/package.json                |   75 ++
+ system/node_modules/mz/readline.js                 |   64 ++
+ system/node_modules/mz/zlib.js                     |   13 +
+ system/node_modules/object-assign/index.js         |   90 ++
+ system/node_modules/object-assign/license          |   21 +
+ system/node_modules/object-assign/package.json     |   74 ++
+ system/node_modules/object-assign/readme.md        |   61 +
+ system/node_modules/thenify-all/History.md         |   11 +
+ system/node_modules/thenify-all/LICENSE            |   22 +
+ system/node_modules/thenify-all/README.md          |   66 ++
+ system/node_modules/thenify-all/index.js           |   73 ++
+ system/node_modules/thenify-all/package.json       |   70 ++
+ system/node_modules/thenify/History.md             |    5 +
+ system/node_modules/thenify/LICENSE                |   22 +
+ system/node_modules/thenify/README.md              |  120 ++
+ system/node_modules/thenify/index.js               |   80 ++
+ system/node_modules/thenify/package.json           |   67 ++
+ system/node_modules/unescape/LICENSE               |   21 +
+ system/node_modules/unescape/README.md             |  134 +++
+ system/node_modules/unescape/index.js              |  103 ++
+ system/node_modules/unescape/package.json          |   98 ++
+ system/node_modules/utility/History.md             |  311 +++++
+ system/node_modules/utility/LICENSE.txt            |   21 +
+ system/node_modules/utility/README.md              |  332 ++++++
+ system/node_modules/utility/index.d.ts             |  592 ++++++++++
+ system/node_modules/utility/lib/array.js           |   49 +
+ system/node_modules/utility/lib/crypto.js          |  135 +++
+ system/node_modules/utility/lib/date.js            |  197 ++++
+ system/node_modules/utility/lib/function.js        |   27 +
+ system/node_modules/utility/lib/json.js            |   74 ++
+ system/node_modules/utility/lib/number.js          |   63 +
+ system/node_modules/utility/lib/object.js          |   73 ++
+ system/node_modules/utility/lib/optimize.js        |   72 ++
+ system/node_modules/utility/lib/polyfill.js        |    7 +
+ system/node_modules/utility/lib/string.js          |  163 +++
+ system/node_modules/utility/lib/utility.js         |   16 +
+ system/node_modules/utility/lib/web.js             |   50 +
+ system/node_modules/utility/package.json           |  101 ++
+ system/package-lock.json                           |  136 +++
+ 211 files changed, 19240 insertions(+)
